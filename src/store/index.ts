@@ -4,7 +4,6 @@ import thunk from 'redux-thunk';
 const rootReducer = combineReducers({});
 
 const middlewares = [thunk];
-console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === `development`) {
     const {logger} = require(`redux-logger`);
 
