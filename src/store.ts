@@ -12,3 +12,5 @@ if (process.env.NODE_ENV === `development`) {
 const store = createStore(rootReducer, applyMiddleware(...middlewares));
 
 export default store;
+
+export type RootState = ReturnType<typeof rootReducer>;
