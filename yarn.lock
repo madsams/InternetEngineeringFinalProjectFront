@@ -1629,7 +1629,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-redux-toastr@^7.6.0":
+"@types/react-redux-toastr@^7.4.1":
   version "7.6.0"
   resolved "https://registry.yarnpkg.com/@types/react-redux-toastr/-/react-redux-toastr-7.6.0.tgz#ab4190df509515928e9d8d0da685a0ba3b4a3e70"
   integrity sha512-x3xue0nQl4JGbgtMAldv3zvBz7Wc6gnpazKcK1t8eLjLWszs6QOoVO+ayZIRqsLC8Bakg+Vrkryn2pO5WFV7Xg==
@@ -8934,10 +8934,10 @@ react-is@^16.12.0, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-i
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-redux-toastr@latest:
-  version "7.6.5"
-  resolved "https://registry.yarnpkg.com/react-redux-toastr/-/react-redux-toastr-7.6.5.tgz#f2343b3d5f7c49193a9bc30cf76b6e39b3e06a9b"
-  integrity sha512-tbf8z18O85BGKXhDfYsgNmurbKlP9p7UXjtdBNS1wWqCAY0QNAyW1W5ulChPEFWoBWVzQywgMGIZ5j3an//srg==
+react-redux-toastr@7.5.2:
+  version "7.5.2"
+  resolved "https://registry.yarnpkg.com/react-redux-toastr/-/react-redux-toastr-7.5.2.tgz#0bb8e1ddd133d51e74d46bcd1a1e97e8a801c6b9"
+  integrity sha512-y0WC06P2WN3pVwB0KaOJgaV0cMYjohqE1iGyjaCwjx9EbQsKXoQhyERWmmgjZaaJup7M9jilZNS+PGcr+PqWWA==
   dependencies:
     classnames "^2.2.3"
     eventemitter3 "^3.1.0"

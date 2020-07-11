@@ -1,5 +1,5 @@
 import Axios, {AxiosError, AxiosResponse, Method as AxiosMethods} from 'axios';
-import renderToast, {toastTypes} from './renderToast';
+import renderToast, {ToastTypes} from './renderToast';
 import {IActionCreator, IThunkAction} from '../types/reduxTypes';
 
 const instance = Axios.create({
@@ -105,7 +105,7 @@ const request = (requestOption: RequestOptionType): IThunkAction => async (
         if (resolve) resolve(response);
         if (successAction) dispatch(successAction(response.data.data));
         if (successToastMessage)
-            renderToast(toastTitle, successToastMessage, toastTypes.SUCCESS);
+            renderToast(toastTitle, successToastMessage, ToastTypes.SUCCESS);
     } catch (error) {
         // Component unmounted and axios unsubscribed
         const isCancelError = !error.config;
@@ -129,7 +129,7 @@ const request = (requestOption: RequestOptionType): IThunkAction => async (
                             renderToast(
                                 toastTitle,
                                 errorCode.toastMessage,
-                                toastTypes.ERROR,
+                                ToastTypes.ERROR,
                             );
                         if (errorCode.action) errorCode.action(error);
                         errorCodeActioned = true;
@@ -140,7 +140,7 @@ const request = (requestOption: RequestOptionType): IThunkAction => async (
             if (!errorCodeActioned) {
                 if (!reject) {
                     if (errorAction) dispatch(errorAction(failToastMessage));
-                    renderToast(toastTitle, failToastMessage, toastTypes.ERROR);
+                    renderToast(toastTitle, failToastMessage, ToastTypes.ERROR);
                 } else {
                     reject(error);
                 }

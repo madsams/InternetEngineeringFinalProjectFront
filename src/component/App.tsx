@@ -1,8 +1,9 @@
 import React from 'react';
+import renderToast, {ToastTypes} from "../utils/actions/renderToast";
 
 function App() {
   return (
-    <div>empty</div>
+      <div onClick={() => renderToast('test', 'this is a test', ToastTypes.SUCCESS)}>empty</div>
   );
 }
 

@@ -5,7 +5,7 @@ const ToastrOptions = {
     closeOnToastrClick: true,
 };
 
-export enum toastTypes {
+export enum ToastTypes {
     LIGHT = 'light',
     MESSAGE = 'message',
     INFO = 'info',
@@ -14,6 +14,6 @@ export enum toastTypes {
     ERROR = 'error',
 }
 
-const renderToast = (title: string, message: string, type: toastTypes) =>
+const renderToast = (title: string, message: string, type: ToastTypes) =>
     toastr[type](title, message, ToastrOptions);
 export default renderToast;
