@@ -1,9 +1,8 @@
 import React from 'react';
 import {Typography} from '@material-ui/core';
-import {Language, Strings} from '../../utils/types';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../store';
+import {Strings} from '../../utils/types';
 import {Variant} from '@material-ui/core/styles/createTypography';
+import {useLanguage} from '../../utils/hooks';
 
 interface ITextProps {
     text: Strings;
@@ -21,9 +20,7 @@ interface ITextProps {
 }
 
 const ITypography = ({text, className, style, color, variant}: ITextProps) => {
-    const language = useSelector<RootState, Language>(
-        (state) => state.language,
-    );
+    const iText = useLanguage(text);
     return (
         <Typography
             component="p"
@@ -31,7 +28,7 @@ const ITypography = ({text, className, style, color, variant}: ITextProps) => {
             className={className}
             color={color}
             variant={variant}>
-            {text[language]}
+            {iText}
         </Typography>
     );
 };
