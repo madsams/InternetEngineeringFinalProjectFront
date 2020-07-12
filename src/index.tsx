@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './style/fonts/IRANSans/WebFonts/css/fontiran.css';
 import './style/index.css';
 import App from './component/App';
 import * as serviceWorker from './serviceWorker';
