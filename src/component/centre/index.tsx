@@ -1,9 +1,4 @@
 import React from 'react';
-import WithHeader from '../utils/header/WithHeader';
 
-const Centre = () => (
-    <WithHeader en="Centre" fa="عامل مرکزی">
-        <div>centre</div>
-    </WithHeader>
-);
+const Centre = () => <div>centre</div>;
 export default Centre;

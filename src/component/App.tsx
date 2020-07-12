@@ -4,9 +4,11 @@ import Login from './login';
 import Field from './field';
 import Centre from './centre';
 import NotMatch from './utils/NotMatch';
+import IHeader from './utils/header/IHeader';
 
 const App = () => (
     <Router>
+        <IHeader />
         <Switch>
             <Route exact path="/login">
                 <Login />
