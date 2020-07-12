@@ -3,12 +3,11 @@ import {Tooltip} from '@material-ui/core';
 import React from 'react';
 import {Strings} from '../../utils/types';
 
-interface ITooltipProps {
-    title: Strings;
+interface ITooltipProps extends Strings {
     children: React.ReactElement;
 }
 
-const ITooltip = ({title, children}: ITooltipProps) => {
+const ITooltip = ({children, ...title}: ITooltipProps) => {
     const iTitle = useLanguage(title);
 
     return (
