@@ -1,20 +1,25 @@
 import React from 'react';
-import switchDir from "../utils/effects/switchDir";
-import {useDispatch} from "react-redux";
-import {TextField} from "@material-ui/core";
-import IThemeProvider from "./IThemeProvider";
+import {useDispatch} from 'react-redux';
+import {TextField} from '@material-ui/core';
+import DoubleDirectionProvider from './DoubleDirectionProvider';
+import {changeLanguage} from '../utils/actions/languagesAction';
 
 function App() {
     const dispatch = useDispatch();
 
     return (
-        <IThemeProvider>
-            <div className='p-4'>
-                <div onClick={() => dispatch(switchDir())}>Change the direction</div>
-                <TextField id="standard-basic" label="Standard" placeholder='koft'/>
+        <DoubleDirectionProvider>
+            <div className="p-4">
+                <div onClick={() => dispatch(changeLanguage('fa'))}>fa</div>
+                <div onClick={() => dispatch(changeLanguage('en'))}>en</div>
+                <TextField
+                    id="standard-basic"
+                    label="Standard"
+                    placeholder="koft"
+                />
             </div>
-        </IThemeProvider>
-  );
+        </DoubleDirectionProvider>
+    );
 }
 
 export default App;

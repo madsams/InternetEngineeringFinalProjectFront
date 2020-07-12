@@ -1,5 +1,5 @@
 import {ThunkAction} from 'redux-thunk';
-import {RootState} from '../../store';
+import {RootState} from '../store';
 import {Action} from 'redux';
 
 export type ISimpleAction = Action<string>;
@@ -14,3 +14,5 @@ export type IThunkAction<ReturnType = void> = ThunkAction<
     unknown,
     ISimpleAction
 >;
+
+export type Language = 'fa' | 'en';

@@ -1,6 +1,6 @@
 import Axios, {AxiosError, AxiosResponse, Method as AxiosMethods} from 'axios';
 import renderToast, {ToastTypes} from './renderToast';
-import {IActionCreator, IThunkAction} from '../types/reduxTypes';
+import {IActionCreator, IThunkAction} from '../types';
 
 const instance = Axios.create({
     baseURL: process.env.REACT_APP_HOST,
