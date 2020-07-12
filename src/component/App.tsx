@@ -1,25 +1,14 @@
 import React from 'react';
-import {useDispatch} from 'react-redux';
-import {TextField} from '@material-ui/core';
-import DoubleDirectionProvider from './DoubleDirectionProvider';
-import {changeLanguage} from '../utils/actions/languagesAction';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
-function App() {
-    const dispatch = useDispatch();
-
-    return (
-        <DoubleDirectionProvider>
-            <div className="p-4">
-                <div onClick={() => dispatch(changeLanguage('fa'))}>fa</div>
-                <div onClick={() => dispatch(changeLanguage('en'))}>en</div>
-                <TextField
-                    id="standard-basic"
-                    label="Standard"
-                    placeholder="koft"
-                />
-            </div>
-        </DoubleDirectionProvider>
-    );
-}
+const App = () => (
+    <Router>
+        <Switch>
+            {/*<Route path="/login" component={Login}/>*/}
+            {/*<Route path="/field" component={Field}/>*/}
+            {/*<Route path="/centre" component={Centre}/>*/}
+        </Switch>
+    </Router>
+);
 
 export default App;
