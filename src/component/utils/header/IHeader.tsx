@@ -13,7 +13,7 @@ const IHeader = ({title}: Props) => (
     <AppBar position="sticky">
         <Toolbar>
             <BackButton />
-            <ITypography text={title} className="flex-grow-1" />
+            <ITypography text={title} className="flex-grow-1 mr-1 ml-1" />
             <LanguageSwitcherButton />
         </Toolbar>
     </AppBar>
