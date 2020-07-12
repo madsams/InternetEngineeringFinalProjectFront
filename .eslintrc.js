@@ -18,6 +18,7 @@ module.exports = {
             rules: {
                 'no-undef': 'off',
                 'no-unused-vars': 'off',
+                'react/prop-types': 'off',
             },
             parserOptions: {
                 sourceType: 'module',

@@ -11,7 +11,7 @@ const ITooltip = ({children, ...title}: ITooltipProps) => {
     const iTitle = useLanguage(title);
 
     return (
-        <Tooltip title={iTitle} arrow>
+        <Tooltip title={iTitle || ''} arrow>
             {children}
         </Tooltip>
     );

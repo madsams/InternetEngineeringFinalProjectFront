@@ -5,7 +5,7 @@ import {Variant} from '@material-ui/core/styles/createTypography';
 import {useLanguage} from '../../utils/hooks';
 
 interface ITextProps {
-    text: Strings;
+    text: Strings | undefined;
     className?: string;
     style?: React.CSSProperties;
     color?:

@@ -3,11 +3,11 @@ import {useSelector} from 'react-redux';
 import {RootState} from '../store';
 import {useState} from 'react';
 
-export const useLanguage = (str: Strings): string => {
+export const useLanguage = (str: Strings | undefined): string | undefined => {
     const language = useSelector<RootState, Language>(
         (state) => state.language,
     );
-    return str[language] || '';
+    return str && str[language] ? str[language] : '';
 };
 export const useDirection = (): boolean => {
     const rtlLanguages = ['fa', 'ar'];
