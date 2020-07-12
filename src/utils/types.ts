@@ -15,7 +15,10 @@ export type IThunkAction<ReturnType = void> = ThunkAction<
     ISimpleAction
 >;
 
-export type Language = 'fa' | 'en';
+export enum Language {
+    fa = 'fa',
+    en = 'en',
+}
 
 export type Strings = {
     [language in Language]?: string;

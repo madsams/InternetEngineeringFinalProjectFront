@@ -1,7 +1,7 @@
 import {LanguageActionTypes, SWITCH_LANGUAGE} from './actions/actionTypes';
 import {Language} from './types';
 
-const initialLanguage: Language = 'en';
+const initialLanguage: Language = Language.en;
 export const languagesReducers = (
     state = initialLanguage,
     action: LanguageActionTypes,

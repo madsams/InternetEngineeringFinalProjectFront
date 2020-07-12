@@ -1,6 +1,6 @@
 import React from 'react';
 import IHeader from './IHeader';
-import {Strings} from '../../utils/types';
+import {Strings} from '../../../utils/types';
 
 interface WithHeaderProps extends Strings {
     children: React.ReactNode;

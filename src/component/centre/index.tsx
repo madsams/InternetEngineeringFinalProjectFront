@@ -1,5 +1,5 @@
 import React from 'react';
-import WithHeader from '../utils/WithHeader';
+import WithHeader from '../utils/header/WithHeader';
 
 const Centre = () => (
     <WithHeader en="Centre" fa="عامل مرکزی">
