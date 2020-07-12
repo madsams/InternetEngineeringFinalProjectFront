@@ -8,13 +8,13 @@ import NotMatch from './utils/NotMatch';
 const App = () => (
     <Router>
         <Switch>
-            <Route path="/login">
+            <Route exact path="/login">
                 <Login />
             </Route>
-            <Route path="/field">
+            <Route exact path="/field">
                 <Field />
             </Route>
-            <Route path="/centre">
+            <Route exact path="/centre">
                 <Centre />
             </Route>
             <Route path="*">
