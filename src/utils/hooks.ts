@@ -8,3 +8,12 @@ export const useLanguage = (str: Strings): string => {
     );
     return str[language] || '';
 };
+export const useDirection = (): boolean => {
+    const rtlLanguages = ['fa', 'ar'];
+
+    const language = useSelector<RootState, Language>(
+        (state) => state.language,
+    );
+
+    return rtlLanguages.includes(language);
+};

@@ -5,13 +5,14 @@ import {
     StylesProvider,
     ThemeProvider,
 } from '@material-ui/core';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {red} from '@material-ui/core/colors';
 import {create} from 'jss';
 import rtl from 'jss-rtl';
 import {useSelector} from 'react-redux';
 import {Language} from '../../utils/types';
 import {RootState} from '../../store';
+import {useDirection} from '../../utils/hooks';
 
 const palette = {
     primary: {
@@ -45,18 +46,15 @@ interface IThemeProviderProps {
     children: React.ReactNode;
 }
 
-const rtlLanguages = ['fa', 'ar'];
-
 const DoubleDirectionProvider = ({children}: IThemeProviderProps) => {
     const language = useSelector<RootState, Language>(
         (state) => state.language,
     );
-    const [isRTL, setIsRTL] = useState<boolean>(false);
+    const isRTL = useDirection();
 
     useEffect(() => {
         const html = document.getElementsByTagName('html')[0];
         html.lang = language;
-        setIsRTL(rtlLanguages.includes(language));
     }, [language]);
 
     useEffect(() => {
