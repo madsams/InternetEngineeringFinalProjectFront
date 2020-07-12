@@ -16,3 +16,7 @@ export type IThunkAction<ReturnType = void> = ThunkAction<
 >;
 
 export type Language = 'fa' | 'en';
+
+export type Strings = {
+    [language in Language]: string;
+};
