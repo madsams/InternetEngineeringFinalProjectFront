@@ -11,8 +11,8 @@ import {red} from '@material-ui/core/colors';
 import {create} from 'jss';
 import rtl from 'jss-rtl';
 import {useSelector} from 'react-redux';
-import {Language} from '../utils/types';
-import {RootState} from '../store';
+import {Language} from '../../utils/types';
+import {RootState} from '../../store';
 
 const palette = {
     primary: {
@@ -54,7 +54,12 @@ const DoubleDirectionProvider = ({children}: IThemeProviderProps) => {
     );
     const [isRTL, setIsRTL] = useState<boolean>(false);
 
-    useEffect(() => setIsRTL(rtlLanguages.includes(language)), [language]);
+    useEffect(() => {
+        const html = document.getElementsByTagName('html')[0];
+        html.lang = language;
+        setIsRTL(rtlLanguages.includes(language));
+    }, [language]);
+
     useEffect(() => {
         const body = document.getElementsByTagName('body')[0];
 

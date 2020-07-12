@@ -7,7 +7,7 @@ import App from './component/App';
 import * as serviceWorker from './serviceWorker';
 import store from './store';
 import {Provider} from 'react-redux';
-import DoubleDirectionProvider from './component/DoubleDirectionProvider';
+import DoubleDirectionProvider from './component/utils/DoubleDirectionProvider';
 
 ReactDOM.render(
     <React.StrictMode>
