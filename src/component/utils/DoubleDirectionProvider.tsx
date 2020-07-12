@@ -5,7 +5,6 @@ import {
     StylesProvider,
     ThemeProvider,
 } from '@material-ui/core';
-import ReduxToastr from 'react-redux-toastr';
 import React, {useEffect, useState} from 'react';
 import {red} from '@material-ui/core/colors';
 import {create} from 'jss';
@@ -72,13 +71,6 @@ const DoubleDirectionProvider = ({children}: IThemeProviderProps) => {
     return (
         <ThemeProvider theme={isRTL ? rtlTheme : ltrTheme}>
             <CssBaseline />
-            <ReduxToastr
-                timeOut={3000}
-                position="top-right"
-                transitionIn="fadeIn"
-                transitionOut="fadeOut"
-                closeOnToastrClick
-            />
             {isRTL ? (
                 <StylesProvider jss={rtlJss}>{children}</StylesProvider>
             ) : (
