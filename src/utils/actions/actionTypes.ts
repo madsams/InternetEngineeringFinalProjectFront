@@ -8,3 +8,11 @@ interface SwitchLanguageAction extends Action<typeof SWITCH_LANGUAGE> {
 }
 
 export type LanguageActionTypes = SwitchLanguageAction;
+
+export const CHANGE_TOKEN = 'CHANGE_TOKEN';
+
+interface ChangeTokenAction extends Action<typeof CHANGE_TOKEN> {
+    payload: string;
+}
+
+export type TokenActionTypes = ChangeTokenAction;
