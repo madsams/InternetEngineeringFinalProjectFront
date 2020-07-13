@@ -23,3 +23,9 @@ export enum Language {
 export type Strings = {
     [language in Language]?: string;
 };
+
+export enum Role {
+    unknown = 'unknown',
+    centreAgent = 'centre',
+    fieldAgent = 'field',
+}

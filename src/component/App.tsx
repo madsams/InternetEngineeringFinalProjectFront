@@ -2,15 +2,16 @@ import React from 'react';
 import Login from './login';
 import Field from './field';
 import Centre from './centre';
-import {Strings} from '../utils/types';
+import {Role, Strings} from '../utils/types';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import {Role, useRole} from '../utils/hooks';
 import IHeader from './utils/header/IHeader';
 
 const App = () => {
-    const [role] = useRole();
-    const getTitle = (): Strings =>
-        role === Role.centreAgent
+    const role = Role.centreAgent;
+
+    const getTitle = (): Strings => {
+        //todo move to redux
+        return role === Role.centreAgent
             ? {
                   fa: 'عامل مرکزی',
                   en: 'Centre Agent',
@@ -24,6 +25,7 @@ const App = () => {
                   fa: 'ورود',
                   en: 'Login',
               };
+    };
     return (
         <Router>
             <IHeader getTitle={getTitle} />
