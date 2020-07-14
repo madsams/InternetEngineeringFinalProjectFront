@@ -1,6 +1,11 @@
-import React from 'react';
-
-const Field = () => {
-    return <div>field</div>;
+import {MainApplicationType, Role} from '../../utils/types';
+const field: MainApplicationType = {
+    role: Role.fieldAgent,
+    routes: [],
+    headerTitle: {
+        fa: 'عامل میدانی',
+        en: 'Field Agent',
+    },
+    drawerVisible: true,
 };
-export default Field;
+export default field;

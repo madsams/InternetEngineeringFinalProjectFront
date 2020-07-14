@@ -1,6 +1,7 @@
 import {ThunkAction} from 'redux-thunk';
 import {RootState} from '../store';
 import {Action} from 'redux';
+import React from 'react';
 
 export type ISimpleAction = Action<string>;
 
@@ -21,7 +22,7 @@ export enum Language {
 }
 
 export type Strings = {
-    [language in Language]?: string;
+    [language in Language]: string;
 };
 
 export type StringsJson = {
@@ -32,4 +33,18 @@ export enum Role {
     unknown = 'unknown',
     centreAgent = 'centre',
     fieldAgent = 'field',
+}
+
+export interface DrawerItem {
+    title?: Strings;
+    icon?: React.ReactNode;
+    path: string;
+    component: React.ComponentType<any>;
+}
+
+export interface MainApplicationType {
+    routes: DrawerItem[];
+    role: Role;
+    headerTitle: Strings;
+    drawerVisible: boolean;
 }

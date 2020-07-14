@@ -3,21 +3,20 @@ import {AppBar, Toolbar} from '@material-ui/core';
 import ITypography from '../ITypography';
 import DrawerButton from './DrawerButton';
 import LanguageSwitcherButton from './LanguageSwitcherButton';
-import {Strings} from '../../../utils/types';
+import {DrawerItem, Strings} from '../../../utils/types';
 
 interface IHeaderProps {
-    getTitle(): Strings;
+    title: Strings;
+    drawerList: Array<DrawerItem>;
+    drawerVisible: boolean;
 }
 
-const IHeader = ({getTitle}: IHeaderProps) => {
+const IHeader = ({title, drawerList, drawerVisible}: IHeaderProps) => {
     return (
         <AppBar position="sticky">
             <Toolbar>
-                <DrawerButton />
-                <ITypography
-                    text={getTitle()}
-                    className="flex-grow-1 mr-2 ml-2"
-                />
+                {drawerVisible && <DrawerButton list={drawerList} />}
+                <ITypography text={title} className="flex-grow-1 mr-2 ml-2" />
                 <LanguageSwitcherButton />
             </Toolbar>
         </AppBar>
