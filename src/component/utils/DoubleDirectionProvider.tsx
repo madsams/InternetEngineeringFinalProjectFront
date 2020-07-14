@@ -1,4 +1,11 @@
-import {createMuiTheme, CssBaseline, jssPreset, StylesProvider, Theme, ThemeProvider,} from '@material-ui/core';
+import {
+    createMuiTheme,
+    CssBaseline,
+    jssPreset,
+    StylesProvider,
+    Theme,
+    ThemeProvider,
+} from '@material-ui/core';
 import React, {useEffect, useState} from 'react';
 import {red} from '@material-ui/core/colors';
 import {create} from 'jss';

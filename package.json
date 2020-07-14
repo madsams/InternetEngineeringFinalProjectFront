@@ -16,6 +16,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "express": "latest",
+    "javascript-time-ago": "latest",
     "jss-rtl": "^0.3.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -29,6 +30,7 @@
     "typescript": "~3.7.2"
   },
   "devDependencies": {
+    "@types/javascript-time-ago": "^2.0.1",
     "@types/react-redux": "^7.1.9",
     "@types/react-redux-toastr": "^7.4.1",
     "@types/react-router-dom": "^5.1.5",
