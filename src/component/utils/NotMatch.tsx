@@ -20,7 +20,7 @@ const NotMatch = () => (
             align="center"
             className="m-3"
         />
-        <ITypography text={strings.text} variant="h4" align="center"/>
+        <ITypography text={strings.text} variant="h4" align="center" />
     </div>
 );
 export default NotMatch;
