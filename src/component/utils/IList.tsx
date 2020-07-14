@@ -1,5 +1,5 @@
 import React from 'react';
-import {List} from '@material-ui/core';
+import {Divider, List} from '@material-ui/core';
 import ITypography from './ITypography';
 import {StringsJson} from '../../utils/types';
 
@@ -33,7 +33,10 @@ const IList = ({data, itemComponent: ItemComponent}: IListProps) => {
                 />
             ) : (
                 data.map((item, index) => (
-                    <ItemComponent key={item.id || index} item={item} />
+                    <>
+                        {index > 0 && <Divider />}
+                        <ItemComponent key={item.id || index} item={item} />
+                    </>
                 ))
             )}
         </List>

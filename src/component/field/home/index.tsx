@@ -1,8 +1,12 @@
-import React from 'react';
-import {StringsJson} from '../../../utils/types';
+import React, {useEffect} from 'react';
+import {Form, StringsJson} from '../../../utils/types';
 import ITypography from '../../utils/ITypography';
 import ILoader from '../../utils/ILoader';
+import {useDispatch, useSelector} from 'react-redux';
+import {getForms} from '../actions';
+import {RootState} from '../../../store';
 import IList from '../../utils/IList';
+import FormsListItem from './FormsListItem';
 
 const strings: StringsJson = {
     title: {
@@ -15,6 +19,15 @@ const strings: StringsJson = {
     },
 };
 const FieldHome = () => {
+    const dispatch = useDispatch();
+    const forms = useSelector<RootState, Array<Form>>(
+        (state) => state.field.forms,
+    );
+
+    useEffect(() => {
+        dispatch(getForms());
+    }, [dispatch]);
+
     return (
         <div className="flex-1 flex-column align-items-center m-2">
             <ITypography text={strings.title} variant="h5" align="center" />
@@ -26,7 +39,7 @@ const FieldHome = () => {
             />
             <br />
             <ILoader isLoading={false}>
-                <IList data={[]} itemComponent={() => <div>koft</div>} />
+                <IList data={forms} itemComponent={FormsListItem} />
             </ILoader>
         </div>
     );
