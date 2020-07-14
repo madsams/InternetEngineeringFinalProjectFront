@@ -64,29 +64,31 @@ export interface Option {
 
 export type FieldTypes = 'Text' | 'Number' | 'Location' | 'Date';
 
-export interface Field {
+export interface FieldType {
     name: string;
     title: string;
     type: FieldTypes;
+}
+
+export interface Field extends FieldType {
     required?: boolean;
     options?: Array<Option>;
 }
 
-export interface Form {
-    title: string;
-    id: number;
-    fields: Array<Field>;
-}
-
-export interface FilledField {
-    name: string;
-    title: string;
-    type: FieldTypes;
+export interface FilledField extends FieldType {
     value: string | number | Location | Option | Date;
 }
 
-export interface FilledForm {
-    id: number;
+export interface FormType {
     title: string;
+    id: number;
+}
+
+export interface Form extends FormType {
+    fields: Array<Field>;
+}
+
+export interface FilledForm extends FormType {
     fields: Array<FilledField>;
+    filledAt: Date;
 }

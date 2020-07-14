@@ -4,7 +4,8 @@ import HomeIcon from '@material-ui/icons/Home';
 import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 import FieldHome from './home';
 import FieldFilled from './filled';
-import FieldForm from './Form';
+import FieldForm from './form/FieldForm';
+import FieldFilledForm from './form/FieldFilledForm';
 
 const field: MainApplicationType = {
     role: Role.fieldAgent,
@@ -23,7 +24,7 @@ const field: MainApplicationType = {
         },
         {
             path: '/form/filled/:id',
-            component: <FieldForm isFilled />,
+            component: <FieldFilledForm />,
             hideInDrawer: true,
         },
         {

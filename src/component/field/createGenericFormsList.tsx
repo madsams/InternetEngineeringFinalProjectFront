@@ -1,4 +1,4 @@
-import {IThunkAction, Strings} from '../../utils/types';
+import {FormType, IThunkAction, Strings} from '../../utils/types';
 import * as React from 'react';
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
@@ -13,7 +13,7 @@ interface GenericFormsListString {
     subtitle: Strings;
 }
 
-const createGenericFormsList = <F extends any>(
+const createGenericFormsList = <F extends FormType>(
     stringsJson: GenericFormsListString,
     getReducer: (state: RootState) => DataReducer<F[]>,
     getData: () => IThunkAction,

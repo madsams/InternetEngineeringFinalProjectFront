@@ -210,6 +210,7 @@ const mockFilledForms: FilledForm[] = [
                 value: {label: 'ASD', value: 234},
             },
         ],
+        filledAt: new Date(),
     },
 ];
 const filledFormsReducer = createDataReducer<FilledForm[]>(
