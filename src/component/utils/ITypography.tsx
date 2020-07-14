@@ -25,7 +25,7 @@ const ITypography = ({text, className, style, color, variant}: ITextProps) => {
         <Typography
             component="p"
             style={style}
-            className={className}
+            className={className + ' text-center'}
             color={color}
             variant={variant}>
             {iText}
