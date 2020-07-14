@@ -7,6 +7,7 @@ const centre: MainApplicationType = {
         fa: 'عامل مرکزی',
         en: 'Centre Agent',
     },
+    defaultPath: '/',
     drawerVisible: true,
 };
 export default centre;

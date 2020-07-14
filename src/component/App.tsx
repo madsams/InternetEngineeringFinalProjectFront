@@ -7,7 +7,7 @@ import {RootState} from '../store';
 import {Auth0Provider} from '@auth0/auth0-react';
 import MainApplication from './utils/MainApplication';
 import login from './login';
-import centre from './field';
+import centre from './centre';
 import field from './field';
 
 const mainApplications: Array<MainApplicationType> = [field, centre, login];
@@ -33,7 +33,10 @@ const App = () => {
                 />
                 <Switch>
                     <Route path="/">
-                        <MainApplication routes={mainApp.routes} />
+                        <MainApplication
+                            routes={mainApp.routes}
+                            defaultPath={mainApp.defaultPath}
+                        />
                     </Route>
                 </Switch>
             </Router>

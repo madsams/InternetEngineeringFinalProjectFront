@@ -9,12 +9,20 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ITooltip from '../ITooltip';
 import ITypography from '../ITypography';
 import {DrawerItem} from '../../../utils/types';
+import {makeStyles} from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+    drawer: {
+        width: 250,
+    },
+});
 
 interface DrawerButtonProps {
     list: Array<DrawerItem>;
 }
 
 const DrawerButton = ({list}: DrawerButtonProps) => {
+    const classes = useStyles();
     const [open, setOpen] = useState<boolean>(false);
     const toggleDrawer = (value: boolean) => (
         event: React.KeyboardEvent | React.MouseEvent,
@@ -34,13 +42,14 @@ const DrawerButton = ({list}: DrawerButtonProps) => {
         <div
             role="presentation"
             onClick={toggleDrawer(false)}
-            onKeyDown={toggleDrawer(false)}>
+            onKeyDown={toggleDrawer(false)}
+            className={classes.drawer}>
             <List>
                 {list.map((item) => (
                     <ListItem button key={item.path}>
                         <ListItemIcon>{item.icon}</ListItemIcon>
                         <ListItemText>
-                            <ITypography text={item.title} />
+                            <ITypography text={item.title} align="left" />
                         </ListItemText>
                     </ListItem>
                 ))}

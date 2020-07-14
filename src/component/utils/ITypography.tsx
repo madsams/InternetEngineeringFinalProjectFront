@@ -17,15 +17,24 @@ interface ITextProps {
         | 'textSecondary'
         | 'error';
     variant?: Variant | 'inherit';
+    align?: 'right' | 'left' | 'center';
 }
 
-const ITypography = ({text, className, style, color, variant}: ITextProps) => {
+const ITypography = ({
+    text,
+    className,
+    style,
+    color,
+    variant,
+    align = 'center',
+}: ITextProps) => {
     const iText = useLanguage(text);
     return (
         <Typography
             component="p"
             style={style}
-            className={className + ' text-center'}
+            className={className}
+            align={align}
             color={color}
             variant={variant}>
             {iText}

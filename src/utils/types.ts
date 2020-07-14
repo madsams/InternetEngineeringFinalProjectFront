@@ -39,7 +39,7 @@ export interface DrawerItem {
     title?: Strings;
     icon?: React.ReactNode;
     path: string;
-    component: React.ComponentType<any>;
+    component: React.ReactNode;
 }
 
 export interface MainApplicationType {
@@ -47,4 +47,5 @@ export interface MainApplicationType {
     role: Role;
     headerTitle: Strings;
     drawerVisible: boolean;
+    defaultPath: string;
 }

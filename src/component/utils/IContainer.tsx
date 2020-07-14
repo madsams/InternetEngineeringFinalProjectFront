@@ -2,12 +2,12 @@ import React from 'react';
 import {Container} from '@material-ui/core';
 
 interface IContainerProps {
-    children: React.ReactNodeArray;
+    children: React.ReactElement | React.ReactNodeArray;
     className?: string;
 }
 
 const IContainer = ({children, className}: IContainerProps) => (
-    <div className="flex-1 justify-content-center bg-light">
+    <div className="flex-1 justify-content-center bg-light p-5">
         <Container maxWidth="md" className={'mt-4 ' + className}>
             {children}
         </Container>
