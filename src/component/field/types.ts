@@ -5,13 +5,15 @@ export const GET_FORMS_PENDING = 'GET_FORMS_PENDING';
 export const GET_FORMS_SUCCESS = 'GET_FORMS_SUCCESS';
 export const GET_FORMS_ERROR = 'GET_FORMS_ERROR';
 
-interface GetFormsPendingAction extends Action<typeof GET_FORMS_PENDING> {}
+export interface GetFormsPendingAction
+    extends Action<typeof GET_FORMS_PENDING> {}
 
-interface GetFormsSuccessAction extends Action<typeof GET_FORMS_SUCCESS> {
+export interface GetFormsSuccessAction
+    extends Action<typeof GET_FORMS_SUCCESS> {
     payload: Array<Form>;
 }
 
-interface GetFormsErrorAction extends Action<typeof GET_FORMS_ERROR> {}
+export interface GetFormsErrorAction extends Action<typeof GET_FORMS_ERROR> {}
 
 type FormsAction =
     | GetFormsErrorAction

@@ -55,9 +55,9 @@ interface RequestOptionType {
 
     callback?(): void;
 
-    resolve(response?: AxiosResponse): () => void;
+    resolve?(response?: AxiosResponse): () => void;
 
-    reject(error?: AxiosError): () => void;
+    reject?(error?: AxiosError): () => void;
 }
 
 interface ResponseType {
