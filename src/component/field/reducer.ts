@@ -176,7 +176,7 @@ const formReducer = createDataReducer<Form[]>('GET_FORM', mockForms);
 
 const mockFilledForms: FilledForm[] = [
     {
-        title: 'A smaple form',
+        title: 'Now',
         id: 1234,
         fields: [
             {
@@ -210,7 +210,81 @@ const mockFilledForms: FilledForm[] = [
                 value: {label: 'ASD', value: 234},
             },
         ],
-        filledAt: new Date(),
+        filledAt: new Date(Date.now()),
+    },
+    {
+        title: 'حالا',
+        id: 124,
+        fields: [
+            {
+                name: 'First_Name',
+                title: 'First Name',
+                type: 'Text',
+                value: 'adaf',
+            },
+            {
+                name: 'Date_field',
+                title: 'Date Filed',
+                type: 'Date',
+                value: new Date(),
+            },
+            {
+                name: 'Loc',
+                title: 'Your Location',
+                type: 'Number',
+                value: {lat: 142, lng: 435},
+            },
+            {
+                name: 'Request_Type',
+                title: 'Request Type',
+                type: 'Text',
+                value: {label: 'sdsd', value: 423},
+            },
+            {
+                name: 'Base_Location',
+                title: 'Base Location',
+                type: 'Location',
+                value: {label: 'ASD', value: 234},
+            },
+        ],
+        filledAt: new Date(Date.now()),
+    },
+    {
+        title: 'دیروز',
+        id: 12,
+        fields: [
+            {
+                name: 'First_Name',
+                title: 'First Name',
+                type: 'Text',
+                value: 'adaf',
+            },
+            {
+                name: 'Date_field',
+                title: 'Date Filed',
+                type: 'Date',
+                value: new Date(),
+            },
+            {
+                name: 'Loc',
+                title: 'Your Location',
+                type: 'Number',
+                value: {lat: 142, lng: 435},
+            },
+            {
+                name: 'Request_Type',
+                title: 'Request Type',
+                type: 'Text',
+                value: {label: 'sdsd', value: 423},
+            },
+            {
+                name: 'Base_Location',
+                title: 'Base Location',
+                type: 'Location',
+                value: {label: 'ASD', value: 234},
+            },
+        ],
+        filledAt: new Date(Date.now() - 24 * 60 * 60 * 1000),
     },
 ];
 const filledFormsReducer = createDataReducer<FilledForm[]>(
