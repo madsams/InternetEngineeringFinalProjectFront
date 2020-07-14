@@ -45,14 +45,20 @@ const DrawerButton = ({list}: DrawerButtonProps) => {
             onKeyDown={toggleDrawer(false)}
             className={classes.drawer}>
             <List>
-                {list.map((item) => (
-                    <ListItem button key={item.path}>
-                        <ListItemIcon>{item.icon}</ListItemIcon>
-                        <ListItemText>
-                            <ITypography text={item.title} align="left" />
-                        </ListItemText>
-                    </ListItem>
-                ))}
+                {list
+                    .filter((i) => !i.hideInDrawer)
+                    .map((item) => (
+                        <ListItem
+                            button
+                            key={item.path}
+                            component="a"
+                            href={item.path}>
+                            <ListItemIcon>{item.icon}</ListItemIcon>
+                            <ListItemText>
+                                <ITypography text={item.title} align="left" />
+                            </ListItemText>
+                        </ListItem>
+                    ))}
             </List>
         </div>
     );

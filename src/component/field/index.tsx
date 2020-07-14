@@ -1,7 +1,9 @@
+import React from 'react';
 import {MainApplicationType, Role} from '../../utils/types';
 import HomeIcon from '@material-ui/icons/Home';
-import React from 'react';
+import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 import FieldHome from './home';
+import FieldFilled from './filled';
 
 const field: MainApplicationType = {
     role: Role.fieldAgent,
@@ -11,6 +13,12 @@ const field: MainApplicationType = {
             title: {en: 'Home', fa: 'صفحه اصلی'},
             component: <FieldHome />,
             icon: <HomeIcon />,
+        },
+        {
+            path: '/filled',
+            title: {en: 'Filled Forms', fa: 'فرم‌های پر شده'},
+            component: <FieldFilled />,
+            icon: <AssignmentTurnedInIcon />,
         },
     ],
     defaultPath: '/home',

@@ -9,19 +9,11 @@ import * as serviceWorker from './serviceWorker';
 import store from './store';
 import {Provider} from 'react-redux';
 import DoubleDirectionProvider from './component/utils/DoubleDirectionProvider';
-import ReduxToastr from 'react-redux-toastr';
 
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
             <DoubleDirectionProvider>
-                <ReduxToastr
-                    timeOut={3000}
-                    position="top-right"
-                    transitionIn="fadeIn"
-                    transitionOut="fadeOut"
-                    closeOnToastrClick
-                />
                 <App />
             </DoubleDirectionProvider>
         </Provider>

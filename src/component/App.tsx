@@ -9,6 +9,8 @@ import MainApplication from './utils/MainApplication';
 import login from './login';
 import centre from './centre';
 import field from './field';
+import ReduxToastr from 'react-redux-toastr';
+import {useDirection} from '../utils/hooks';
 
 const mainApplications: Array<MainApplicationType> = [field, centre, login];
 
@@ -19,12 +21,20 @@ const useApplication = (): MainApplicationType => {
 
 const App = () => {
     const mainApp = useApplication();
+    const isRTL = useDirection();
 
     return (
         <Auth0Provider
             domain="ieng-final-project.eu.auth0.com"
             clientId="itCUjipghPHaeGzOC72mj04evZCBDcns"
             redirectUri={window.location.origin}>
+            <ReduxToastr
+                timeOut={3000}
+                position={isRTL ? 'top-left' : 'top-right'}
+                transitionIn="fadeIn"
+                transitionOut="fadeOut"
+                closeOnToastrClick
+            />
             <Router>
                 <IHeader
                     title={mainApp.headerTitle}

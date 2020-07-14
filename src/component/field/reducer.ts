@@ -1,11 +1,6 @@
-import {Reducer} from 'redux';
-import {Form} from '../../utils/types';
-import {FieldAction} from './types';
-
-interface FieldReducer {
-    isLoading: boolean;
-    forms: Array<Form>;
-}
+import {FilledForm, Form} from '../../utils/types';
+import {createDataReducer} from '../../utils/generics';
+import {combineReducers} from 'redux';
 
 const mockForms: Form[] = [
     {
@@ -177,25 +172,54 @@ const mockForms: Form[] = [
         ],
     },
 ];
+const formReducer = createDataReducer<Form[]>('GET_FORM', mockForms);
 
-const initialFieldState: FieldReducer = {
-    isLoading: false,
-    forms: mockForms,
-};
+const mockFilledForms: FilledForm[] = [
+    {
+        title: 'A smaple form',
+        id: 1234,
+        fields: [
+            {
+                name: 'First_Name',
+                title: 'First Name',
+                type: 'Text',
+                value: 'adaf',
+            },
+            {
+                name: 'Date_field',
+                title: 'Date Filed',
+                type: 'Date',
+                value: new Date(),
+            },
+            {
+                name: 'Loc',
+                title: 'Your Location',
+                type: 'Number',
+                value: {lat: 142, lng: 435},
+            },
+            {
+                name: 'Request_Type',
+                title: 'Request Type',
+                type: 'Text',
+                value: {label: 'sdsd', value: 423},
+            },
+            {
+                name: 'Base_Location',
+                title: 'Base Location',
+                type: 'Location',
+                value: {label: 'ASD', value: 234},
+            },
+        ],
+    },
+];
+const filledFormsReducer = createDataReducer<FilledForm[]>(
+    'GET_FILLED_FORM',
+    mockFilledForms,
+);
 
-const fieldReducer: Reducer<FieldReducer, FieldAction> = (
-    state = initialFieldState,
-    action,
-) => {
-    switch (action.type) {
-        case 'GET_FORMS_PENDING':
-            return {...state, isLoading: true};
-        case 'GET_FORMS_ERROR':
-            return {...state, isLoading: false};
-        case 'GET_FORMS_SUCCESS':
-            return {...state, isLoading: false, forms: [...action.payload]};
-        default:
-            return state;
-    }
-};
+const fieldReducer = combineReducers({
+    forms: formReducer,
+    filled: filledFormsReducer,
+});
+
 export default fieldReducer;

@@ -10,14 +10,8 @@ const strings: StringsJson = {
     },
 };
 
-interface SimpleItem {
-    id: string | number;
-
-    [key: string]: any;
-}
-
 interface IListProps {
-    data: SimpleItem[];
+    data: any[];
     itemComponent: React.ComponentType<any>;
 }
 
@@ -34,7 +28,9 @@ const IList = ({data, itemComponent: ItemComponent}: IListProps) => {
             ) : (
                 data.map((item, index) => (
                     <>
-                        {index > 0 && <Divider />}
+                        {index > 0 && (
+                            <Divider key={'d' + (item.id || index)} />
+                        )}
                         <ItemComponent key={item.id || index} item={item} />
                     </>
                 ))

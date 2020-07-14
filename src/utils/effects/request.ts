@@ -1,6 +1,6 @@
 import Axios, {AxiosError, AxiosResponse, Method as AxiosMethods} from 'axios';
 import renderToast, {ToastTypes} from './renderToast';
-import {IActionCreator, IThunkAction} from '../types';
+import {IActionCreator, IThunkAction, Strings} from '../types';
 
 const instance = Axios.create({
     baseURL: process.env.REACT_APP_HOST,
@@ -33,7 +33,7 @@ instance.interceptors.response.use(
 
 export interface ErrorCodesType {
     code: number;
-    toastMessage?: string;
+    toastMessage?: Strings;
 
     action(error?: AxiosError): void;
 }
@@ -45,9 +45,9 @@ interface RequestOptionType {
     url: string;
     timeout?: number;
     headers?: object;
-    toastTitle?: string;
-    successToastMessage?: string;
-    failToastMessage?: string;
+    toastTitle?: Strings;
+    successToastMessage?: Strings;
+    failToastMessage?: Strings;
     errorCodes?: Array<ErrorCodesType>;
     successAction: IActionCreator;
     errorAction: IActionCreator;
@@ -75,9 +75,12 @@ const request = (requestOption: RequestOptionType): IThunkAction => async (
         url,
         timeout = 7 * 1000,
         headers,
-        toastTitle = '',
+        toastTitle = {en: '', fa: ''},
         successToastMessage,
-        failToastMessage = 'لطفا اتصال خود را بررسی کنید',
+        failToastMessage = {
+            en: 'Please check your connection',
+            fa: 'لطفا اتصال خود را بررسی کنید',
+        },
         errorCodes = [],
         resolve,
         reject,
@@ -105,7 +108,13 @@ const request = (requestOption: RequestOptionType): IThunkAction => async (
         if (resolve) resolve(response);
         if (successAction) dispatch(successAction(response.data.data));
         if (successToastMessage)
-            renderToast(toastTitle, successToastMessage, ToastTypes.SUCCESS);
+            dispatch(
+                renderToast(
+                    toastTitle,
+                    successToastMessage,
+                    ToastTypes.SUCCESS,
+                ),
+            );
     } catch (error) {
         // Component unmounted and axios unsubscribed
         const isCancelError = !error.config;
@@ -126,10 +135,12 @@ const request = (requestOption: RequestOptionType): IThunkAction => async (
                 errorCodes.forEach((errorCode) => {
                     if (code === errorCode.code && !errorCodeActioned) {
                         if (errorCode.toastMessage)
-                            renderToast(
-                                toastTitle,
-                                errorCode.toastMessage,
-                                ToastTypes.ERROR,
+                            dispatch(
+                                renderToast(
+                                    toastTitle,
+                                    errorCode.toastMessage,
+                                    ToastTypes.ERROR,
+                                ),
                             );
                         if (errorCode.action) errorCode.action(error);
                         errorCodeActioned = true;
@@ -140,7 +151,13 @@ const request = (requestOption: RequestOptionType): IThunkAction => async (
             if (!errorCodeActioned) {
                 if (!reject) {
                     if (errorAction) dispatch(errorAction(failToastMessage));
-                    renderToast(toastTitle, failToastMessage, ToastTypes.ERROR);
+                    dispatch(
+                        renderToast(
+                            toastTitle,
+                            failToastMessage,
+                            ToastTypes.ERROR,
+                        ),
+                    );
                 } else {
                     reject(error);
                 }

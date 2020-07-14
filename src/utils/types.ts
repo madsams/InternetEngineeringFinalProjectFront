@@ -9,6 +9,10 @@ export type IActionCreator<ReturnType = ISimpleAction> = (
     ...args: any
 ) => ReturnType;
 
+export interface IDataAction<D> extends ISimpleAction {
+    payload?: D;
+}
+
 export type IThunkAction<ReturnType = void> = ThunkAction<
     ReturnType,
     RootState,
@@ -40,6 +44,7 @@ export interface DrawerItem {
     icon?: React.ReactNode;
     path: string;
     component: React.ReactNode;
+    hideInDrawer?: boolean;
 }
 
 export interface MainApplicationType {
@@ -49,6 +54,8 @@ export interface MainApplicationType {
     drawerVisible: boolean;
     defaultPath: string;
 }
+
+export type Location = {lat: number; lng: number};
 
 export interface Option {
     label: string;
@@ -69,4 +76,17 @@ export interface Form {
     title: string;
     id: number;
     fields: Array<Field>;
+}
+
+export interface FilledField {
+    name: string;
+    title: string;
+    type: FieldTypes;
+    value: string | number | Location | Option | Date;
+}
+
+export interface FilledForm {
+    id: number;
+    title: string;
+    fields: Array<FilledField>;
 }

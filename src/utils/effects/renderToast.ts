@@ -1,4 +1,5 @@
 import {toastr} from 'react-redux-toastr';
+import {IThunkAction, Strings} from '../types';
 
 const ToastrOptions = {
     showCloseButton: false,
@@ -14,6 +15,14 @@ export enum ToastTypes {
     ERROR = 'error',
 }
 
-const renderToast = (title: string, message: string, type: ToastTypes) =>
-    toastr[type](title, message, ToastrOptions);
+const renderToast = (
+    title: Strings,
+    message: Strings,
+    type: ToastTypes,
+): IThunkAction => (dispatch, getState) => {
+    const language = getState().language;
+    const iTitle = title[language];
+    const iMessage = message[language];
+    return toastr[type](iTitle, iMessage, ToastrOptions);
+};
 export default renderToast;
