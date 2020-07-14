@@ -1,11 +1,5 @@
-import {
-    createMuiTheme,
-    CssBaseline,
-    jssPreset,
-    StylesProvider,
-    ThemeProvider,
-} from '@material-ui/core';
-import React, {useEffect} from 'react';
+import {createMuiTheme, CssBaseline, jssPreset, StylesProvider, Theme, ThemeProvider,} from '@material-ui/core';
+import React, {useEffect, useState} from 'react';
 import {red} from '@material-ui/core/colors';
 import {create} from 'jss';
 import rtl from 'jss-rtl';
@@ -37,6 +31,7 @@ const rtlTheme = createMuiTheme({
     palette,
 });
 const ltrTheme = createMuiTheme({
+    direction: 'ltr',
     palette,
 });
 
@@ -51,6 +46,7 @@ const DoubleDirectionProvider = ({children}: IThemeProviderProps) => {
         (state) => state.language,
     );
     const isRTL = useDirection();
+    const [theme, setTheme] = useState<Theme>(isRTL ? rtlTheme : ltrTheme);
 
     useEffect(() => {
         const html = document.getElementsByTagName('html')[0];
@@ -66,8 +62,12 @@ const DoubleDirectionProvider = ({children}: IThemeProviderProps) => {
         else changeElement('ltr');
     }, [isRTL]);
 
+    useEffect(() => {
+        setTheme(isRTL ? rtlTheme : ltrTheme);
+    }, [isRTL]);
+
     return (
-        <ThemeProvider theme={isRTL ? rtlTheme : ltrTheme}>
+        <ThemeProvider theme={theme}>
             <CssBaseline />
             {isRTL ? (
                 <StylesProvider jss={rtlJss}>{children}</StylesProvider>
