@@ -1,4 +1,3 @@
-import React from 'react';
 import {FilledForm} from '../../../utils/types';
 import {getFilledForms} from '../actions';
 import FilledFormsListItem from './FilledFormsListItem';

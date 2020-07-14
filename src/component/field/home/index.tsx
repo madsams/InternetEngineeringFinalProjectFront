@@ -1,4 +1,3 @@
-import React from 'react';
 import {Form} from '../../../utils/types';
 import {getForms} from '../actions';
 import FormsListItem from './FormsListItem';
