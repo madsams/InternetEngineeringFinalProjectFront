@@ -1,5 +1,5 @@
 import {Action} from 'redux';
-import {Language} from '../types';
+import {Language, Role} from '../types';
 
 export const SWITCH_LANGUAGE = 'SWITCH_LANGUAGE';
 
@@ -16,3 +16,11 @@ interface ChangeTokenAction extends Action<typeof CHANGE_TOKEN> {
 }
 
 export type TokenActionTypes = ChangeTokenAction;
+
+export const SET_ROLE = 'SET_ROLE';
+
+interface SetRoleAction extends Action<typeof SET_ROLE> {
+    payload: Role;
+}
+
+export type RoleActionTypes = SetRoleAction;

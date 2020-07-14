@@ -1,13 +1,14 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux';
 import thunk from 'redux-thunk';
 import {reducer as toastrReducer} from 'react-redux-toastr';
-import {languagesReducers, tokenReducer} from './utils/reducers';
+import {languagesReducers, roleReducer, tokenReducer} from './utils/reducers';
 import {setStorage} from './utils/effects/storage';
 
 const rootReducer = combineReducers({
     toastr: toastrReducer,
     language: languagesReducers,
     token: tokenReducer,
+    role: roleReducer,
 });
 
 const middlewares = [thunk];
@@ -27,6 +28,7 @@ const saveStateToStorage = (key: string) => {
 store.subscribe(() => {
     saveStateToStorage('language');
     saveStateToStorage('token');
+    saveStateToStorage('role');
 });
 
 export default store;
