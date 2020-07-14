@@ -26,7 +26,7 @@ const ITypography = ({
     style,
     color,
     variant,
-    align = 'center',
+    align = 'left',
 }: ITextProps) => {
     const iText = useLanguage(text);
     return (

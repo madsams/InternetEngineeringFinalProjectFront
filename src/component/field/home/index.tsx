@@ -14,15 +14,21 @@ const strings: StringsJson = {
         fa: 'روی یکی از فرم‌های زیر کلیک کنید تا به صفحه‌ی مورد نظر هدایت شوید',
     },
 };
-const FieldHome = () => (
-    <div className="flex-1 flex-column align-items-center m-2">
-        <ITypography text={strings.title} variant="h3" />
-        <br />
-        <ITypography text={strings.subtitle} variant="subtitle1" />
-        <br />
-        <ILoader isLoading={false}>
-            <IList data={[]} itemComponent={() => <div>koft</div>} />
-        </ILoader>
-    </div>
-);
+const FieldHome = () => {
+    return (
+        <div className="flex-1 flex-column align-items-center m-2">
+            <ITypography text={strings.title} variant="h5" align="center" />
+            <br />
+            <ITypography
+                text={strings.subtitle}
+                variant="subtitle1"
+                align="center"
+            />
+            <br />
+            <ILoader isLoading={false}>
+                <IList data={[]} itemComponent={() => <div>koft</div>} />
+            </ILoader>
+        </div>
+    );
+};
 export default FieldHome;

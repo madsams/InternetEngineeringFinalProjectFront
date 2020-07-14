@@ -29,6 +29,7 @@ const IList = ({data, itemComponent: ItemComponent}: IListProps) => {
                     variant="subtitle2"
                     text={strings.emptyList}
                     color="textSecondary"
+                    align="center"
                 />
             ) : (
                 data.map((item, index) => (

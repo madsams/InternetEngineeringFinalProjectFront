@@ -7,7 +7,7 @@ interface IContainerProps {
 }
 
 const IContainer = ({children, className}: IContainerProps) => (
-    <div className="flex-1 justify-content-center bg-light p-5">
+    <div className="flex-1 justify-content-center bg-light">
         <Container maxWidth="md" className={'mt-4 ' + className}>
             {children}
         </Container>

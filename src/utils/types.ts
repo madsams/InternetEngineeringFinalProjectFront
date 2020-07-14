@@ -49,3 +49,29 @@ export interface MainApplicationType {
     drawerVisible: boolean;
     defaultPath: string;
 }
+
+export interface Option {
+    label: string;
+    value: any;
+}
+
+export enum FieldTypes {
+    Text = 'Text',
+    Number = 'Number',
+    Location = 'Location',
+    Date = 'Date',
+}
+
+export interface Field {
+    name: string;
+    title: string;
+    type: FieldTypes;
+    required?: boolean;
+    options?: Array<Option>;
+}
+
+export interface Form {
+    title: string;
+    id: number;
+    fields: Array<Field>;
+}

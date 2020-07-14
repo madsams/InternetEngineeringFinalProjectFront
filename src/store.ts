@@ -3,12 +3,14 @@ import thunk from 'redux-thunk';
 import {reducer as toastrReducer} from 'react-redux-toastr';
 import {languagesReducers, roleReducer, tokenReducer} from './utils/reducers';
 import {setStorage} from './utils/effects/storage';
+import fieldReducer from './component/field/reducer';
 
 const rootReducer = combineReducers({
     toastr: toastrReducer,
     language: languagesReducers,
     token: tokenReducer,
     role: roleReducer,
+    field: fieldReducer,
 });
 
 const middlewares = [thunk];
