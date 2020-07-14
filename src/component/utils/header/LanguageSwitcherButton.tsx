@@ -4,7 +4,7 @@ import LanguageIcon from '@material-ui/icons/Language';
 import {Language} from '../../../utils/types';
 import ITooltip from '../ITooltip';
 import {useDispatch} from 'react-redux';
-import {changeLanguage} from '../../../utils/actions/languagesAction';
+import {changeLanguage} from '../../../utils/actions/actions';
 
 const LanguageSwitcherButton = () => {
     const dispatch = useDispatch();
