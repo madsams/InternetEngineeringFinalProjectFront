@@ -1,4 +1,4 @@
-import {FormType, IThunkAction, Strings} from '../../utils/types';
+import {FormType, IThunkAction, LangBaseJson} from '../../utils/types';
 import * as React from 'react';
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
@@ -9,8 +9,8 @@ import IList from '../utils/IList';
 import {DataReducer} from '../../utils/generics';
 
 interface GenericFormsListString {
-    title: Strings;
-    subtitle: Strings;
+    title: LangBaseJson;
+    subtitle: LangBaseJson;
 }
 
 const createGenericFormsList = <F extends FormType>(

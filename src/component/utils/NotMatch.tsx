@@ -1,8 +1,8 @@
 import React from 'react';
-import {Strings} from '../../utils/types';
+import {LangBaseJson} from '../../utils/types';
 import ITypography from './ITypography';
 
-const strings: Strings = {
+const strings: LangBaseJson = {
     en: 'This page is not exist',
     fa: 'صفحه مورد نظر شما یافت نشد',
 };

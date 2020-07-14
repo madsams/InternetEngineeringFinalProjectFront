@@ -1,8 +1,8 @@
-import {Language, Strings} from './types';
+import {LangBaseJson, Language} from './types';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store';
 
-export const useLanguage = (str: Strings | undefined): string => {
+export const useLanguage = (str: LangBaseJson | undefined): string => {
     const language = useSelector<RootState, Language>(
         (state) => state.language,
     );

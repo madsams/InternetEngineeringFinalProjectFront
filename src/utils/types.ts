@@ -25,12 +25,12 @@ export enum Language {
     en = 'en',
 }
 
-export type Strings = {
-    [language in Language]: string;
+export type LangBaseJson<D = string> = {
+    [language in Language]: D;
 };
 
 export type StringsJson = {
-    [key: string]: Strings;
+    [key: string]: LangBaseJson;
 };
 
 export enum Role {
@@ -40,7 +40,7 @@ export enum Role {
 }
 
 export interface DrawerItem {
-    title?: Strings;
+    title?: LangBaseJson;
     icon?: React.ReactNode;
     path: string;
     component: React.ReactNode;
@@ -50,7 +50,7 @@ export interface DrawerItem {
 export interface MainApplicationType {
     routes: DrawerItem[];
     role: Role;
-    headerTitle: Strings;
+    headerTitle: LangBaseJson;
     drawerVisible: boolean;
     defaultPath: string;
 }

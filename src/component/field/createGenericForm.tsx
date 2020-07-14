@@ -8,7 +8,6 @@ import {useParams} from 'react-router';
 import NotMatch from '../utils/NotMatch';
 
 const createGenericForm = <F extends FormType>(
-    // stringsJson: GenericFormsListString,
     getReducer: (state: RootState) => DataReducer<F[]>,
 ) => () => {
     const {id} = useParams();
@@ -21,7 +20,7 @@ const createGenericForm = <F extends FormType>(
         setForm(allForms.find((f) => f.id == id));
     }, [id, allForms]);
 
-    return <div>{form ? form.title : <NotMatch/>}</div>;
+    return <div>{form ? form.title : <NotMatch />}</div>;
 };
 
 export default createGenericForm;

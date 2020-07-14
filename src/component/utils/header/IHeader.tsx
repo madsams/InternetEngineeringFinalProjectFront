@@ -3,10 +3,10 @@ import {AppBar, Toolbar} from '@material-ui/core';
 import ITypography from '../ITypography';
 import DrawerButton from './DrawerButton';
 import LanguageSwitcherButton from './LanguageSwitcherButton';
-import {DrawerItem, Strings} from '../../../utils/types';
+import {DrawerItem, LangBaseJson} from '../../../utils/types';
 
 interface IHeaderProps {
-    title: Strings;
+    title: LangBaseJson;
     drawerList: Array<DrawerItem>;
     drawerVisible: boolean;
 }

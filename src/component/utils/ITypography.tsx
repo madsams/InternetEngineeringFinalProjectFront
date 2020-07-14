@@ -1,11 +1,11 @@
 import React from 'react';
 import {Typography} from '@material-ui/core';
-import {Strings} from '../../utils/types';
+import {LangBaseJson} from '../../utils/types';
 import {Variant} from '@material-ui/core/styles/createTypography';
 import {useLanguage} from '../../utils/hooks';
 
 interface ITextProps {
-    text: Strings | undefined;
+    text: LangBaseJson | undefined;
     className?: string;
     style?: React.CSSProperties;
     color?:

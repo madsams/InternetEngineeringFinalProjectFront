@@ -1,9 +1,9 @@
 import {useLanguage} from '../../utils/hooks';
 import {Tooltip} from '@material-ui/core';
 import React from 'react';
-import {Strings} from '../../utils/types';
+import {LangBaseJson} from '../../utils/types';
 
-interface ITooltipProps extends Strings {
+interface ITooltipProps extends LangBaseJson {
     children: React.ReactElement;
 }
 

@@ -1,6 +1,6 @@
 import Axios, {AxiosError, AxiosResponse, Method as AxiosMethods} from 'axios';
 import renderToast, {ToastTypes} from './renderToast';
-import {IActionCreator, IThunkAction, Strings} from '../types';
+import {IActionCreator, IThunkAction, LangBaseJson} from '../types';
 
 const instance = Axios.create({
     baseURL: process.env.REACT_APP_HOST,
@@ -33,7 +33,7 @@ instance.interceptors.response.use(
 
 export interface ErrorCodesType {
     code: number;
-    toastMessage?: Strings;
+    toastMessage?: LangBaseJson;
 
     action(error?: AxiosError): void;
 }
@@ -45,9 +45,9 @@ interface RequestOptionType {
     url: string;
     timeout?: number;
     headers?: object;
-    toastTitle?: Strings;
-    successToastMessage?: Strings;
-    failToastMessage?: Strings;
+    toastTitle?: LangBaseJson;
+    successToastMessage?: LangBaseJson;
+    failToastMessage?: LangBaseJson;
     errorCodes?: Array<ErrorCodesType>;
     successAction: IActionCreator;
     errorAction: IActionCreator;
