@@ -1,4 +1,3 @@
-import React from 'react';
 import {FilledForm} from '../../../utils/types';
 import createGenericForm from '../createGenericForm';
 
