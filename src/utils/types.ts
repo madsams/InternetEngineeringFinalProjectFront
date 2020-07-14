@@ -24,6 +24,10 @@ export type Strings = {
     [language in Language]?: string;
 };
 
+export type StringsJson = {
+    [key: string]: Strings;
+};
+
 export enum Role {
     unknown = 'unknown',
     centreAgent = 'centre',

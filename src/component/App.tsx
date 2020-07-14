@@ -7,6 +7,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import IHeader from './utils/header/IHeader';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store';
+import {Auth0Provider} from '@auth0/auth0-react';
 
 const App = () => {
     const role = useSelector<RootState, Role>((state) => state.role);
@@ -32,20 +33,25 @@ const App = () => {
     }, [role]);
 
     return (
-        <Router>
-            <IHeader getTitle={getTitle} />
-            <Switch>
-                <Route path="/">
-                    {role === Role.centreAgent ? (
-                        <Centre />
-                    ) : role === Role.fieldAgent ? (
-                        <Field />
-                    ) : (
-                        <Login />
-                    )}
-                </Route>
-            </Switch>
-        </Router>
+        <Auth0Provider
+            domain="ieng-final-project.eu.auth0.com"
+            clientId="itCUjipghPHaeGzOC72mj04evZCBDcns"
+            redirectUri={window.location.origin}>
+            <Router>
+                <IHeader getTitle={getTitle} />
+                <Switch>
+                    <Route path="/">
+                        {role === Role.centreAgent ? (
+                            <Centre />
+                        ) : role === Role.fieldAgent ? (
+                            <Field />
+                        ) : (
+                            <Login />
+                        )}
+                    </Route>
+                </Switch>
+            </Router>
+        </Auth0Provider>
     );
 };
 export default App;
