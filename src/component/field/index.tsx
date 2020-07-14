@@ -2,8 +2,8 @@ import React from 'react';
 import {MainApplicationType, Role} from '../../utils/types';
 import HomeIcon from '@material-ui/icons/Home';
 import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
-import FieldHome from './home';
-import FieldFilled from './filled';
+import FieldHome from './FieldHome';
+import FieldFilled from './FieldFilled';
 import FieldForm from './form/FieldForm';
 import FieldFilledForm from './form/FieldFilledForm';
 

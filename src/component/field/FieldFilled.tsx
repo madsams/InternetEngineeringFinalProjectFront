@@ -1,7 +1,7 @@
-import {FilledForm} from '../../../utils/types';
-import {getFilledForms} from '../actions';
+import {FilledForm} from '../../utils/types';
+import {getFilledForms} from './actions';
 import FilledFormsListItem from './FilledFormsListItem';
-import createGenericFormsList from '../createGenericFormsList';
+import createGenericFormsList from './createGenericFormsList';
 
 const strings = {
     title: {

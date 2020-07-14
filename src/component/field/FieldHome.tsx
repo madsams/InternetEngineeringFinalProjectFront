@@ -1,7 +1,7 @@
-import {Form} from '../../../utils/types';
-import {getForms} from '../actions';
+import {Form} from '../../utils/types';
+import {getForms} from './actions';
 import FormsListItem from './FormsListItem';
-import createGenericFormsList from '../createGenericFormsList';
+import createGenericFormsList from './createGenericFormsList';
 
 const strings = {
     title: {

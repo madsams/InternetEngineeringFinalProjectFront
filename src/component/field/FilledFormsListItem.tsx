@@ -1,8 +1,8 @@
 import React from 'react';
 import {ListItem, ListItemText, Typography} from '@material-ui/core';
-import {FilledForm} from '../../../utils/types';
-import {formatTimeAgo} from '../../../utils/funstions';
-import ITypography from '../../utils/ITypography';
+import {FilledForm} from '../../utils/types';
+import {formatTimeAgo} from '../../utils/funstions';
+import ITypography from '../utils/ITypography';
 
 interface FormsListItemProps {
     item: FilledForm;

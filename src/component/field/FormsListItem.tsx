@@ -1,6 +1,6 @@
 import React from 'react';
 import {ListItem, ListItemText, Typography} from '@material-ui/core';
-import {Form} from '../../../utils/types';
+import {Form} from '../../utils/types';
 
 interface FormsListItemProps {
     item: Form;
