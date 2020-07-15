@@ -7,6 +7,7 @@ import moment, {Moment} from 'moment';
 import jMoment from 'moment-jalaali';
 import {LangBaseJson} from '../../../../utils/types';
 import {useLanguage} from '../../../../utils/hooks';
+import TodayIcon from '@material-ui/icons/Today';
 
 interface InputDateProps extends IInputProps {
     value: Date | null;
@@ -72,6 +73,9 @@ const InputDate = ({
                 autoOk
                 minDate={new Date('0000-00-00')}
                 onChange={handleDateChange}
+                InputProps={{
+                    endAdornment: <TodayIcon color="action"/>,
+                }}
             />
         </MuiPickersUtilsProvider>
     );
