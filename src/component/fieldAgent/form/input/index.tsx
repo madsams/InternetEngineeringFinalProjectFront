@@ -13,7 +13,7 @@ const FormInput = ({error, touched, ...props}: IFormInputProps) => (
     <>
         <IInput {...props} />
         <IError error={error} touched={touched} />
-        <span className="m-1"/>
+        <span className="m-1" />
     </>
 );
 
