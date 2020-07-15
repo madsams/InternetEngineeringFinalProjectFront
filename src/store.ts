@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import {reducer as toastrReducer} from 'react-redux-toastr';
 import {languagesReducers, roleReducer, tokenReducer} from './utils/reducers';
 import {setStorage} from './utils/effects/storage';
-import fieldReducer from './component/field/reducer';
+import fieldReducer from './component/fieldAgent/reducer';
 
 const rootReducer = combineReducers({
     toastr: toastrReducer,

@@ -7,8 +7,8 @@ import {RootState} from '../store';
 import {Auth0Provider} from '@auth0/auth0-react';
 import MainApplication from './utils/MainApplication';
 import login from './login';
-import centre from './centre';
-import field from './field';
+import centre from './centreAgent';
+import field from './fieldAgent';
 import ReduxToastr from 'react-redux-toastr';
 import {useDirection} from '../utils/hooks';
 
