@@ -57,7 +57,10 @@ export const createDataRequestReducer = <SD>(
     }
 };
 
-type GetRequestAction = (callback?: () => void) => IThunkAction;
+type GetRequestAction = (
+    params?: object,
+    callback?: () => void,
+) => IThunkAction;
 export const createGetRequestActions = <SD>(
     prefix: string,
     url: API,
@@ -85,11 +88,13 @@ export const createGetRequestActions = <SD>(
         payload: data,
     });
 
-    return (): IThunkAction => (dispatch) => {
+    return (params, callback): IThunkAction => (dispatch) => {
         dispatch(
             request({
                 url,
                 method: 'GET',
+                callback,
+                params,
                 errorAction: error,
                 pendingAction: pending,
                 successAction: success,
