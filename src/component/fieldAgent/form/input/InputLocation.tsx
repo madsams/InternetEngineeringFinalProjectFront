@@ -6,5 +6,6 @@ interface InputLocationProps extends IInputProps {
     value: Location | null;
 }
 
+//todo
 const InputLocation = ({value}: InputLocationProps) => <></>;
 export default InputLocation;
