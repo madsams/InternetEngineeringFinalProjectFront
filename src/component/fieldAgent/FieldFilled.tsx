@@ -1,6 +1,6 @@
 import {FilledForm} from '../../utils/types';
 import {getFilledForms} from './actions';
-import FilledFormsListItem from './FilledFormsListItem';
+import FilledListItem from './FilledListItem';
 import createGenericFormsList from './createGenericFormsList';
 
 const strings = {
@@ -17,6 +17,6 @@ const FieldFilled = createGenericFormsList<FilledForm>(
     strings,
     (state) => state.field.filled,
     getFilledForms,
-    FilledFormsListItem,
+    FilledListItem,
 );
 export default FieldFilled;

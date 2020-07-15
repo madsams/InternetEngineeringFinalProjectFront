@@ -1,6 +1,6 @@
 import {Form} from '../../utils/types';
 import {getForms} from './actions';
-import EmptyFormsListItem from './EmptyFormsListItem';
+import EmptyFormsListItem from './HomeListItem';
 import createGenericFormsList from './createGenericFormsList';
 
 const strings = {
