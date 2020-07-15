@@ -130,8 +130,8 @@ export const createPostRequestActions = <D>(
     return (data, id, callback): IThunkAction => (dispatch) => {
         dispatch(
             request({
-                data,
-                url: url + '/' + id,
+                data: {...data, id},
+                url: url,
                 method: 'POST',
                 callback,
                 errorAction: error,
