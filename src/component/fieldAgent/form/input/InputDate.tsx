@@ -1,8 +1,12 @@
 import React from 'react';
 import {IInputProps} from './types';
-import 'date-fns';
 import {DatePicker, MuiPickersUtilsProvider} from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
+import JalaliUtils from '@date-io/jalaali';
+import MomentUtils from '@date-io/moment';
+import moment, {Moment} from 'moment';
+import jMoment from 'moment-jalaali';
+import {LangBaseJson} from '../../../../utils/types';
+import {useLanguage} from '../../../../utils/hooks';
 
 interface InputDateProps extends IInputProps {
     value: Date | null;
@@ -10,7 +14,28 @@ interface InputDateProps extends IInputProps {
     onChange(value: Date | null): void;
 }
 
-const dateFormat = 'yyyy/MM/dd';
+jMoment.loadPersian({dialect: 'persian-modern', usePersianDigits: true});
+moment.locale('en');
+
+const momentFormatsLBJ: LangBaseJson<string> = {
+    fa: 'jYYYY/jMM/jDD',
+    en: 'YYYY-MM-DD',
+};
+
+const utilsLBJ: LangBaseJson<any> = {
+    fa: JalaliUtils,
+    en: MomentUtils,
+};
+
+const localesLBJ: LangBaseJson<string> = {
+    fa: 'fa',
+    en: 'en',
+};
+
+const libInstanceLBJ: LangBaseJson<any> = {
+    fa: jMoment,
+    en: moment,
+};
 
 const InputDate = ({
     name,
@@ -20,23 +45,31 @@ const InputDate = ({
     onChange,
     onBlur,
 }: InputDateProps) => {
-    const handleDateChange = (date: Date | null) => {
-        onChange(date);
+    const momentFormat = useLanguage(momentFormatsLBJ);
+    const util = useLanguage(utilsLBJ);
+    const locale = useLanguage(localesLBJ);
+    const libInstance = useLanguage(libInstanceLBJ);
+
+    const handleDateChange = (date: Moment | null) => {
+        const iDate = date ? date.toDate() : null;
+        onChange(iDate);
     };
     return (
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <MuiPickersUtilsProvider
+            libInstance={libInstance}
+            utils={util}
+            locale={locale}>
             <DatePicker
                 required={required}
                 clearable={true}
                 disableToolbar
                 variant="inline"
-                format={dateFormat}
+                format={momentFormat}
                 id={name}
                 label={title}
-                value={value || null}
+                value={value ? moment(value) : null}
                 onBlur={onBlur}
                 autoOk
-                invalidDateMessage={`Date Format is ${dateFormat}`}
                 minDate={new Date('0000-00-00')}
                 onChange={handleDateChange}
             />
