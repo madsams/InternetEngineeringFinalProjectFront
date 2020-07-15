@@ -74,7 +74,7 @@ const InputDate = ({
                 minDate={new Date('0000-00-00')}
                 onChange={handleDateChange}
                 InputProps={{
-                    endAdornment: <TodayIcon color="action"/>,
+                    endAdornment: <TodayIcon color="action" />,
                 }}
             />
         </MuiPickersUtilsProvider>

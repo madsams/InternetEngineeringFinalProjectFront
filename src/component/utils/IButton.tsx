@@ -7,11 +7,12 @@ import ITypography from './ITypography';
 const useStyle = makeStyles({
     button: {
         maxWidth: 250,
+        textTransform: 'none',
     },
 });
 
 interface IButtonProps {
-    isLoading: boolean;
+    isLoading?: boolean;
     className?: string;
     color?: PropTypes.Color;
     title: LangBaseJson;
@@ -20,7 +21,7 @@ interface IButtonProps {
 }
 
 const IButton = ({
-    isLoading,
+    isLoading = false,
     onClick,
     className,
     color = 'primary',
@@ -35,6 +36,7 @@ const IButton = ({
             className={
                 'flex-1 m-1 mt-5 col-5 ' + classes.button + ' ' + className
             }
+            disabled={isLoading}
             onClick={onClick}>
             <ILoader isLoading={isLoading}>
                 <ITypography text={title} />

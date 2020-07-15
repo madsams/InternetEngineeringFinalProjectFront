@@ -4,12 +4,14 @@ import ITypography from '../../../utils/ITypography';
 
 interface IErrorProps {
     error: LangBaseJson | null;
-    touched: boolean;
+    touched?: boolean;
+    className?: string;
 }
 
-const IError = ({touched, error}: IErrorProps) =>
+const IError = ({touched = true, error, className}: IErrorProps) =>
     touched && error ? (
         <ITypography
+            className={className}
             variant="caption"
             color="error"
             text={error}

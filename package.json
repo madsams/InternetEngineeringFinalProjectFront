@@ -20,6 +20,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "express": "latest",
+    "google-map-react": "latest",
     "javascript-time-ago": "latest",
     "jss": "^10.3.0",
     "jss-rtl": "^0.3.0",
@@ -38,6 +39,7 @@
     "typescript": "~3.7.2"
   },
   "devDependencies": {
+    "@types/google-map-react": "^1.1.8",
     "@types/javascript-time-ago": "^2.0.1",
     "@types/moment-jalaali": "^0.7.4",
     "@types/react-redux": "^7.1.9",
