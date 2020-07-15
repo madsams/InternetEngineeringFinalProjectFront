@@ -44,10 +44,10 @@ function getInitialFormState(fields: Array<Field>, initialValue: any) {
 
 const FieldForm = ({form: {fields, id}}: FieldFormProps) => {
     const [values, setValues] = useState<FormValues>(
-        getInitialFormState(fields, undefined),
+        getInitialFormState(fields, null),
     );
     const [errors, setErrors] = useState<Errors>(
-        getInitialFormState(fields, undefined),
+        getInitialFormState(fields, null),
     );
     const [touched, setTouched] = useState<Touched>(
         getInitialFormState(fields, false),
@@ -76,8 +76,8 @@ const FieldForm = ({form: {fields, id}}: FieldFormProps) => {
     };
 
     const clearState = () => {
-        setValues(getInitialFormState(fields, undefined));
-        setErrors(getInitialFormState(fields, undefined));
+        setValues(getInitialFormState(fields, null));
+        setErrors(getInitialFormState(fields, null));
         setTouched(getInitialFormState(fields, false));
     };
 
