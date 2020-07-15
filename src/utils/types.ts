@@ -62,7 +62,12 @@ export interface Option {
     value: any;
 }
 
-export type FieldTypes = 'Text' | 'Number' | 'Location' | 'Date';
+export enum FieldTypes {
+    Text = 'Text',
+    Number = 'Number',
+    Location = 'Location',
+    Date = 'Date',
+}
 
 export interface FieldType {
     name: string;

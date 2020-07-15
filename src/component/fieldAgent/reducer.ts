@@ -1,4 +1,4 @@
-import {FilledForm, Form} from '../../utils/types';
+import {FieldTypes, FilledForm, Form} from '../../utils/types';
 import {createDataReducer} from '../../utils/generics';
 import {combineReducers} from 'redux';
 
@@ -10,25 +10,25 @@ const mockForms: Form[] = [
             {
                 name: 'First_Name',
                 title: 'First Name',
-                type: 'Text',
+                type: FieldTypes.text,
                 required: true,
             },
             {
                 name: 'Date_field',
                 title: 'Date Filed',
-                type: 'Date',
+                type: FieldTypes.date,
                 required: true,
             },
             {
                 name: 'Loc',
                 title: 'Your Location',
-                type: 'Number',
+                type: FieldTypes.number,
                 required: false,
             },
             {
                 name: 'Request_Type',
                 title: 'Request Type',
-                type: 'Text',
+                type: FieldTypes.text,
                 options: [
                     {
                         label: 'Help',
@@ -43,7 +43,7 @@ const mockForms: Form[] = [
             {
                 name: 'Base_Location',
                 title: 'Base Location',
-                type: 'Location',
+                type: FieldTypes.location,
                 options: [
                     {
                         label: 'Base1',
@@ -70,19 +70,19 @@ const mockForms: Form[] = [
             {
                 name: 'First_Name',
                 title: 'First Name',
-                type: 'Text',
+                type: FieldTypes.text,
                 required: true,
             },
             {
                 name: 'Loc',
                 title: 'Your Location',
-                type: 'Location',
+                type: FieldTypes.location,
                 required: false,
             },
             {
                 name: 'Request_Type',
                 title: 'Request Type',
-                type: 'Text',
+                type: FieldTypes.text,
                 options: [
                     {
                         label: 'Help',
@@ -97,7 +97,7 @@ const mockForms: Form[] = [
             {
                 name: 'Base_Location',
                 title: 'Base Location',
-                type: 'Location',
+                type: FieldTypes.location,
                 options: [
                     {
                         label: 'Base1',
@@ -124,19 +124,19 @@ const mockForms: Form[] = [
             {
                 name: 'First_Name',
                 title: 'First Name',
-                type: 'Text',
+                type: FieldTypes.text,
                 required: true,
             },
             {
                 name: 'Loc',
                 title: 'Your Location',
-                type: 'Location',
+                type: FieldTypes.location,
                 required: false,
             },
             {
                 name: 'Request_Type',
                 title: 'Request Type',
-                type: 'Text',
+                type: FieldTypes.text,
                 options: [
                     {
                         label: 'Help',
@@ -151,7 +151,7 @@ const mockForms: Form[] = [
             {
                 name: 'Base_Location',
                 title: 'Base Location',
-                type: 'Location',
+                type: FieldTypes.location,
                 options: [
                     {
                         label: 'Base1',
@@ -182,31 +182,31 @@ const mockFilledForms: FilledForm[] = [
             {
                 name: 'First_Name',
                 title: 'First Name',
-                type: 'Text',
+                type: FieldTypes.text,
                 value: 'adaf',
             },
             {
                 name: 'Date_field',
                 title: 'Date Filed',
-                type: 'Date',
+                type: FieldTypes.date,
                 value: new Date(),
             },
             {
                 name: 'Loc',
                 title: 'Your Location',
-                type: 'Number',
+                type: FieldTypes.number,
                 value: {lat: 142, lng: 435},
             },
             {
                 name: 'Request_Type',
                 title: 'Request Type',
-                type: 'Text',
+                type: FieldTypes.text,
                 value: {label: 'sdsd', value: 423},
             },
             {
                 name: 'Base_Location',
                 title: 'Base Location',
-                type: 'Location',
+                type: FieldTypes.location,
                 value: {label: 'ASD', value: 234},
             },
         ],
@@ -219,31 +219,31 @@ const mockFilledForms: FilledForm[] = [
             {
                 name: 'First_Name',
                 title: 'First Name',
-                type: 'Text',
+                type: FieldTypes.text,
                 value: 'adaf',
             },
             {
                 name: 'Date_field',
                 title: 'Date Filed',
-                type: 'Date',
+                type: FieldTypes.date,
                 value: new Date(),
             },
             {
                 name: 'Loc',
                 title: 'Your Location',
-                type: 'Number',
+                type: FieldTypes.number,
                 value: {lat: 142, lng: 435},
             },
             {
                 name: 'Request_Type',
                 title: 'Request Type',
-                type: 'Text',
+                type: FieldTypes.text,
                 value: {label: 'sdsd', value: 423},
             },
             {
                 name: 'Base_Location',
                 title: 'Base Location',
-                type: 'Location',
+                type: FieldTypes.location,
                 value: {label: 'ASD', value: 234},
             },
         ],
@@ -256,31 +256,31 @@ const mockFilledForms: FilledForm[] = [
             {
                 name: 'First_Name',
                 title: 'First Name',
-                type: 'Text',
+                type: FieldTypes.text,
                 value: 'adaf',
             },
             {
                 name: 'Date_field',
                 title: 'Date Filed',
-                type: 'Date',
+                type: FieldTypes.date,
                 value: new Date(),
             },
             {
                 name: 'Loc',
                 title: 'Your Location',
-                type: 'Number',
+                type: FieldTypes.number,
                 value: {lat: 142, lng: 435},
             },
             {
                 name: 'Request_Type',
                 title: 'Request Type',
-                type: 'Text',
+                type: FieldTypes.text,
                 value: {label: 'sdsd', value: 423},
             },
             {
                 name: 'Base_Location',
                 title: 'Base Location',
-                type: 'Location',
+                type: FieldTypes.location,
                 value: {label: 'ASD', value: 234},
             },
         ],

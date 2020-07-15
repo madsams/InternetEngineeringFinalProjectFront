@@ -18,6 +18,7 @@ interface ITextProps {
         | 'error';
     variant?: Variant | 'inherit';
     align?: 'right' | 'left' | 'center';
+    prefix?: string;
 }
 
 const ITypography = ({
@@ -27,6 +28,7 @@ const ITypography = ({
     color,
     variant,
     align = 'left',
+    prefix = '',
 }: ITextProps) => {
     const iText = useLanguage(text);
     return (
@@ -37,7 +39,7 @@ const ITypography = ({
             align={align}
             color={color}
             variant={variant}>
-            {iText}
+            {prefix + iText}
         </Typography>
     );
 };
