@@ -1,4 +1,4 @@
-import {Form, IDataAction, ISimpleAction, IThunkAction} from './types';
+import {IDataAction, ISimpleAction, IThunkAction} from './types';
 import {Action, Reducer} from 'redux';
 import request from './effects/request';
 import API from './API';
@@ -69,7 +69,7 @@ export const createDataRequestActions = <SD>(
     interface PendingAction extends Action<typeof PENDING> {}
 
     interface SuccessAction extends Action<typeof SUCCESS> {
-        payload: Array<Form>;
+        payload: Array<SD>;
     }
 
     interface ErrorAction extends Action<typeof ERROR> {}
@@ -80,9 +80,9 @@ export const createDataRequestActions = <SD>(
     const error = (): ErrorAction => ({
         type: ERROR,
     });
-    const success = (forms: Array<Form>): SuccessAction => ({
+    const success = (data: Array<SD>): SuccessAction => ({
         type: SUCCESS,
-        payload: forms,
+        payload: data,
     });
 
     return (): IThunkAction => (dispatch) => {
