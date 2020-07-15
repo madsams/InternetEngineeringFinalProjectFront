@@ -1,6 +1,6 @@
 enum api {
-    forms = '/api/forms',
-    filledForms = '/api/v1/filled-forms',
+    forms = '/api/form',
+    filledForms = '/api/form-answer',
 }
 
 export default api;
