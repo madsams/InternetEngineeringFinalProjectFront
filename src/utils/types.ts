@@ -10,7 +10,7 @@ export type IActionCreator<ReturnType = ISimpleAction> = (
 ) => ReturnType;
 
 export interface IDataAction<D> extends ISimpleAction {
-    payload?: D;
+    payload: D;
 }
 
 export type IThunkAction<ReturnType = void> = ThunkAction<

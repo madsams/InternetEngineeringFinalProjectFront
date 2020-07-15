@@ -51,7 +51,7 @@ export const createDataRequestReducer = <SD>(
         case typePrefix + '_ERROR':
             return {...state, isLoading: false};
         case typePrefix + '_SUCCESS':
-            return {...state, isLoading: false, forms: action.payload};
+            return {...state, isLoading: false, data: action.payload};
         default:
             return state;
     }
