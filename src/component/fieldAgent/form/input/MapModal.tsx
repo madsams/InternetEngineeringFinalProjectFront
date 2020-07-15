@@ -5,6 +5,8 @@ import {LangBaseJson, Location, StringsJson} from '../../../../utils/types';
 import IButton from '../../../utils/IButton';
 import IError from './IError';
 import {makeStyles} from '@material-ui/core/styles';
+import {useDispatch} from 'react-redux';
+import {getGeoLocation} from '../../actions';
 
 interface MapModalProps {
     open: boolean;
@@ -53,6 +55,7 @@ const MapModal = ({open, choose, onClose}: MapModalProps) => {
     const classes = useStyles();
     const [marker, setMarker] = useState<Location | null>(null);
     const [error, setError] = useState<LangBaseJson | null>(null);
+    const dispatch = useDispatch();
     const handleClose = () => {
         onClose();
         setError(null);
@@ -62,6 +65,7 @@ const MapModal = ({open, choose, onClose}: MapModalProps) => {
         if (!marker) {
             setError(strings.notChosenError);
         } else {
+            dispatch(getGeoLocation({location: marker}));
             choose(marker);
             handleClose();
         }

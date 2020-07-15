@@ -16,7 +16,7 @@ const strings = {
 const FieldFilled = createGenericFormsList<FilledForm>(
     strings,
     (state) => state.field.filled,
-    getFilledForms,
+    () => getFilledForms(undefined),
     FilledListItem,
 );
 export default FieldFilled;

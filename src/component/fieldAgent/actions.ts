@@ -1,4 +1,4 @@
-import {FilledForm, Form} from '../../utils/types';
+import {FilledForm, Form, Location} from '../../utils/types';
 import api from '../../utils/API';
 import {
     createGetRequestActions,
@@ -13,8 +13,11 @@ import {
     SUBMIT_FORM,
 } from './types';
 
-export const getForms = createGetRequestActions<Form>(GET_FORMS, api.forms);
-export const getFilledForms = createGetRequestActions<FilledForm>(
+export const getForms = createGetRequestActions<Form, undefined>(
+    GET_FORMS,
+    api.forms,
+);
+export const getFilledForms = createGetRequestActions<FilledForm, undefined>(
     GET_FILLED_FORMS,
     api.filledForms,
 );
@@ -22,7 +25,7 @@ export const submitForm = createPostRequestActions<FormValues>(
     SUBMIT_FORM,
     api.forms,
 );
-export const getGeoLocation = createGetRequestActions<GeoLocation[]>(
-    GET_GEO_LOCATION,
-    api.forms,
-);
+export const getGeoLocation = createGetRequestActions<
+    GeoLocation[],
+    {location: Location}
+>(GET_GEO_LOCATION, api.forms);

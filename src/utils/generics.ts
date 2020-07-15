@@ -57,14 +57,11 @@ export const createDataRequestReducer = <SD>(
     }
 };
 
-type GetRequestAction = (
-    params?: object,
-    callback?: () => void,
-) => IThunkAction;
-export const createGetRequestActions = <SD>(
+type GetRequestAction<P> = (params: P, callback?: () => void) => IThunkAction;
+export const createGetRequestActions = <SD, P extends object | undefined>(
     prefix: string,
     url: API,
-): GetRequestAction => {
+): GetRequestAction<P> => {
     const PENDING = prefix + '_PENDING';
     const SUCCESS = prefix + '_SUCCESS';
     const ERROR = prefix + '_ERROR';
