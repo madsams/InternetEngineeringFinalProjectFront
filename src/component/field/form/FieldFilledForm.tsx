@@ -1,7 +1,12 @@
 import {FilledForm} from '../../../utils/types';
-import createGenericForm from '../createGenericForm';
+import React from 'react';
+import withForm from './withForm';
 
-const FieldFilledForm = createGenericForm<FilledForm>(
-    (state) => state.field.filled,
+interface FieldFormProps {
+    form: FilledForm;
+}
+
+const FieldFilledForm = ({form}: FieldFormProps) => <>filled: {form.title}</>;
+export default withForm<FilledForm>((state) => state.field.filled)(
+    FieldFilledForm,
 );
-export default FieldFilledForm;
