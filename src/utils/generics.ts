@@ -58,7 +58,7 @@ export const createDataRequestReducer = <SD>(
 };
 
 type DataAction = () => IThunkAction;
-export const createRequestActions = <SD>(
+export const createDataRequestActions = <SD>(
     prefix: string,
     url: API,
 ): DataAction => {

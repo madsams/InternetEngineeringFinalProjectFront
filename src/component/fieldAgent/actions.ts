@@ -1,9 +1,9 @@
 import {Form} from '../../utils/types';
 import API from '../../utils/API';
-import {createRequestActions} from '../../utils/generics';
+import {createDataRequestActions} from '../../utils/generics';
 
-export const getForms = createRequestActions<Form>('GET_FORMS', API.forms);
-export const getFilledForms = createRequestActions<Form>(
+export const getForms = createDataRequestActions<Form>('GET_FORMS', API.forms);
+export const getFilledForms = createDataRequestActions<Form>(
     'GET_FILLED_FORMS',
     API.filledForms,
 );
