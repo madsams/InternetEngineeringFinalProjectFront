@@ -57,11 +57,11 @@ export const createDataRequestReducer = <SD>(
     }
 };
 
-type DataAction = () => IThunkAction;
-export const createDataRequestActions = <SD>(
+type GetRequestAction = (callback?: () => void) => IThunkAction;
+export const createGetRequestActions = <SD>(
     prefix: string,
     url: API,
-): DataAction => {
+): GetRequestAction => {
     const PENDING = prefix + '_PENDING';
     const SUCCESS = prefix + '_SUCCESS';
     const ERROR = prefix + '_ERROR';
@@ -90,6 +90,50 @@ export const createDataRequestActions = <SD>(
             request({
                 url,
                 method: 'GET',
+                errorAction: error,
+                pendingAction: pending,
+                successAction: success,
+            }),
+        );
+    };
+};
+
+type PostRequestAction<D> = (
+    data: D,
+    id: number,
+    callback?: () => void,
+) => IThunkAction;
+export const createPostRequestActions = <D>(
+    prefix: string,
+    url: API,
+): PostRequestAction<D> => {
+    const PENDING = prefix + '_PENDING';
+    const SUCCESS = prefix + '_SUCCESS';
+    const ERROR = prefix + '_ERROR';
+
+    interface PendingAction extends Action<typeof PENDING> {}
+
+    interface SuccessAction extends Action<typeof SUCCESS> {}
+
+    interface ErrorAction extends Action<typeof ERROR> {}
+
+    const pending = (): PendingAction => ({
+        type: PENDING,
+    });
+    const error = (): ErrorAction => ({
+        type: ERROR,
+    });
+    const success = (): SuccessAction => ({
+        type: SUCCESS,
+    });
+
+    return (data, id, callback): IThunkAction => (dispatch) => {
+        dispatch(
+            request({
+                data,
+                url: url + '/' + id,
+                method: 'POST',
+                callback,
                 errorAction: error,
                 pendingAction: pending,
                 successAction: success,

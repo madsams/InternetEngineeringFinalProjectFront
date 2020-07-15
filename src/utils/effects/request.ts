@@ -40,7 +40,7 @@ export interface ErrorCodesType {
 
 interface RequestOptionType {
     method: AxiosMethods;
-    data?: object;
+    data?: any;
     params?: object;
     url: string;
     timeout?: number;
@@ -70,7 +70,7 @@ const request = (requestOption: RequestOptionType): IThunkAction => async (
 ) => {
     const {
         method,
-        data = {},
+        data,
         params = {},
         url,
         timeout = 7 * 1000,

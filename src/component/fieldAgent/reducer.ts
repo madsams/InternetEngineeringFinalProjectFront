@@ -1,6 +1,10 @@
 import {FieldTypes, FilledForm, Form} from '../../utils/types';
-import {createDataRequestReducer} from '../../utils/generics';
+import {
+    createDataRequestReducer,
+    createRequestReducer,
+} from '../../utils/generics';
 import {combineReducers} from 'redux';
+import {GET_FILLED_FORMS, GET_FORMS, SUBMIT_FORM} from './types';
 
 const mockForms: Form[] = [
     {
@@ -172,7 +176,7 @@ const mockForms: Form[] = [
         ],
     },
 ];
-const formReducer = createDataRequestReducer<Form[]>('GET_FORM', mockForms);
+const formReducer = createDataRequestReducer<Form[]>(GET_FORMS, mockForms);
 
 const mockFilledForms: FilledForm[] = [
     {
@@ -288,13 +292,16 @@ const mockFilledForms: FilledForm[] = [
     },
 ];
 const filledFormsReducer = createDataRequestReducer<FilledForm[]>(
-    'GET_FILLED_FORM',
+    GET_FILLED_FORMS,
     mockFilledForms,
 );
+
+const submitFormReducer = createRequestReducer(SUBMIT_FORM);
 
 const fieldReducer = combineReducers({
     forms: formReducer,
     filled: filledFormsReducer,
+    submitForm: submitFormReducer,
 });
 
 export default fieldReducer;
