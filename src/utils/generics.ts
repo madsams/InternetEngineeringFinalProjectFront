@@ -1,23 +1,48 @@
-import {Form, IDataAction, IThunkAction} from './types';
+import {Form, IDataAction, ISimpleAction, IThunkAction} from './types';
 import {Action, Reducer} from 'redux';
 import request from './effects/request';
 import API from './API';
 
-export interface DataReducer<D> {
+export interface RequestReducer {
+    isLoading: boolean;
+}
+
+const initialRequestState = (): RequestReducer => ({
+    isLoading: false,
+});
+
+export const createRequestReducer = (
+    typePrefix: string,
+): Reducer<RequestReducer, ISimpleAction> => (
+    state = initialRequestState(),
+    action,
+) => {
+    switch (action.type) {
+        case typePrefix + '_PENDING':
+            return {...state, isLoading: true};
+        case typePrefix + '_ERROR':
+        case typePrefix + '_SUCCESS':
+            return {...state, isLoading: false};
+        default:
+            return state;
+    }
+};
+
+export interface DataRequestReducer<D> {
     isLoading: boolean;
     data: D;
 }
 
-const initialState = <D>(data: D): DataReducer<D> => ({
+const initialDataRequestState = <D>(data: D): DataRequestReducer<D> => ({
     isLoading: false,
     data,
 });
 
-export const createDataReducer = <SD>(
+export const createDataRequestReducer = <SD>(
     typePrefix: string,
     initialData: SD,
-): Reducer<DataReducer<SD>, IDataAction<SD>> => (
-    state = initialState(initialData),
+): Reducer<DataRequestReducer<SD>, IDataAction<SD>> => (
+    state = initialDataRequestState(initialData),
     action,
 ) => {
     switch (action.type) {
@@ -33,7 +58,10 @@ export const createDataReducer = <SD>(
 };
 
 type DataAction = () => IThunkAction;
-export const createDataActions = <SD>(prefix: string, url: API): DataAction => {
+export const createRequestActions = <SD>(
+    prefix: string,
+    url: API,
+): DataAction => {
     const PENDING = prefix + '_PENDING';
     const SUCCESS = prefix + '_SUCCESS';
     const ERROR = prefix + '_ERROR';

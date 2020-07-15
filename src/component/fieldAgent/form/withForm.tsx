@@ -3,7 +3,7 @@ import * as React from 'react';
 import {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../../store';
-import {DataReducer} from '../../../utils/generics';
+import {DataRequestReducer} from '../../../utils/generics';
 import {useParams} from 'react-router';
 import NotMatch from '../../utils/NotMatch';
 import {Typography} from '@material-ui/core';
@@ -13,7 +13,7 @@ interface ComponentProps<F> {
 }
 
 const withForm = <F extends FormType>(
-    getReducer: (state: RootState) => DataReducer<F[]>,
+    getReducer: (state: RootState) => DataRequestReducer<F[]>,
 ) => (Component: React.ComponentType<ComponentProps<F>>): React.FC => () => {
     const {id} = useParams();
     const allForms = useSelector<RootState, F[]>(

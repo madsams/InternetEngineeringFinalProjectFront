@@ -6,7 +6,7 @@ import {RootState} from '../../store';
 import ITypography from '../utils/ITypography';
 import ILoader from '../utils/ILoader';
 import IList from '../utils/IList';
-import {DataReducer} from '../../utils/generics';
+import {DataRequestReducer} from '../../utils/generics';
 
 interface GenericFormsListString {
     title: LangBaseJson;
@@ -15,7 +15,7 @@ interface GenericFormsListString {
 
 const createGenericFormsList = <F extends FormType>(
     stringsJson: GenericFormsListString,
-    getReducer: (state: RootState) => DataReducer<F[]>,
+    getReducer: (state: RootState) => DataRequestReducer<F[]>,
     getData: () => IThunkAction,
     listItemComponent: React.ComponentType<any>,
 ) => () => {

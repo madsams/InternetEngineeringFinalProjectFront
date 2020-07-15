@@ -1,5 +1,5 @@
 import {FieldTypes, FilledForm, Form} from '../../utils/types';
-import {createDataReducer} from '../../utils/generics';
+import {createDataRequestReducer} from '../../utils/generics';
 import {combineReducers} from 'redux';
 
 const mockForms: Form[] = [
@@ -10,25 +10,25 @@ const mockForms: Form[] = [
             {
                 name: 'First_Name',
                 title: 'First Name',
-                type: FieldTypes.text,
+                type: FieldTypes.Text,
                 required: true,
             },
             {
                 name: 'Date_field',
                 title: 'Date Filed',
-                type: FieldTypes.date,
+                type: FieldTypes.Date,
                 required: true,
             },
             {
                 name: 'Loc',
                 title: 'Your Location',
-                type: FieldTypes.number,
+                type: FieldTypes.Number,
                 required: false,
             },
             {
                 name: 'Request_Type',
                 title: 'Request Type',
-                type: FieldTypes.text,
+                type: FieldTypes.Text,
                 options: [
                     {
                         label: 'Help',
@@ -43,7 +43,7 @@ const mockForms: Form[] = [
             {
                 name: 'Base_Location',
                 title: 'Base Location',
-                type: FieldTypes.location,
+                type: FieldTypes.Location,
                 options: [
                     {
                         label: 'Base1',
@@ -70,19 +70,19 @@ const mockForms: Form[] = [
             {
                 name: 'First_Name',
                 title: 'First Name',
-                type: FieldTypes.text,
+                type: FieldTypes.Text,
                 required: true,
             },
             {
                 name: 'Loc',
                 title: 'Your Location',
-                type: FieldTypes.location,
+                type: FieldTypes.Location,
                 required: false,
             },
             {
                 name: 'Request_Type',
                 title: 'Request Type',
-                type: FieldTypes.text,
+                type: FieldTypes.Text,
                 options: [
                     {
                         label: 'Help',
@@ -97,7 +97,7 @@ const mockForms: Form[] = [
             {
                 name: 'Base_Location',
                 title: 'Base Location',
-                type: FieldTypes.location,
+                type: FieldTypes.Location,
                 options: [
                     {
                         label: 'Base1',
@@ -124,19 +124,19 @@ const mockForms: Form[] = [
             {
                 name: 'First_Name',
                 title: 'First Name',
-                type: FieldTypes.text,
+                type: FieldTypes.Text,
                 required: true,
             },
             {
                 name: 'Loc',
                 title: 'Your Location',
-                type: FieldTypes.location,
+                type: FieldTypes.Location,
                 required: false,
             },
             {
                 name: 'Request_Type',
                 title: 'Request Type',
-                type: FieldTypes.text,
+                type: FieldTypes.Text,
                 options: [
                     {
                         label: 'Help',
@@ -151,7 +151,7 @@ const mockForms: Form[] = [
             {
                 name: 'Base_Location',
                 title: 'Base Location',
-                type: FieldTypes.location,
+                type: FieldTypes.Location,
                 options: [
                     {
                         label: 'Base1',
@@ -172,7 +172,7 @@ const mockForms: Form[] = [
         ],
     },
 ];
-const formReducer = createDataReducer<Form[]>('GET_FORM', mockForms);
+const formReducer = createDataRequestReducer<Form[]>('GET_FORM', mockForms);
 
 const mockFilledForms: FilledForm[] = [
     {
@@ -182,31 +182,31 @@ const mockFilledForms: FilledForm[] = [
             {
                 name: 'First_Name',
                 title: 'First Name',
-                type: FieldTypes.text,
+                type: FieldTypes.Text,
                 value: 'adaf',
             },
             {
                 name: 'Date_field',
                 title: 'Date Filed',
-                type: FieldTypes.date,
+                type: FieldTypes.Date,
                 value: new Date(),
             },
             {
                 name: 'Loc',
                 title: 'Your Location',
-                type: FieldTypes.number,
+                type: FieldTypes.Number,
                 value: {lat: 142, lng: 435},
             },
             {
                 name: 'Request_Type',
                 title: 'Request Type',
-                type: FieldTypes.text,
+                type: FieldTypes.Text,
                 value: {label: 'sdsd', value: 423},
             },
             {
                 name: 'Base_Location',
                 title: 'Base Location',
-                type: FieldTypes.location,
+                type: FieldTypes.Location,
                 value: {label: 'ASD', value: 234},
             },
         ],
@@ -219,31 +219,31 @@ const mockFilledForms: FilledForm[] = [
             {
                 name: 'First_Name',
                 title: 'First Name',
-                type: FieldTypes.text,
+                type: FieldTypes.Text,
                 value: 'adaf',
             },
             {
                 name: 'Date_field',
                 title: 'Date Filed',
-                type: FieldTypes.date,
+                type: FieldTypes.Date,
                 value: new Date(),
             },
             {
                 name: 'Loc',
                 title: 'Your Location',
-                type: FieldTypes.number,
+                type: FieldTypes.Number,
                 value: {lat: 142, lng: 435},
             },
             {
                 name: 'Request_Type',
                 title: 'Request Type',
-                type: FieldTypes.text,
+                type: FieldTypes.Text,
                 value: {label: 'sdsd', value: 423},
             },
             {
                 name: 'Base_Location',
                 title: 'Base Location',
-                type: FieldTypes.location,
+                type: FieldTypes.Location,
                 value: {label: 'ASD', value: 234},
             },
         ],
@@ -256,38 +256,38 @@ const mockFilledForms: FilledForm[] = [
             {
                 name: 'First_Name',
                 title: 'First Name',
-                type: FieldTypes.text,
+                type: FieldTypes.Text,
                 value: 'adaf',
             },
             {
                 name: 'Date_field',
                 title: 'Date Filed',
-                type: FieldTypes.date,
+                type: FieldTypes.Date,
                 value: new Date(),
             },
             {
                 name: 'Loc',
                 title: 'Your Location',
-                type: FieldTypes.number,
+                type: FieldTypes.Number,
                 value: {lat: 142, lng: 435},
             },
             {
                 name: 'Request_Type',
                 title: 'Request Type',
-                type: FieldTypes.text,
+                type: FieldTypes.Text,
                 value: {label: 'sdsd', value: 423},
             },
             {
                 name: 'Base_Location',
                 title: 'Base Location',
-                type: FieldTypes.location,
+                type: FieldTypes.Location,
                 value: {label: 'ASD', value: 234},
             },
         ],
         filledAt: new Date(Date.now() - 24 * 60 * 60 * 1000),
     },
 ];
-const filledFormsReducer = createDataReducer<FilledForm[]>(
+const filledFormsReducer = createDataRequestReducer<FilledForm[]>(
     'GET_FILLED_FORM',
     mockFilledForms,
 );
