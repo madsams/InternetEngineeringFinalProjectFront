@@ -44,10 +44,10 @@ function getInitialFormState(fields: Array<Field>, initialValue: any) {
 
 const FieldForm = ({form: {fields, id}}: FieldFormProps) => {
     const [values, setValues] = useState<FormValues>(
-        getInitialFormState(fields, null),
+        getInitialFormState(fields, undefined),
     );
     const [errors, setErrors] = useState<Errors>(
-        getInitialFormState(fields, null),
+        getInitialFormState(fields, undefined),
     );
     const [touched, setTouched] = useState<Touched>(
         getInitialFormState(fields, false),
@@ -76,8 +76,8 @@ const FieldForm = ({form: {fields, id}}: FieldFormProps) => {
     };
 
     const clearState = () => {
-        setValues(getInitialFormState(fields, null));
-        setErrors(getInitialFormState(fields, null));
+        setValues(getInitialFormState(fields, undefined));
+        setErrors(getInitialFormState(fields, undefined));
         setTouched(getInitialFormState(fields, false));
     };
 
@@ -96,6 +96,7 @@ const FieldForm = ({form: {fields, id}}: FieldFormProps) => {
     }
 
     const submit = () => {
+        console.log(fields);
         if (checkRequires()) {
             dispatch(submitForm(values, id, clearState));
         }
