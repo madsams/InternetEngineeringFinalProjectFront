@@ -97,6 +97,7 @@ const FieldForm = ({form: {fields, id}}: FieldFormProps) => {
 
     const submit = () => {
         console.log(fields);
+        console.log(values);
         if (checkRequires()) {
             dispatch(submitForm(values, id, clearState));
         }
