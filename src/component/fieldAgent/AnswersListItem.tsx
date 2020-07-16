@@ -4,13 +4,14 @@ import {FormAnswer} from '../../utils/types';
 import {formatTimeAgo} from '../../utils/funstions';
 import ITypography from '../utils/ITypography';
 import {Link} from 'react-router-dom';
+import {FORM_ANSWERS_DETAIL} from './paths';
 
 interface FormsListItemProps {
     item: FormAnswer;
 }
 
 const FilledFormsListItem = ({item}: FormsListItemProps) => (
-    <Link to={`/form-answer/${item.id}`} className="text-decoration-none">
+    <Link to={FORM_ANSWERS_DETAIL(item.id)} className="text-decoration-none">
         <ListItem button component="div">
             <ListItemText className="col-4">
                 <Typography

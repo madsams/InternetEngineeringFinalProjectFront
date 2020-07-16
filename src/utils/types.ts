@@ -39,20 +39,20 @@ export enum Role {
     fieldAgent = 'field',
 }
 
-export interface DrawerItem {
+export interface DrawerItem<P extends Path> {
     title?: LangBaseJson;
     icon?: React.ReactNode;
-    path: string;
+    path: P;
     component: React.ReactNode;
     hideInDrawer?: boolean;
 }
 
-export interface MainApplicationType {
-    routes: DrawerItem[];
+export interface MainApplicationType<P extends Path> {
+    routes: DrawerItem<P>[];
     role: Role;
     headerTitle: LangBaseJson;
     drawerVisible: boolean;
-    defaultPath: string;
+    defaultPath: P;
 }
 
 export type Location = {lat: number; lng: number};
@@ -99,3 +99,5 @@ export interface FormAnswer extends FormType {
     fields: Array<FilledField>;
     createdAt: Date;
 }
+
+export type Path = string;

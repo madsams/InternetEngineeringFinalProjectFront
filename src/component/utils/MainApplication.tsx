@@ -9,7 +9,7 @@ import {DrawerItem} from '../../utils/types';
 import IContainer from './IContainer';
 
 interface MainApplicationProps {
-    routes: Array<DrawerItem>;
+    routes: Array<DrawerItem<string>>;
     defaultPath: string;
 }
 

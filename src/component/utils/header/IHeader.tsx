@@ -7,7 +7,7 @@ import {DrawerItem, LangBaseJson} from '../../../utils/types';
 
 interface IHeaderProps {
     title: LangBaseJson;
-    drawerList: Array<DrawerItem>;
+    drawerList: Array<DrawerItem<string>>;
     drawerVisible: boolean;
 }
 

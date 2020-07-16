@@ -18,7 +18,7 @@ const useStyles = makeStyles({
 });
 
 interface DrawerButtonProps {
-    list: Array<DrawerItem>;
+    list: Array<DrawerItem<string>>;
 }
 
 const DrawerButton = ({list}: DrawerButtonProps) => {

@@ -12,9 +12,9 @@ import field from './fieldAgent';
 import ReduxToastr from 'react-redux-toastr';
 import {useDirection} from '../utils/hooks';
 
-const mainApplications: Array<MainApplicationType> = [field, centre, login];
+const mainApplications = [field, centre, login];
 
-const useApplication = (): MainApplicationType => {
+const useApplication = (): MainApplicationType<string> => {
     const role = useSelector<RootState, Role>((state) => state.role);
     return mainApplications.find((a) => a.role === role) || login;
 };

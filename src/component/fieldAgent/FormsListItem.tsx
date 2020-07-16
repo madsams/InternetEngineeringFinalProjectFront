@@ -2,13 +2,14 @@ import React from 'react';
 import {ListItem, ListItemText, Typography} from '@material-ui/core';
 import {Form} from '../../utils/types';
 import {Link} from 'react-router-dom';
+import {FORMS_DETAIL} from './paths';
 
 interface FormsListItemProps {
     item: Form;
 }
 
 const FormsListItem = ({item}: FormsListItemProps) => (
-    <Link to={`/form/${item.id}`} className="text-decoration-none">
+    <Link to={FORMS_DETAIL(item.id)} className="text-decoration-none">
         <ListItem button component="div">
             <ListItemText className="position-absolute">
                 <Typography variant="overline" color="textSecondary">
