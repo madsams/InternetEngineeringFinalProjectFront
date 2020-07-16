@@ -27,6 +27,7 @@ const InputLocation = ({
 
     const handleClose = () => setOpen(false);
 
+    //todo show polygons
     return (
         <>
             <TextField
