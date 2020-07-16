@@ -27,6 +27,7 @@ const palette = {
     },
     background: {
         default: '#fff',
+        paper: '#ddd',
     },
     text: {
         primary: '#222',
