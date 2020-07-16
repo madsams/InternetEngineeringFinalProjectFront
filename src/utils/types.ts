@@ -86,7 +86,8 @@ export interface FilledField extends FieldType {
 
 export interface FormType {
     title: string;
-    id: number;
+    //todo id: number;
+    id: string;
 }
 
 export interface Form extends FormType {

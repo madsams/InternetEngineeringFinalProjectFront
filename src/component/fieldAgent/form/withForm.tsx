@@ -22,7 +22,8 @@ const withForm = <F extends FormType>(
     const [form, setForm] = useState<F | undefined>(undefined);
 
     useEffect(() => {
-        setForm(allForms.find((f) => f.id === parseInt(id)));
+        //todo setForm(allForms.find((f) => f.id === parseInt(id)));
+        setForm(allForms.find((f) => f.id === id));
     }, [id, allForms]);
 
     return form ? (

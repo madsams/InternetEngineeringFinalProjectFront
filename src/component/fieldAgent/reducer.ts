@@ -1,8 +1,5 @@
 import {FieldTypes, FilledForm, Form} from '../../utils/types';
-import {
-    createDataRequestReducer,
-    createRequestReducer,
-} from '../../utils/generics';
+import {createDataRequestReducer, createRequestReducer,} from '../../utils/generics';
 import {combineReducers} from 'redux';
 import {GeoLocation, GET_FILLED_FORMS, GET_FORMS, SUBMIT_FORM} from './types';
 
@@ -11,7 +8,7 @@ const formReducer = createDataRequestReducer<Form[]>(GET_FORMS, []);
 const mockFilledForms: FilledForm[] = [
     {
         title: 'Now',
-        id: 1234,
+        id: '1234',
         fields: [
             {
                 name: 'First_Name',
@@ -48,7 +45,7 @@ const mockFilledForms: FilledForm[] = [
     },
     {
         title: 'حالا',
-        id: 124,
+        id: '124',
         fields: [
             {
                 name: 'First_Name',
@@ -85,7 +82,7 @@ const mockFilledForms: FilledForm[] = [
     },
     {
         title: 'دیروز',
-        id: 12,
+        id: '12',
         fields: [
             {
                 name: 'First_Name',

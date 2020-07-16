@@ -102,7 +102,8 @@ export const createGetRequestActions = <SD, P extends object | undefined>(
 
 type PostRequestAction<D> = (
     data: D,
-    id: number,
+    //todo id: number,
+    id: string,
     callback?: () => void,
 ) => IThunkAction;
 export const createPostRequestActions = <D>(
