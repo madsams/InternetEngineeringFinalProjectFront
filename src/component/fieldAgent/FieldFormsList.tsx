@@ -16,7 +16,7 @@ const strings = {
 const FieldHome = createGenericFormsList<Form>(
     strings,
     (state) => state.field.forms,
-    () => getForms(undefined),
+    getForms,
     EmptyFormsListItem,
 );
 export default FieldHome;

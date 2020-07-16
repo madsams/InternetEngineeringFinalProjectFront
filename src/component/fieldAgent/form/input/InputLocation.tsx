@@ -34,7 +34,7 @@ const InputLocation = ({
                 InputLabelProps={{shrink: !!value}}
                 label={title}
                 id={name}
-                value={value && `(${value.lat} ${value.lng})`}
+                value={value ? `(${value.lat} ${value.lng})` : undefined}
                 onClick={handleClick}
             />
             <MapModal choose={onChange} onClose={handleClose} open={open} />

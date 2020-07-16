@@ -38,7 +38,7 @@ export interface ErrorCodesType {
     action(error?: AxiosError): void;
 }
 
-interface RequestOptionType {
+export interface RequestOptionType {
     method: AxiosMethods;
     data?: any;
     params?: object;

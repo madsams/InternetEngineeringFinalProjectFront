@@ -1,6 +1,6 @@
 enum api {
     forms = '/api/forms',
-    filledForms = '/api/form-answer',
+    formAnswers = '/api/form-answers',
     geoLocation = '/api/polygons',
 }
 

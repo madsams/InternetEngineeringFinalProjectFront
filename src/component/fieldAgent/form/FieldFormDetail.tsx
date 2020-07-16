@@ -6,7 +6,7 @@ import FormInput from './input';
 import {FormValues} from '../types';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../store';
-import {submitForm} from '../actions';
+import {getSelectedFormDetail, submitForm} from '../actions';
 import IButton from '../../utils/IButton';
 
 interface FieldFormProps {
@@ -42,7 +42,7 @@ function getInitialFormState(fields: Array<Field>, initialValue: any) {
     );
 }
 
-const FieldForm = ({form: {fields, id}}: FieldFormProps) => {
+const FieldFormDetail = ({form: {fields, id}}: FieldFormProps) => {
     const [values, setValues] = useState<FormValues>(
         getInitialFormState(fields, null),
     );
@@ -124,4 +124,7 @@ const FieldForm = ({form: {fields, id}}: FieldFormProps) => {
         </div>
     );
 };
-export default withForm<Form>((state) => state.field.forms)(FieldForm);
+export default withForm<Form>(
+    (state) => state.field.formDetail,
+    getSelectedFormDetail,
+)(FieldFormDetail);

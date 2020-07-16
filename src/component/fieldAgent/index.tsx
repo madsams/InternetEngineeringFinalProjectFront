@@ -2,10 +2,10 @@ import React from 'react';
 import {MainApplicationType, Role} from '../../utils/types';
 import HomeIcon from '@material-ui/icons/Home';
 import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
-import FieldHome from './FieldHome';
-import FieldFilled from './FieldFilled';
-import FieldForm from './form/FieldForm';
-import FieldFilledForm from './form/FieldFilledForm';
+import FieldFormsList from './FieldFormsList';
+import FieldFormAnswersList from './FieldFormAnswersList';
+import FieldForm from './form/FieldFormDetail';
+import FieldFilledForm from './form/FieldFormAnswerDetail';
 
 const field: MainApplicationType = {
     role: Role.fieldAgent,
@@ -13,13 +13,13 @@ const field: MainApplicationType = {
         {
             path: '/home',
             title: {en: 'Home', fa: 'صفحه اصلی'},
-            component: <FieldHome />,
+            component: <FieldFormsList />,
             icon: <HomeIcon />,
         },
         {
             path: '/filled',
             title: {en: 'Filled Forms', fa: 'فرم‌های پر شده'},
-            component: <FieldFilled />,
+            component: <FieldFormAnswersList />,
             icon: <AssignmentTurnedInIcon />,
         },
         {

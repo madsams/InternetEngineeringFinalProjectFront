@@ -1,6 +1,6 @@
-import {IDataAction, ISimpleAction, IThunkAction} from './types';
+import {ID, IDataAction, ISimpleAction, IThunkAction} from './types';
 import {Action, Reducer} from 'redux';
-import request from './effects/request';
+import request, {RequestOptionType} from './effects/request';
 import API from './API';
 
 export interface RequestReducer {
@@ -57,14 +57,31 @@ export const createDataRequestReducer = <SD>(
     }
 };
 
-type GetRequestAction<P> = (params: P, callback?: () => void) => IThunkAction;
-export const createGetRequestActions = <SD, P extends object | undefined>(
-    prefix: string,
+type GetRequestSimpleAction = (callback?: () => void) => IThunkAction;
+type GetRequestWithParamsAction<P> = (
+    params: P,
+    callback?: () => void,
+) => IThunkAction;
+type GetRequestWithIdAction = (id: ID, callback?: () => void) => IThunkAction;
+type GetRequestWithIdAndParamsAction<P> = (
+    id: ID,
+    params: P,
+    callback?: () => void,
+) => IThunkAction;
+
+type GetRequestActionsType<P extends object | undefined> = (
+    id: ID | undefined,
+    params: P,
+    callback?: () => void,
+) => IThunkAction;
+
+const createGetRequestActions = <SD, P extends object | undefined>(
+    actionType: string,
     url: API,
-): GetRequestAction<P> => {
-    const PENDING = prefix + '_PENDING';
-    const SUCCESS = prefix + '_SUCCESS';
-    const ERROR = prefix + '_ERROR';
+): GetRequestActionsType<P> => {
+    const PENDING = actionType + '_PENDING';
+    const SUCCESS = actionType + '_SUCCESS';
+    const ERROR = actionType + '_ERROR';
 
     interface PendingAction extends Action<typeof PENDING> {}
 
@@ -85,25 +102,60 @@ export const createGetRequestActions = <SD, P extends object | undefined>(
         payload: data,
     });
 
-    return (params, callback): IThunkAction => (dispatch) => {
-        dispatch(
-            request({
-                url,
-                method: 'GET',
-                callback,
-                params,
-                errorAction: error,
-                pendingAction: pending,
-                successAction: success,
-            }),
-        );
+    return (id, params, callback): IThunkAction => (dispatch) => {
+        const requestOption: RequestOptionType = {
+            url,
+            params,
+            method: 'GET',
+            callback,
+            errorAction: error,
+            pendingAction: pending,
+            successAction: success,
+        };
+
+        if (params) requestOption.params = params;
+        if (id) requestOption.url = url + '/' + id;
+
+        dispatch(request(requestOption));
     };
 };
+export const createGetRequestSimpleActions = <SD>(
+    actionType: string,
+    url: API,
+): GetRequestSimpleAction => (callback) =>
+    createGetRequestActions<SD, undefined>(actionType, url)(
+        undefined,
+        undefined,
+        callback,
+    );
+export const createGetRequestWithParamsActions = <SD, P extends object>(
+    actionType: string,
+    url: API,
+): GetRequestWithParamsAction<P> => (params, callback) =>
+    createGetRequestActions<SD, P>(actionType, url)(
+        undefined,
+        params,
+        callback,
+    );
+export const createGetRequestWithIdActions = <SD>(
+    actionType: string,
+    url: API,
+): GetRequestWithIdAction => (id, callback) =>
+    createGetRequestActions<SD, undefined>(actionType, url)(
+        id,
+        undefined,
+        callback,
+    );
+
+export const GetRequestWithIdAndParamsAction = <SD, P extends object>(
+    actionType: string,
+    url: API,
+): GetRequestWithIdAndParamsAction<P> => (id, params, callback) =>
+    createGetRequestActions<SD, P>(actionType, url)(id, params, callback);
 
 type PostRequestAction<D> = (
     data: D,
-    //todo id: number,
-    id: string,
+    id: ID,
     callback?: () => void,
 ) => IThunkAction;
 export const createPostRequestActions = <D>(

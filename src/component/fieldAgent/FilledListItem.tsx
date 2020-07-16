@@ -1,12 +1,12 @@
 import React from 'react';
 import {ListItem, ListItemText, Typography} from '@material-ui/core';
-import {FilledForm} from '../../utils/types';
+import {FormAnswer} from '../../utils/types';
 import {formatTimeAgo} from '../../utils/funstions';
 import ITypography from '../utils/ITypography';
 import {Link} from 'react-router-dom';
 
 interface FormsListItemProps {
-    item: FilledForm;
+    item: FormAnswer;
 }
 
 const FilledFormsListItem = ({item}: FormsListItemProps) => (

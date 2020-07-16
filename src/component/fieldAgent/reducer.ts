@@ -1,4 +1,4 @@
-import {FieldTypes, FilledForm, Form} from '../../utils/types';
+import {FieldTypes, Form, FormAnswer} from '../../utils/types';
 import {
     createDataRequestReducer,
     createRequestReducer,
@@ -6,15 +6,17 @@ import {
 import {combineReducers} from 'redux';
 import {
     GeoLocation,
-    GET_FILLED_FORMS,
-    GET_FORMS,
+    GET_ALL_FORMS,
+    GET_FORM_ANSWER_DETAIL,
+    GET_FORM_ANSWERS,
+    GET_FORM_DETAIL,
     GET_GEO_LOCATION,
     SUBMIT_FORM,
 } from './types';
 
-const formReducer = createDataRequestReducer<Form[]>(GET_FORMS, []);
+const formsReducer = createDataRequestReducer<Form[]>(GET_ALL_FORMS, []);
 
-const mockFilledForms: FilledForm[] = [
+const mockFilledForms: FormAnswer[] = [
     {
         title: 'Now',
         id: '1234',
@@ -127,8 +129,8 @@ const mockFilledForms: FilledForm[] = [
         filledAt: new Date(Date.now() - 24 * 60 * 60 * 1000),
     },
 ];
-const filledFormsReducer = createDataRequestReducer<FilledForm[]>(
-    GET_FILLED_FORMS,
+const formAnswersReducer = createDataRequestReducer<FormAnswer[]>(
+    GET_FORM_ANSWERS,
     mockFilledForms,
 );
 
@@ -139,11 +141,29 @@ const geoLocationsReducer = createDataRequestReducer<GeoLocation[]>(
     [],
 );
 
+const initialFormDetail: Form = {id: '', fields: [], title: ''};
+const formDetailReducer = createDataRequestReducer<Form>(
+    GET_FORM_DETAIL,
+    initialFormDetail,
+);
+const initialFormAnswerDetail: FormAnswer = {
+    title: '',
+    id: '',
+    fields: [],
+    filledAt: new Date(),
+};
+const formAnswerDetailReducer = createDataRequestReducer<FormAnswer>(
+    GET_FORM_ANSWER_DETAIL,
+    initialFormAnswerDetail,
+);
+
 const fieldReducer = combineReducers({
-    forms: formReducer,
-    filled: filledFormsReducer,
+    forms: formsReducer,
+    formAnswers: formAnswersReducer,
     submitForm: submitFormReducer,
     geoLocations: geoLocationsReducer,
+    formDetail: formDetailReducer,
+    formAnswerDetail: formAnswerDetailReducer,
 });
 
 export default fieldReducer;

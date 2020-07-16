@@ -1,5 +1,5 @@
-import {FilledForm} from '../../utils/types';
-import {getFilledForms} from './actions';
+import {FormAnswer} from '../../utils/types';
+import {getFormAnswers} from './actions';
 import FilledListItem from './FilledListItem';
 import createGenericFormsList from './createGenericFormsList';
 
@@ -13,10 +13,10 @@ const strings = {
         fa: 'برای اطلاعات بیشتر کلیک کنید',
     },
 };
-const FieldFilled = createGenericFormsList<FilledForm>(
+const FieldFilled = createGenericFormsList<FormAnswer>(
     strings,
-    (state) => state.field.filled,
-    () => getFilledForms(undefined),
+    (state) => state.field.formAnswers,
+    getFormAnswers,
     FilledListItem,
 );
 export default FieldFilled;

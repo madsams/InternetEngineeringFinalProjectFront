@@ -84,17 +84,18 @@ export interface FilledField extends FieldType {
     value: string | number | Location | Option | Date;
 }
 
+export type ID = string;
+
 export interface FormType {
     title: string;
-    //todo id: number;
-    id: string;
+    id: ID;
 }
 
 export interface Form extends FormType {
     fields: Array<Field>;
 }
 
-export interface FilledForm extends FormType {
+export interface FormAnswer extends FormType {
     fields: Array<FilledField>;
     filledAt: Date;
 }
