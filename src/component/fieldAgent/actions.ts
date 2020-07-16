@@ -22,7 +22,7 @@ export const getGeoLocation = createGetRequestWithParamsActions<
     {location: Location}
 >(GET_GEO_LOCATION, api.geoLocation);
 
-export const submitForm = createPostRequestWithIdActions<FormValues>(
+export const submitForm = createPostRequestWithIdActions<{values: FormValues}>(
     SUBMIT_FORM,
     api.formAnswers,
 );
@@ -44,4 +44,4 @@ export const getSelectedFormDetail = createGetRequestWithIdActions<Form>(
 
 export const getSelectedFormAnswerDetail = createGetRequestWithIdActions<
     FormAnswer
->(GET_FORM_ANSWER_DETAIL, api.forms);
+>(GET_FORM_ANSWER_DETAIL, api.forms, (data: {value: FormAnswer}) => data.value);

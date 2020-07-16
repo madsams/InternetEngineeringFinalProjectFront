@@ -52,7 +52,7 @@ const mockFilledForms: FormAnswer[] = [
                 value: {label: 'ASD', value: 234},
             },
         ],
-        filledAt: new Date(Date.now()),
+        createdAt: new Date(Date.now()),
     },
     {
         title: 'حالا',
@@ -89,7 +89,7 @@ const mockFilledForms: FormAnswer[] = [
                 value: {label: 'ASD', value: 234},
             },
         ],
-        filledAt: new Date(Date.now()),
+        createdAt: new Date(Date.now()),
     },
     {
         title: 'دیروز',
@@ -126,7 +126,7 @@ const mockFilledForms: FormAnswer[] = [
                 value: {label: 'ASD', value: 234},
             },
         ],
-        filledAt: new Date(Date.now() - 24 * 60 * 60 * 1000),
+        createdAt: new Date(Date.now() - 24 * 60 * 60 * 1000),
     },
 ];
 const formAnswersReducer = createDataRequestReducer<FormAnswer[]>(
@@ -150,7 +150,7 @@ const initialFormAnswerDetail: FormAnswer = {
     title: '',
     id: '',
     fields: [],
-    filledAt: new Date(),
+    createdAt: new Date(),
 };
 const formAnswerDetailReducer = createDataRequestReducer<FormAnswer>(
     GET_FORM_ANSWER_DETAIL,

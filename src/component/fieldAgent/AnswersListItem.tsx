@@ -27,7 +27,7 @@ const FilledFormsListItem = ({item}: FormsListItemProps) => (
             </ListItemText>
             <ListItemText className="col-4">
                 <ITypography
-                    text={formatTimeAgo(item.filledAt)}
+                    text={formatTimeAgo(item.createdAt)}
                     align="right"
                     variant="overline"
                     color="textSecondary"

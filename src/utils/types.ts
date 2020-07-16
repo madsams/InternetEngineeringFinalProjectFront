@@ -97,5 +97,5 @@ export interface Form extends FormType {
 
 export interface FormAnswer extends FormType {
     fields: Array<FilledField>;
-    filledAt: Date;
+    createdAt: Date;
 }

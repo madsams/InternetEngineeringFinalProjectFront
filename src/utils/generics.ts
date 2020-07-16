@@ -82,6 +82,7 @@ type GetRequestActionsType<P extends object | undefined> = (
 const createGetRequestActions = <SD, P extends object | undefined>(
     actionType: string,
     url: API,
+    getData = (data: any) => data,
 ): GetRequestActionsType<P> => {
     const PENDING = actionType + '_PENDING';
     const SUCCESS = actionType + '_SUCCESS';
@@ -90,7 +91,7 @@ const createGetRequestActions = <SD, P extends object | undefined>(
     interface PendingAction extends Action<typeof PENDING> {}
 
     interface SuccessAction extends Action<typeof SUCCESS> {
-        payload: Array<SD>;
+        payload: SD;
     }
 
     interface ErrorAction extends Action<typeof ERROR> {}
@@ -101,9 +102,9 @@ const createGetRequestActions = <SD, P extends object | undefined>(
     const error = (): ErrorAction => ({
         type: ERROR,
     });
-    const success = (data: Array<SD>): SuccessAction => ({
+    const success = (data: any): SuccessAction => ({
         type: SUCCESS,
-        payload: data,
+        payload: getData(data),
     });
 
     return (id, params, callback): IThunkAction => (dispatch) => {
@@ -123,11 +124,13 @@ const createGetRequestActions = <SD, P extends object | undefined>(
         dispatch(request(requestOption));
     };
 };
+
 export const createGetRequestSimpleActions = <SD>(
     actionType: string,
     url: API,
+    getData?: (data: any) => SD,
 ): GetRequestSimpleAction => (callback) =>
-    createGetRequestActions<SD, undefined>(actionType, url)(
+    createGetRequestActions<SD, undefined>(actionType, url, getData)(
         undefined,
         undefined,
         callback,
@@ -135,8 +138,9 @@ export const createGetRequestSimpleActions = <SD>(
 export const createGetRequestWithParamsActions = <SD, P extends object>(
     actionType: string,
     url: API,
+    getData?: (data: any) => SD,
 ): GetRequestWithParamsAction<P> => (params, callback) =>
-    createGetRequestActions<SD, P>(actionType, url)(
+    createGetRequestActions<SD, P>(actionType, url, getData)(
         undefined,
         params,
         callback,
@@ -144,8 +148,9 @@ export const createGetRequestWithParamsActions = <SD, P extends object>(
 export const createGetRequestWithIdActions = <SD>(
     actionType: string,
     url: API,
+    getData?: (data: any) => SD,
 ): GetRequestWithIdAction => (id, callback) =>
-    createGetRequestActions<SD, undefined>(actionType, url)(
+    createGetRequestActions<SD, undefined>(actionType, url, getData)(
         id,
         undefined,
         callback,
@@ -154,8 +159,13 @@ export const createGetRequestWithIdActions = <SD>(
 export const GetRequestWithIdAndParamsAction = <SD, P extends object>(
     actionType: string,
     url: API,
+    getData?: (data: any) => SD,
 ): GetRequestWithIdAndParamsAction<P> => (id, params, callback) =>
-    createGetRequestActions<SD, P>(actionType, url)(id, params, callback);
+    createGetRequestActions<SD, P>(actionType, url, getData)(
+        id,
+        params,
+        callback,
+    );
 
 // ----------------- Post Requests ----------------
 
