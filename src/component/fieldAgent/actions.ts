@@ -28,4 +28,4 @@ export const submitForm = createPostRequestActions<FormValues>(
 export const getGeoLocation = createGetRequestActions<
     GeoLocation[],
     {location: Location}
->(GET_GEO_LOCATION, api.forms);
+>(GET_GEO_LOCATION, api.geoLocation);

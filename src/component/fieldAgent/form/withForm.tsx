@@ -7,6 +7,7 @@ import {DataRequestReducer} from '../../../utils/generics';
 import {useParams} from 'react-router';
 import NotMatch from '../../utils/NotMatch';
 import {Typography} from '@material-ui/core';
+import ILoader from '../../utils/ILoader';
 
 interface ComponentProps<F> {
     form: F;
@@ -22,6 +23,7 @@ const withForm = <F extends FormType>(
     const [form, setForm] = useState<F | undefined>(undefined);
 
     useEffect(() => {
+        //todo fetch forms/:id from back
         //todo setForm(allForms.find((f) => f.id === parseInt(id)));
         setForm(allForms.find((f) => f.id === id));
     }, [id, allForms]);
@@ -36,7 +38,9 @@ const withForm = <F extends FormType>(
                     variant="caption"
                     className="m-1">{`(${form.id})`}</Typography>
             </div>
-            <Component form={form} />
+            <ILoader isLoading={!form}>
+                <Component form={form} />
+            </ILoader>
         </>
     ) : (
         <NotMatch />

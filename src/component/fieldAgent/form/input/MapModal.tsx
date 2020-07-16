@@ -5,8 +5,9 @@ import {LangBaseJson, Location, StringsJson} from '../../../../utils/types';
 import IButton from '../../../utils/IButton';
 import IError from './IError';
 import {makeStyles} from '@material-ui/core/styles';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {getGeoLocation} from '../../actions';
+import {RootState} from '../../../../store';
 
 interface MapModalProps {
     open: boolean;
@@ -49,12 +50,21 @@ const useStyles = makeStyles((theme: Theme) =>
             maxWidth: 80,
             marginTop: '30px !important',
         },
+        marker: {
+            height: 5,
+            width: 5,
+            borderRadius: 10,
+            backgroundColor: 'red',
+        },
     }),
 );
 const MapModal = ({open, choose, onClose}: MapModalProps) => {
     const classes = useStyles();
     const [marker, setMarker] = useState<Location | null>(null);
     const [error, setError] = useState<LangBaseJson | null>(null);
+    const isLoading = useSelector<RootState, boolean>(
+        (state) => state.field.geoLocations.isLoading,
+    );
     const dispatch = useDispatch();
     const handleClose = () => {
         onClose();
@@ -65,10 +75,23 @@ const MapModal = ({open, choose, onClose}: MapModalProps) => {
         if (!marker) {
             setError(strings.notChosenError);
         } else {
-            dispatch(getGeoLocation({location: marker}));
             choose(marker);
             handleClose();
         }
+    };
+    const options = {fullscreenControl: false};
+    const handleClick = ({lat, lng}: Location) => {
+        dispatch(getGeoLocation({location: {lat, lng}}));
+        setMarker({lat, lng});
+        setError(null);
+    };
+
+    const bootstrapURLKeys = {
+        key: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
+    };
+    const defaultCenter = {
+        lat: 35.8021869463483,
+        lng: 51.393752052927404,
     };
     return (
         <Modal open={open}>
@@ -77,27 +100,14 @@ const MapModal = ({open, choose, onClose}: MapModalProps) => {
                     'flex-1 align-items-center flex-column ' + classes.paper
                 }>
                 <GoogleMapReact
-                    options={{fullscreenControl: false}}
-                    onClick={({lat, lng}) => {
-                        setMarker({lat, lng});
-                        setError(null);
-                    }}
-                    bootstrapURLKeys={{
-                        key: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
-                    }}
-                    defaultCenter={{
-                        lat: 35.8021869463483,
-                        lng: 51.393752052927404,
-                    }}
+                    options={options}
+                    onClick={handleClick}
+                    bootstrapURLKeys={bootstrapURLKeys}
+                    defaultCenter={defaultCenter}
                     defaultZoom={10}>
                     {marker && (
                         <div
-                            style={{
-                                height: 5,
-                                width: 5,
-                                borderRadius: 10,
-                                backgroundColor: 'red',
-                            }}
+                            className={classes.marker}
                             // @ts-ignore
                             lat={marker.lat}
                             lng={marker.lng}
@@ -106,9 +116,11 @@ const MapModal = ({open, choose, onClose}: MapModalProps) => {
                 </GoogleMapReact>
                 <div className="flex-1 flex-row align-self-stretch m-sm-1">
                     <IError error={error} className="position-absolute" />
+                    {/*todo print locations here*/}
                     <IButton
                         title={strings.okButtonText}
                         onClick={handleSubmit}
+                        isLoading={isLoading}
                         className={classes.button}
                     />
                     <IButton

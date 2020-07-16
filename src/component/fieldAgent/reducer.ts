@@ -1,7 +1,16 @@
 import {FieldTypes, FilledForm, Form} from '../../utils/types';
-import {createDataRequestReducer, createRequestReducer,} from '../../utils/generics';
+import {
+    createDataRequestReducer,
+    createRequestReducer,
+} from '../../utils/generics';
 import {combineReducers} from 'redux';
-import {GeoLocation, GET_FILLED_FORMS, GET_FORMS, SUBMIT_FORM} from './types';
+import {
+    GeoLocation,
+    GET_FILLED_FORMS,
+    GET_FORMS,
+    GET_GEO_LOCATION,
+    SUBMIT_FORM,
+} from './types';
 
 const formReducer = createDataRequestReducer<Form[]>(GET_FORMS, []);
 
@@ -126,7 +135,7 @@ const filledFormsReducer = createDataRequestReducer<FilledForm[]>(
 const submitFormReducer = createRequestReducer(SUBMIT_FORM);
 
 const geoLocationsReducer = createDataRequestReducer<GeoLocation[]>(
-    GET_FILLED_FORMS,
+    GET_GEO_LOCATION,
     [],
 );
 
