@@ -44,4 +44,4 @@ export const getSelectedFormDetail = createGetRequestWithIdActions<Form>(
 
 export const getSelectedFormAnswerDetail = createGetRequestWithIdActions<
     FormAnswer
->(GET_FORM_ANSWER_DETAIL, api.forms, (data: {value: FormAnswer}) => data.value);
+>(GET_FORM_ANSWER_DETAIL, api.formAnswers);

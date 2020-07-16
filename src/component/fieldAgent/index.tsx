@@ -17,15 +17,15 @@ const field: MainApplicationType = {
             icon: <HomeIcon />,
         },
         {
-            path: '/form/answer',
+            path: '/form-answer/:id',
+            component: <FieldFormAnswerDetail />,
+            hideInDrawer: true,
+        },
+        {
+            path: '/form-answer',
             title: {en: 'Filled Forms', fa: 'فرم‌های پر شده'},
             component: <FieldFormAnswersList />,
             icon: <AssignmentTurnedInIcon />,
-        },
-        {
-            path: '/form/answer/:id',
-            component: <FieldFormAnswerDetail />,
-            hideInDrawer: true,
         },
         {
             path: '/form/:id',

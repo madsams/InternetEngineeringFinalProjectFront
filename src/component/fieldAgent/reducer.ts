@@ -1,4 +1,4 @@
-import {FieldTypes, Form, FormAnswer} from '../../utils/types';
+import {Form, FormAnswer} from '../../utils/types';
 import {
     createDataRequestReducer,
     createRequestReducer,
@@ -16,122 +16,9 @@ import {
 
 const formsReducer = createDataRequestReducer<Form[]>(GET_ALL_FORMS, []);
 
-const mockFilledForms: FormAnswer[] = [
-    {
-        title: 'Now',
-        id: '1234',
-        fields: [
-            {
-                name: 'First_Name',
-                title: 'First Name',
-                type: FieldTypes.Text,
-                value: 'adaf',
-            },
-            {
-                name: 'Date_field',
-                title: 'Date Filed',
-                type: FieldTypes.Date,
-                value: new Date(),
-            },
-            {
-                name: 'Loc',
-                title: 'Your Location',
-                type: FieldTypes.Number,
-                value: {lat: 142, lng: 435},
-            },
-            {
-                name: 'Request_Type',
-                title: 'Request Type',
-                type: FieldTypes.Text,
-                value: {label: 'sdsd', value: 423},
-            },
-            {
-                name: 'Base_Location',
-                title: 'Base Location',
-                type: FieldTypes.Location,
-                value: {label: 'ASD', value: 234},
-            },
-        ],
-        createdAt: new Date(Date.now()),
-    },
-    {
-        title: 'حالا',
-        id: '124',
-        fields: [
-            {
-                name: 'First_Name',
-                title: 'First Name',
-                type: FieldTypes.Text,
-                value: 'adaf',
-            },
-            {
-                name: 'Date_field',
-                title: 'Date Filed',
-                type: FieldTypes.Date,
-                value: new Date(),
-            },
-            {
-                name: 'Loc',
-                title: 'Your Location',
-                type: FieldTypes.Number,
-                value: {lat: 142, lng: 435},
-            },
-            {
-                name: 'Request_Type',
-                title: 'Request Type',
-                type: FieldTypes.Text,
-                value: {label: 'sdsd', value: 423},
-            },
-            {
-                name: 'Base_Location',
-                title: 'Base Location',
-                type: FieldTypes.Location,
-                value: {label: 'ASD', value: 234},
-            },
-        ],
-        createdAt: new Date(Date.now()),
-    },
-    {
-        title: 'دیروز',
-        id: '12',
-        fields: [
-            {
-                name: 'First_Name',
-                title: 'First Name',
-                type: FieldTypes.Text,
-                value: 'adaf',
-            },
-            {
-                name: 'Date_field',
-                title: 'Date Filed',
-                type: FieldTypes.Date,
-                value: new Date(),
-            },
-            {
-                name: 'Loc',
-                title: 'Your Location',
-                type: FieldTypes.Number,
-                value: {lat: 142, lng: 435},
-            },
-            {
-                name: 'Request_Type',
-                title: 'Request Type',
-                type: FieldTypes.Text,
-                value: {label: 'sdsd', value: 423},
-            },
-            {
-                name: 'Base_Location',
-                title: 'Base Location',
-                type: FieldTypes.Location,
-                value: {label: 'ASD', value: 234},
-            },
-        ],
-        createdAt: new Date(Date.now() - 24 * 60 * 60 * 1000),
-    },
-];
 const formAnswersReducer = createDataRequestReducer<FormAnswer[]>(
     GET_FORM_ANSWERS,
-    mockFilledForms,
+    [],
 );
 
 const submitFormReducer = createRequestReducer(SUBMIT_FORM);

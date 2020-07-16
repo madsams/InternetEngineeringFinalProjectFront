@@ -10,7 +10,7 @@ interface FormsListItemProps {
 }
 
 const FilledFormsListItem = ({item}: FormsListItemProps) => (
-    <Link to={`/form/filled/${item.id}`} className="text-decoration-none">
+    <Link to={`/form-answer/${item.id}`} className="text-decoration-none">
         <ListItem button component="div">
             <ListItemText className="col-4">
                 <Typography

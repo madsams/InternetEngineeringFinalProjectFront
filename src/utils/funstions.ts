@@ -13,15 +13,16 @@ export const setLanguageToHTML = (language: Language) => {
 };
 
 const _setLanguageToTimeAgo = (locales: LangBaseJson<Locale>) =>
-    Object.values(locales).map((l) => TimeAgo.addLocale(l));
+    Object.values(locales).forEach((l) => TimeAgo.addLocale(l));
 
 const _formatTimeAgo = (language: string, time: number | Date): string => {
     _setLanguageToTimeAgo({fa, en});
     return new TimeAgo(language).format(time);
 };
-export const formatTimeAgo = (time: number | Date): LangBaseJson => {
+export const formatTimeAgo = (time: Date): LangBaseJson => {
+    const iTime = new Date(time);
     return {
-        en: _formatTimeAgo('en-US', time),
-        fa: _formatTimeAgo('fa-IR', time),
+        en: _formatTimeAgo('en-US', iTime),
+        fa: _formatTimeAgo('fa-IR', iTime),
     };
 };
