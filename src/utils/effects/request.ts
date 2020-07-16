@@ -1,4 +1,4 @@
-import Axios, {AxiosError, AxiosResponse, Method as AxiosMethods} from 'axios';
+import Axios, {AxiosError, Method as AxiosMethods} from 'axios';
 import renderToast, {ToastTypes} from './renderToast';
 import {IActionCreator, IThunkAction, LangBaseJson} from '../types';
 
@@ -38,6 +38,11 @@ export interface ErrorCodesType {
     action(error?: AxiosError): void;
 }
 
+export interface RequestResponse {
+    data: object | Array<any>;
+    message: string;
+}
+
 export interface RequestOptionType {
     method: AxiosMethods;
     data?: any;
@@ -55,14 +60,9 @@ export interface RequestOptionType {
 
     callback?(): void;
 
-    resolve?(response?: AxiosResponse): () => void;
+    resolve?(response?: RequestResponse): void;
 
-    reject?(error?: AxiosError): () => void;
-}
-
-interface ResponseType {
-    data: object | Array<any>;
-    message: string;
+    reject?(error?: AxiosError): void;
 }
 
 const request = (requestOption: RequestOptionType): IThunkAction => async (
@@ -95,7 +95,7 @@ const request = (requestOption: RequestOptionType): IThunkAction => async (
 
     try {
         // Calls "url" by "method" with "data" as body and "headers" and params
-        const response = await instance.request<ResponseType>({
+        const response = await instance.request<RequestResponse>({
             url,
             method,
             headers,
@@ -105,7 +105,7 @@ const request = (requestOption: RequestOptionType): IThunkAction => async (
         });
 
         // If axios call was successful
-        if (resolve) resolve(response);
+        if (resolve) resolve(response.data);
         if (successAction) dispatch(successAction(response.data.data));
         if (successToastMessage)
             dispatch(

@@ -1,6 +1,6 @@
 import {ID, IDataAction, ISimpleAction, IThunkAction} from './types';
 import {Action, Reducer} from 'redux';
-import request, {RequestOptionType} from './effects/request';
+import request, {RequestOptionType, RequestResponse} from './effects/request';
 import API from './API';
 
 // ----------------- Reducers ----------------
@@ -163,6 +163,7 @@ type PostRequestAction<D> = (
     data: D,
     id: ID,
     callback?: () => void,
+    resolve?: (res?: RequestResponse) => void,
 ) => IThunkAction;
 
 export const createPostRequestWithIdActions = <D>(
@@ -189,13 +190,14 @@ export const createPostRequestWithIdActions = <D>(
         type: SUCCESS,
     });
 
-    return (data, id, callback): IThunkAction => (dispatch) => {
+    return (data, id, callback, resolve): IThunkAction => (dispatch) => {
         dispatch(
             request({
                 data,
                 url: url + '/' + id,
                 method: 'POST',
                 callback,
+                resolve,
                 errorAction: error,
                 pendingAction: pending,
                 successAction: success,

@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../store';
 import {getSelectedFormDetail, submitForm} from '../actions';
 import IButton from '../../utils/IButton';
+import {useHistory} from 'react-router-dom';
 
 interface FieldFormProps {
     form: Form;
@@ -55,6 +56,7 @@ const FieldFormDetail = ({form: {fields, id}}: FieldFormProps) => {
     const isLoading = useSelector<RootState, boolean>(
         (state) => state.field.submitForm.isLoading,
     );
+    const history = useHistory();
     const dispatch = useDispatch();
 
     const getHandleError = (name: string) => (error: LangBaseJson | null) =>
@@ -75,13 +77,7 @@ const FieldFormDetail = ({form: {fields, id}}: FieldFormProps) => {
         getHandleError(name)(null);
     };
 
-    const clearState = () => {
-        setValues(getInitialFormState(fields, null));
-        setErrors(getInitialFormState(fields, null));
-        setTouched(getInitialFormState(fields, false));
-    };
-
-    function checkRequires() {
+    const checkRequires = () => {
         let isOk = true;
         fields
             .filter((item) => item.required)
@@ -93,11 +89,22 @@ const FieldFormDetail = ({form: {fields, id}}: FieldFormProps) => {
                 getHandleError(name)(strings.reqError);
             });
         return isOk;
-    }
+    };
+
+    const clearState = () => {
+        setValues(getInitialFormState(fields, null));
+        setErrors(getInitialFormState(fields, null));
+        setTouched(getInitialFormState(fields, false));
+    };
+
+    const submitResolve = () => {
+        clearState();
+        history.push('/form/answer');
+    };
 
     const submit = () => {
         if (checkRequires()) {
-            dispatch(submitForm(values, id, clearState));
+            dispatch(submitForm(values, id, undefined, submitResolve));
         }
     };
 

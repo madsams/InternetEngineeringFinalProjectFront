@@ -4,8 +4,8 @@ import HomeIcon from '@material-ui/icons/Home';
 import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 import FieldFormsList from './FieldFormsList';
 import FieldFormAnswersList from './FieldFormAnswersList';
-import FieldForm from './form/FieldFormDetail';
-import FieldFilledForm from './form/FieldFormAnswerDetail';
+import FieldFormDetail from './form/FieldFormDetail';
+import FieldFormAnswerDetail from './form/FieldFormAnswerDetail';
 
 const field: MainApplicationType = {
     role: Role.fieldAgent,
@@ -17,19 +17,19 @@ const field: MainApplicationType = {
             icon: <HomeIcon />,
         },
         {
-            path: '/filled',
+            path: '/form/answer',
             title: {en: 'Filled Forms', fa: 'فرم‌های پر شده'},
             component: <FieldFormAnswersList />,
             icon: <AssignmentTurnedInIcon />,
         },
         {
-            path: '/form/filled/:id',
-            component: <FieldFilledForm />,
+            path: '/form/answer/:id',
+            component: <FieldFormAnswerDetail />,
             hideInDrawer: true,
         },
         {
             path: '/form/:id',
-            component: <FieldForm />,
+            component: <FieldFormDetail />,
             hideInDrawer: true,
         },
     ],

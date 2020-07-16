@@ -1,6 +1,6 @@
 import {Form} from '../../utils/types';
 import {getForms} from './actions';
-import EmptyFormsListItem from './HomeListItem';
+import FormsListItem from './FormsListItem';
 import createGenericFormsList from './createGenericFormsList';
 
 const strings = {
@@ -17,6 +17,6 @@ const FieldHome = createGenericFormsList<Form>(
     strings,
     (state) => state.field.forms,
     getForms,
-    EmptyFormsListItem,
+    FormsListItem,
 );
 export default FieldHome;
