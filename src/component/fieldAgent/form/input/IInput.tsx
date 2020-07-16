@@ -7,7 +7,7 @@ import InputLocation from './InputLocation';
 import InputText from './InputText';
 
 const IInput = ({...props}: IInputProps) => {
-    if (props.options)
+    if (props.options && props.options.length)
         return <InputSelect {...props} options={props.options} />;
 
     switch (props.type) {
