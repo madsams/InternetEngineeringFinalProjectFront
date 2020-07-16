@@ -4,7 +4,7 @@ import {
     createGetRequestSimpleActions,
     createGetRequestWithIdActions,
     createGetRequestWithParamsActions,
-    createPostRequestActions,
+    createPostRequestWithIdActions,
 } from '../../utils/generics';
 import {
     FormValues,
@@ -22,9 +22,9 @@ export const getGeoLocation = createGetRequestWithParamsActions<
     {location: Location}
 >(GET_GEO_LOCATION, api.geoLocation);
 
-export const submitForm = createPostRequestActions<FormValues>(
+export const submitForm = createPostRequestWithIdActions<FormValues>(
     SUBMIT_FORM,
-    api.forms,
+    api.formAnswers,
 );
 
 export const getForms = createGetRequestSimpleActions<Form>(

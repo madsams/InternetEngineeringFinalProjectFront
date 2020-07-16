@@ -3,6 +3,8 @@ import {Action, Reducer} from 'redux';
 import request, {RequestOptionType} from './effects/request';
 import API from './API';
 
+// ----------------- Reducers ----------------
+
 export interface RequestReducer {
     isLoading: boolean;
 }
@@ -56,6 +58,8 @@ export const createDataRequestReducer = <SD>(
             return state;
     }
 };
+
+// ----------------- Get Requests ----------------
 
 type GetRequestSimpleAction = (callback?: () => void) => IThunkAction;
 type GetRequestWithParamsAction<P> = (
@@ -153,18 +157,21 @@ export const GetRequestWithIdAndParamsAction = <SD, P extends object>(
 ): GetRequestWithIdAndParamsAction<P> => (id, params, callback) =>
     createGetRequestActions<SD, P>(actionType, url)(id, params, callback);
 
+// ----------------- Post Requests ----------------
+
 type PostRequestAction<D> = (
     data: D,
     id: ID,
     callback?: () => void,
 ) => IThunkAction;
-export const createPostRequestActions = <D>(
-    prefix: string,
+
+export const createPostRequestWithIdActions = <D>(
+    actionType: string,
     url: API,
 ): PostRequestAction<D> => {
-    const PENDING = prefix + '_PENDING';
-    const SUCCESS = prefix + '_SUCCESS';
-    const ERROR = prefix + '_ERROR';
+    const PENDING = actionType + '_PENDING';
+    const SUCCESS = actionType + '_SUCCESS';
+    const ERROR = actionType + '_ERROR';
 
     interface PendingAction extends Action<typeof PENDING> {}
 
@@ -185,8 +192,8 @@ export const createPostRequestActions = <D>(
     return (data, id, callback): IThunkAction => (dispatch) => {
         dispatch(
             request({
-                data: {...data, id},
-                url: url,
+                data,
+                url: url + '/' + id,
                 method: 'POST',
                 callback,
                 errorAction: error,
