@@ -38,10 +38,7 @@ export interface ErrorCodesType {
     action(error?: AxiosError): void;
 }
 
-export interface RequestResponse {
-    data: object | Array<any>;
-    message: string;
-}
+export type RequestResponse = object | Array<any>;
 
 export interface RequestOptionType {
     method: AxiosMethods;
@@ -106,7 +103,7 @@ const request = (requestOption: RequestOptionType): IThunkAction => async (
 
         // If axios call was successful
         if (resolve) resolve(response.data);
-        if (successAction) dispatch(successAction(response.data.data));
+        if (successAction) dispatch(successAction(response.data));
         if (successToastMessage)
             dispatch(
                 renderToast(

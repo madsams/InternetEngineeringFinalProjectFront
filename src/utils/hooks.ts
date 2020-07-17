@@ -8,6 +8,16 @@ export const useLanguage = (str: LangBaseJson | undefined): string => {
     );
     return str && str[language] ? str[language] : '';
 };
+
+export const useLanguageSelector = () => {
+    const language = useSelector<RootState, Language>(
+        (state) => state.language,
+    );
+
+    return (str: LangBaseJson | undefined): string => {
+        return str && str[language] ? str[language] : '';
+    };
+};
 export const useDirection = (): boolean => {
     const rtlLanguages = ['fa', 'ar'];
 

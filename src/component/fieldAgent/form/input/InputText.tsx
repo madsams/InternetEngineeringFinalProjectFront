@@ -26,6 +26,9 @@ const InputText = ({
             required={required}
             label={title}
             value={value ? value : ''}
+            inputProps={{
+                dir: isNumber ? 'ltr' : 'rtl',
+            }}
             type={isNumber ? 'number' : undefined}
             onBlur={onBlur}
             onChange={handleChange}

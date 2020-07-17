@@ -1,4 +1,4 @@
-import {Form, FormAnswer, IDataAction} from '../../utils/types';
+import {Form, FormAnswer, IDataAction, Location} from '../../utils/types';
 import api from '../../utils/API';
 import {
     createGetRequestSimpleActions,
@@ -19,8 +19,7 @@ import {
 
 export const getPolygonOfLocation = createGetRequestWithParamsActions<
     PolygonsOfLocation[],
-    //todo Location
-    {lat: number; long: number}
+    Location
 >(GET_POLYGON_OF_LOCATION, api.polygon);
 export const resetPolygonOfLocation = (): IDataAction<PolygonsOfLocation> => ({
     type: GET_POLYGON_OF_LOCATION + '_SUCCESS',
