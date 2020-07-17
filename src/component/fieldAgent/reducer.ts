@@ -26,12 +26,14 @@ const submitFormReducer = createRequestReducer(SUBMIT_FORM);
 const polygonsOfLocationReducer = createDataRequestReducer<PolygonsOfLocation>(
     GET_POLYGON_OF_LOCATION,
     [],
+    true,
 );
 
 const initialFormDetail: Form = {id: '', fields: [], title: ''};
 const formDetailReducer = createDataRequestReducer<Form>(
     GET_FORM_DETAIL,
     initialFormDetail,
+    true,
 );
 const initialFormAnswerDetail: FormAnswer = {
     title: '',
@@ -42,6 +44,7 @@ const initialFormAnswerDetail: FormAnswer = {
 const formAnswerDetailReducer = createDataRequestReducer<FormAnswer>(
     GET_FORM_ANSWER_DETAIL,
     initialFormAnswerDetail,
+    true,
 );
 
 const fieldReducer = combineReducers({

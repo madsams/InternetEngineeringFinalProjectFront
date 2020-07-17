@@ -51,6 +51,7 @@ const initialDataRequestState = <D>(data: D): DataRequestReducer<D> => ({
 export const createDataRequestReducer = <SD>(
     typePrefix: string,
     initialData: SD,
+    isRefreshInError = false,
 ): Reducer<DataRequestReducer<SD>, IDataAction<SD>> => (
     state = initialDataRequestState(initialData),
     action,
@@ -59,7 +60,9 @@ export const createDataRequestReducer = <SD>(
         case typePrefix + _PENDING:
             return {...state, isLoading: true};
         case typePrefix + _ERROR:
-            return {...state, isLoading: false};
+            if (isRefreshInError)
+                return {...state, isLoading: false, data: initialData};
+            else return {...state, isLoading: false};
         case typePrefix + _SUCCESS:
             return {...state, isLoading: false, data: action.payload};
         default:
