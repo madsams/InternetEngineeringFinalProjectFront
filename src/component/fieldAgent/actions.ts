@@ -1,4 +1,4 @@
-import {Form, FormAnswer, Location} from '../../utils/types';
+import {Form, FormAnswer, IDataAction} from '../../utils/types';
 import api from '../../utils/API';
 import {
     createGetRequestSimpleActions,
@@ -8,19 +8,24 @@ import {
 } from '../../utils/generics';
 import {
     FormValues,
-    GeoLocation,
     GET_ALL_FORMS,
     GET_FORM_ANSWER_DETAIL,
     GET_FORM_ANSWERS,
     GET_FORM_DETAIL,
-    GET_GEO_LOCATION,
+    GET_POLYGON_OF_LOCATION,
+    PolygonsOfLocation,
     SUBMIT_FORM,
 } from './types';
 
-export const getGeoLocation = createGetRequestWithParamsActions<
-    GeoLocation[],
-    {location: Location}
->(GET_GEO_LOCATION, api.geoLocation);
+export const getPolygonOfLocation = createGetRequestWithParamsActions<
+    PolygonsOfLocation[],
+    //todo Location
+    {lat: number; long: number}
+>(GET_POLYGON_OF_LOCATION, api.polygon);
+export const resetPolygonOfLocation = (): IDataAction<PolygonsOfLocation> => ({
+    type: GET_POLYGON_OF_LOCATION + '_SUCCESS',
+    payload: [],
+});
 
 export const submitForm = createPostRequestWithIdActions<{values: FormValues}>(
     SUBMIT_FORM,

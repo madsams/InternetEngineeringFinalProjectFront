@@ -5,12 +5,12 @@ import {
 } from '../../utils/generics';
 import {combineReducers} from 'redux';
 import {
-    GeoLocation,
     GET_ALL_FORMS,
     GET_FORM_ANSWER_DETAIL,
     GET_FORM_ANSWERS,
     GET_FORM_DETAIL,
-    GET_GEO_LOCATION,
+    GET_POLYGON_OF_LOCATION,
+    PolygonsOfLocation,
     SUBMIT_FORM,
 } from './types';
 
@@ -23,8 +23,8 @@ const formAnswersReducer = createDataRequestReducer<FormAnswer[]>(
 
 const submitFormReducer = createRequestReducer(SUBMIT_FORM);
 
-const geoLocationsReducer = createDataRequestReducer<GeoLocation[]>(
-    GET_GEO_LOCATION,
+const polygonsOfLocationReducer = createDataRequestReducer<PolygonsOfLocation>(
+    GET_POLYGON_OF_LOCATION,
     [],
 );
 
@@ -48,7 +48,7 @@ const fieldReducer = combineReducers({
     forms: formsReducer,
     formAnswers: formAnswersReducer,
     submitForm: submitFormReducer,
-    geoLocations: geoLocationsReducer,
+    polygonsOfLocation: polygonsOfLocationReducer,
     formDetail: formDetailReducer,
     formAnswerDetail: formAnswerDetailReducer,
 });

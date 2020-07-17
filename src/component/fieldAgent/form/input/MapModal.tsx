@@ -1,13 +1,15 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import GoogleMapReact from 'google-map-react';
-import {createStyles, Modal, Theme} from '@material-ui/core';
+import {createStyles, Modal, Theme, Typography} from '@material-ui/core';
 import {LangBaseJson, Location, StringsJson} from '../../../../utils/types';
 import IButton from '../../../utils/IButton';
 import IError from './IError';
 import {makeStyles} from '@material-ui/core/styles';
 import {useDispatch, useSelector} from 'react-redux';
-import {getGeoLocation} from '../../actions';
+import {getPolygonOfLocation, resetPolygonOfLocation} from '../../actions';
 import {RootState} from '../../../../store';
+import {PolygonsOfLocation} from '../../types';
+import ITypography from '../../../utils/ITypography';
 
 interface MapModalProps {
     open: boolean;
@@ -29,6 +31,10 @@ const strings: StringsJson = {
     notChosenError: {
         en: 'Mark the location first',
         fa: 'هنوز مکان مورد نظر خود را انتخاب نکرده‌اید',
+    },
+    polygons: {
+        en: 'Polygons that your chosen location is inside them:',
+        fa: 'محدوده‌هایی که مکان انتخابی شما در آن قرار دارد:',
     },
 };
 
@@ -63,9 +69,17 @@ const MapModal = ({open, choose, onClose}: MapModalProps) => {
     const [marker, setMarker] = useState<Location | null>(null);
     const [error, setError] = useState<LangBaseJson | null>(null);
     const isLoading = useSelector<RootState, boolean>(
-        (state) => state.field.geoLocations.isLoading,
+        (state) => state.field.polygonsOfLocation.isLoading,
+    );
+    const polygons = useSelector<RootState, PolygonsOfLocation>(
+        (state) => state.field.polygonsOfLocation.data,
     );
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (open) dispatch(resetPolygonOfLocation());
+    }, [dispatch, open]);
+
     const handleClose = () => {
         onClose();
         setError(null);
@@ -81,7 +95,7 @@ const MapModal = ({open, choose, onClose}: MapModalProps) => {
     };
     const options = {fullscreenControl: false};
     const handleClick = ({lat, lng}: Location) => {
-        dispatch(getGeoLocation({location: {lat, lng}}));
+        dispatch(getPolygonOfLocation({lat, long: lng}));
         setMarker({lat, lng});
         setError(null);
     };
@@ -116,7 +130,12 @@ const MapModal = ({open, choose, onClose}: MapModalProps) => {
                 </GoogleMapReact>
                 <div className="flex-1 flex-row align-self-stretch m-sm-1">
                     <IError error={error} className="position-absolute" />
-                    {/*todo print locations here*/}
+                    {polygons.length > 0 && (
+                        <div className="d-flex flex-row">
+                            <ITypography text={strings.polygons} />
+                            <Typography>{polygons.join(', ')}</Typography>
+                        </div>
+                    )}
                     <IButton
                         title={strings.okButtonText}
                         onClick={handleSubmit}
