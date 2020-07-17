@@ -3,6 +3,10 @@ import {RootState} from '../store';
 import {Action} from 'redux';
 import React from 'react';
 
+export const _SUCCESS = '_SUCCESS';
+export const _ERROR = '_ERROR';
+export const _PENDING = '_PENDING';
+
 export type ISimpleAction = Action<string>;
 
 export type IActionCreator<ReturnType = ISimpleAction> = (

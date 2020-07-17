@@ -1,4 +1,12 @@
-import {ID, IDataAction, ISimpleAction, IThunkAction} from './types';
+import {
+    _ERROR,
+    _PENDING,
+    _SUCCESS,
+    ID,
+    IDataAction,
+    ISimpleAction,
+    IThunkAction,
+} from './types';
 import {Action, Reducer} from 'redux';
 import request, {RequestOptionType, RequestResponse} from './effects/request';
 import API from './API';
@@ -20,10 +28,10 @@ export const createRequestReducer = (
     action,
 ) => {
     switch (action.type) {
-        case typePrefix + '_PENDING':
+        case typePrefix + _PENDING:
             return {...state, isLoading: true};
-        case typePrefix + '_ERROR':
-        case typePrefix + '_SUCCESS':
+        case typePrefix + _ERROR:
+        case typePrefix + _SUCCESS:
             return {...state, isLoading: false};
         default:
             return state;
@@ -48,11 +56,11 @@ export const createDataRequestReducer = <SD>(
     action,
 ) => {
     switch (action.type) {
-        case typePrefix + '_PENDING':
+        case typePrefix + _PENDING:
             return {...state, isLoading: true};
-        case typePrefix + '_ERROR':
+        case typePrefix + _ERROR:
             return {...state, isLoading: false};
-        case typePrefix + '_SUCCESS':
+        case typePrefix + _SUCCESS:
             return {...state, isLoading: false, data: action.payload};
         default:
             return state;
@@ -84,9 +92,9 @@ const createGetRequestActions = <SD, P extends object | undefined>(
     url: API,
     getData = (data: any) => data,
 ): GetRequestActionsType<P> => {
-    const PENDING = actionType + '_PENDING';
-    const SUCCESS = actionType + '_SUCCESS';
-    const ERROR = actionType + '_ERROR';
+    const PENDING = actionType + _PENDING;
+    const SUCCESS = actionType + _SUCCESS;
+    const ERROR = actionType + _ERROR;
 
     interface PendingAction extends Action<typeof PENDING> {}
 
@@ -180,9 +188,9 @@ export const createPostRequestWithIdActions = <D>(
     actionType: string,
     url: API,
 ): PostRequestAction<D> => {
-    const PENDING = actionType + '_PENDING';
-    const SUCCESS = actionType + '_SUCCESS';
-    const ERROR = actionType + '_ERROR';
+    const PENDING = actionType + _PENDING;
+    const SUCCESS = actionType + _SUCCESS;
+    const ERROR = actionType + _ERROR;
 
     interface PendingAction extends Action<typeof PENDING> {}
 
