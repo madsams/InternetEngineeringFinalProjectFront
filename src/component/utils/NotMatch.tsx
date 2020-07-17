@@ -1,18 +1,24 @@
 import React from 'react';
-import {StringsJson} from '../../utils/types';
+import {LangBaseJson, StringCreatorsJson, StringsJson} from '../../utils/types';
 import ITypography from './ITypography';
 
+interface NotMatchProps {
+    prefix?: LangBaseJson;
+}
 const strings: StringsJson = {
     code: {
         en: '404',
         fa: '۴۰۴',
     },
-    text: {
-        en: 'This page is not exist',
-        fa: 'صفحه مورد نظر شما یافت نشد',
-    },
 };
-const NotMatch = () => (
+
+const stringCreators: StringCreatorsJson = {
+    text: (text: LangBaseJson) => ({
+        en: text.en + 'This page is not exist',
+        fa: text.fa + ' مورد نظر شما یافت نشد',
+    }),
+};
+const NotMatch = ({prefix = {en: 'صفحه', fa: 'page'}}: NotMatchProps) => (
     <div className="d-flex flex-column flex-1 align-items-center justify-content-center h-100">
         <ITypography
             text={strings.code}
@@ -20,7 +26,11 @@ const NotMatch = () => (
             align="center"
             className="m-3"
         />
-        <ITypography text={strings.text} variant="h4" align="center" />
+        <ITypography
+            text={stringCreators.text(prefix)}
+            variant="h4"
+            align="center"
+        />
     </div>
 );
 export default NotMatch;

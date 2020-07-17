@@ -33,8 +33,18 @@ export type LangBaseJson<D = string> = {
     [language in Language]: D;
 };
 
+export type LangBaseJsonCreator<D = string> = (
+    text: LangBaseJson,
+) => {
+    [language in Language]: D;
+};
+
 export type StringsJson = {
     [key: string]: LangBaseJson;
+};
+
+export type StringCreatorsJson = {
+    [key: string]: LangBaseJsonCreator;
 };
 
 export enum Role {

@@ -29,23 +29,14 @@ const polygonsOfLocationReducer = createDataRequestReducer<PolygonsOfLocation>(
     true,
 );
 
-const initialFormDetail: Form = {id: '', fields: [], title: ''};
-const formDetailReducer = createDataRequestReducer<Form>(
+const formDetailReducer = createDataRequestReducer<Form | undefined>(
     GET_FORM_DETAIL,
-    initialFormDetail,
+    undefined,
     true,
 );
-const initialFormAnswerDetail: FormAnswer = {
-    title: '',
-    id: '',
-    fields: [],
-    createdAt: new Date(),
-};
-const formAnswerDetailReducer = createDataRequestReducer<FormAnswer>(
-    GET_FORM_ANSWER_DETAIL,
-    initialFormAnswerDetail,
-    true,
-);
+const formAnswerDetailReducer = createDataRequestReducer<
+    FormAnswer | undefined
+>(GET_FORM_ANSWER_DETAIL, undefined, true);
 
 const fieldReducer = combineReducers({
     forms: formsReducer,
