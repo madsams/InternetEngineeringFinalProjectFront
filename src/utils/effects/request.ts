@@ -122,6 +122,9 @@ const request = (requestOption: RequestOptionType): IThunkAction => async (
 
         if (isEconnabortedError) {
             if (errorAction) dispatch(errorAction(failToastMessage));
+            dispatch(
+                renderToast(toastTitle, failToastMessage, ToastTypes.ERROR),
+            );
         } else if (!isCancelError) {
             // Error codes are
             let errorCodeActioned = false;
@@ -144,7 +147,8 @@ const request = (requestOption: RequestOptionType): IThunkAction => async (
                     }
                 });
             }
-
+            console.log('errorCodeActioned', errorCodeActioned);
+            console.log('reject', reject);
             if (!errorCodeActioned) {
                 if (!reject) {
                     if (errorAction) dispatch(errorAction(failToastMessage));

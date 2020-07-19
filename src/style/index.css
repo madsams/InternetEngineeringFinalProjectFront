@@ -48,3 +48,5 @@ div, p, span {
   display: flex;
   flex: 4 !important;
 }
+
+button:focus {outline:0;}

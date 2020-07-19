@@ -2,12 +2,16 @@ import React from 'react';
 import {Divider, List} from '@material-ui/core';
 import ILoader from './ILoader';
 import IEmptyChecker from './IEmptyChecker';
+import {ISimpleAction, IThunkAction} from '../../utils/types';
+import IFailedChecker from './IFailedChecker';
 
 interface IListProps {
     data: any[];
     itemComponent: React.ComponentType<any>;
     isLoading: boolean;
     isFailed: boolean;
+
+    reloadAction(): IThunkAction | ISimpleAction;
 }
 
 const IList = ({
@@ -15,25 +19,30 @@ const IList = ({
     itemComponent: ItemComponent,
     isLoading,
     isFailed,
+    reloadAction,
 }: IListProps) => {
     return (
         <List component="nav" className="col-12 border">
             <ILoader isLoading={isLoading}>
-                <IEmptyChecker data={data}>
-                    <>
-                        {data.map((item, index) => (
-                            <>
-                                {index > 0 && (
-                                    <Divider key={'d' + (item.id || index)} />
-                                )}
-                                <ItemComponent
-                                    key={item.id || index}
-                                    item={item}
-                                />
-                            </>
-                        ))}
-                    </>
-                </IEmptyChecker>
+                <IFailedChecker isFailed={isFailed} reloadAction={reloadAction}>
+                    <IEmptyChecker data={data}>
+                        <>
+                            {data.map((item, index) => (
+                                <>
+                                    {index > 0 && (
+                                        <Divider
+                                            key={'d' + (item.id || index)}
+                                        />
+                                    )}
+                                    <ItemComponent
+                                        key={item.id || index}
+                                        item={item}
+                                    />
+                                </>
+                            ))}
+                        </>
+                    </IEmptyChecker>
+                </IFailedChecker>
             </ILoader>
         </List>
     );

@@ -9,7 +9,7 @@ interface ILoaderProps {
 const ILoader = ({children, isLoading}: ILoaderProps) =>
     isLoading ? (
         <div className="d-flex align-items-center justify-content-center">
-            <CircularProgress />
+            <CircularProgress size={25} />
         </div>
     ) : (
         <React.Fragment>{children}</React.Fragment>

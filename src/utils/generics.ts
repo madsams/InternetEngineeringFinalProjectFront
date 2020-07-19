@@ -70,7 +70,7 @@ export const createDataRequestReducer = <SD>(
                     isFailed: true,
                     data: initialData,
                 };
-            else return {...state, isLoading: false};
+            else return {...state, isFailed: true, isLoading: false};
         case typePrefix + _SUCCESS:
             return {
                 ...state,

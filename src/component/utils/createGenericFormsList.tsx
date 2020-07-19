@@ -32,6 +32,7 @@ const createGenericFormsList = <F extends FormType>(
     useEffect(() => {
         dispatch(getData());
     }, [dispatch]);
+
     return (
         <div className="flex-1 flex-column align-items-center m-2">
             <ITypography text={stringsJson.title} variant="h5" align="center" />
@@ -47,6 +48,7 @@ const createGenericFormsList = <F extends FormType>(
                 itemComponent={listItemComponent}
                 isLoading={isLoading}
                 isFailed={isFailed}
+                reloadAction={getData}
             />
         </div>
     );
