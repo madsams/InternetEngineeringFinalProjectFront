@@ -1,32 +1,42 @@
 import React from 'react';
 import IContainer from '../utils/IContainer';
-import {Button} from '@material-ui/core';
 import ITypography from '../utils/ITypography';
-import {StringsJson} from '../../utils/types';
+import {Role, StringsJson} from '../../utils/types';
 import {useDispatch} from 'react-redux';
 import {login} from './actions';
+import IButton from '../utils/IButton';
 
 const strings: StringsJson = {
     text: {
         en: 'You need to login first',
         fa: 'شما ابتدا باید وارد شوید',
     },
-    button: {
-        en: 'Login',
-        fa: 'ورود',
+    buttonAsField: {
+        en: 'Login as Field Agent',
+        fa: 'ورود مامور میدانی',
+    },
+    buttonAsCentre: {
+        en: 'Login as Centre Agent',
+        fa: 'ورود مامور مرکزی',
     },
 };
 const LoginScreen = () => {
     const dispatch = useDispatch();
-    const handleLogin = () => {
-        dispatch(login());
+    const handleCentreLogin = () => {
+        dispatch(login(Role.centreAgent));
+    };
+
+    const handleFieldLogin = async () => {
+        dispatch(login(Role.fieldAgent));
     };
     return (
         <IContainer className="d-flex flex-column justify-content-center align-items-center">
             <ITypography text={strings.text} variant="h6" className="mb-4" />
-            <Button onClick={handleLogin} color="primary" variant="contained">
-                <ITypography text={strings.button} />
-            </Button>
+            <IButton
+                title={strings.buttonAsCentre}
+                onClick={handleCentreLogin}
+            />
+            <IButton title={strings.buttonAsField} onClick={handleFieldLogin} />
         </IContainer>
     );
 };
