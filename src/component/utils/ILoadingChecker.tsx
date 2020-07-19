@@ -6,7 +6,7 @@ interface ILoaderProps {
     children: React.ReactNode;
 }
 
-const ILoader = ({children, isLoading}: ILoaderProps) =>
+const ILoadingChecker = ({children, isLoading}: ILoaderProps) =>
     isLoading ? (
         <div className="d-flex align-items-center justify-content-center">
             <CircularProgress size={25} />
@@ -14,4 +14,4 @@ const ILoader = ({children, isLoading}: ILoaderProps) =>
     ) : (
         <React.Fragment>{children}</React.Fragment>
     );
-export default ILoader;
+export default ILoadingChecker;

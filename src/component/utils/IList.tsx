@@ -1,6 +1,6 @@
 import React from 'react';
 import {Divider, List} from '@material-ui/core';
-import ILoader from './ILoader';
+import ILoadingChecker from './ILoadingChecker';
 import IEmptyChecker from './IEmptyChecker';
 import {ISimpleAction, IThunkAction} from '../../utils/types';
 import IFailedChecker from './IFailedChecker';
@@ -23,7 +23,7 @@ const IList = ({
 }: IListProps) => {
     return (
         <List component="nav" className="col-12 border">
-            <ILoader isLoading={isLoading}>
+            <ILoadingChecker isLoading={isLoading}>
                 <IFailedChecker isFailed={isFailed} reloadAction={reloadAction}>
                     <IEmptyChecker data={data}>
                         <>
@@ -43,7 +43,7 @@ const IList = ({
                         </>
                     </IEmptyChecker>
                 </IFailedChecker>
-            </ILoader>
+            </ILoadingChecker>
         </List>
     );
 };

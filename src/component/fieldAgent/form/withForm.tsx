@@ -6,7 +6,7 @@ import {RootState} from '../../../store';
 import {DataRequestReducer} from '../../../utils/generics';
 import {useParams} from 'react-router';
 import {Typography} from '@material-ui/core';
-import ILoader from '../../utils/ILoader';
+import ILoadingChecker from '../../utils/ILoadingChecker';
 import NotMatch from '../../utils/NotMatch';
 
 const strings: StringsJson = {
@@ -38,7 +38,7 @@ const withForm = <F extends FormType>(
     }, [dispatch, id]);
 
     return (
-        <ILoader isLoading={isLoading}>
+        <ILoadingChecker isLoading={isLoading}>
             {form ? (
                 <>
                     <div className="d-flex flex-row justify-content-center align-items-center">
@@ -54,7 +54,7 @@ const withForm = <F extends FormType>(
             ) : (
                 <NotMatch prefix={strings.prefix} />
             )}
-        </ILoader>
+        </ILoadingChecker>
     );
 };
 

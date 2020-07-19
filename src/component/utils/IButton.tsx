@@ -1,6 +1,6 @@
 import {Button, makeStyles, PropTypes} from '@material-ui/core';
 import React from 'react';
-import ILoader from './ILoader';
+import ILoadingChecker from './ILoadingChecker';
 import {LangBaseJson} from '../../utils/types';
 import ITypography from './ITypography';
 
@@ -38,9 +38,9 @@ const IButton = ({
             }
             disabled={isLoading}
             onClick={onClick}>
-            <ILoader isLoading={isLoading}>
+            <ILoadingChecker isLoading={isLoading}>
                 <ITypography text={title} />
-            </ILoader>
+            </ILoadingChecker>
         </Button>
     );
 };
