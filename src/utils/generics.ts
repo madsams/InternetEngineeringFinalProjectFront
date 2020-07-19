@@ -15,10 +15,12 @@ import API from './API';
 
 export interface RequestReducer {
     isLoading: boolean;
+    isFailed: boolean;
 }
 
 const initialRequestState = (): RequestReducer => ({
     isLoading: false,
+    isFailed: false,
 });
 
 export const createRequestReducer = (
@@ -29,22 +31,23 @@ export const createRequestReducer = (
 ) => {
     switch (action.type) {
         case typePrefix + _PENDING:
-            return {...state, isLoading: true};
+            return {...state, isFailed: false, isLoading: true};
         case typePrefix + _ERROR:
+            return {...state, isFailed: true, isLoading: false};
         case typePrefix + _SUCCESS:
-            return {...state, isLoading: false};
+            return {...state, isFailed: false, isLoading: false};
         default:
             return state;
     }
 };
 
-export interface DataRequestReducer<D> {
-    isLoading: boolean;
+export interface DataRequestReducer<D> extends RequestReducer {
     data: D;
 }
 
 const initialDataRequestState = <D>(data: D): DataRequestReducer<D> => ({
     isLoading: false,
+    isFailed: false,
     data,
 });
 
@@ -58,13 +61,23 @@ export const createDataRequestReducer = <SD>(
 ) => {
     switch (action.type) {
         case typePrefix + _PENDING:
-            return {...state, isLoading: true};
+            return {...state, isFailed: false, isLoading: true};
         case typePrefix + _ERROR:
             if (isRefreshInError)
-                return {...state, isLoading: false, data: initialData};
+                return {
+                    ...state,
+                    isLoading: false,
+                    isFailed: true,
+                    data: initialData,
+                };
             else return {...state, isLoading: false};
         case typePrefix + _SUCCESS:
-            return {...state, isLoading: false, data: action.payload};
+            return {
+                ...state,
+                isLoading: false,
+                isFailed: false,
+                data: action.payload,
+            };
         default:
             return state;
     }
