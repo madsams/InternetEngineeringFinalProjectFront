@@ -3,5 +3,5 @@ import {changeRole, changeToken} from '../../utils/actions/actions';
 
 export const login = (): IThunkAction => (dispatch) => {
     dispatch(changeToken(''));
-    dispatch(changeRole(Role.fieldAgent));
+    dispatch(changeRole(Role.centreAgent));
 };

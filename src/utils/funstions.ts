@@ -26,3 +26,27 @@ export const formatTimeAgo = (time: Date): LangBaseJson => {
         fa: _formatTimeAgo('fa-IR', iTime),
     };
 };
+
+export const concat2LangBaseJsons = (
+    json1: LangBaseJson<string>,
+    json2: LangBaseJson<string>,
+): LangBaseJson<string> => ({
+    en: json1.en + json2.en,
+    fa: json1.fa + json2.fa,
+});
+
+export const concatLangBaseJsonWithStr = (
+    json1: LangBaseJson<string>,
+    str: string,
+): LangBaseJson<string> => ({
+    en: json1.en + str,
+    fa: json1.fa + str,
+});
+
+export const concatStrWithLangBaseJson = (
+    json1: LangBaseJson<string>,
+    str: string,
+): LangBaseJson<string> => ({
+    en: str + json1.en,
+    fa: str + json1.fa,
+});

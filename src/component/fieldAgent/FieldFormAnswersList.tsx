@@ -1,6 +1,6 @@
 import {FormAnswer} from '../../utils/types';
 import {getFormAnswers} from './actions';
-import AnswersListItem from './AnswersListItem';
+import AnswersListItem from './FieldAnswersListItem';
 import createGenericFormsList from '../utils/createGenericFormsList';
 
 const strings = {

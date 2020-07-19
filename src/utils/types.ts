@@ -100,6 +100,8 @@ export type ID = string;
 export interface FormType {
     title: string;
     id: ID;
+    answersCount: number;
+    createdAt: Date;
 }
 
 export interface Form extends FormType {
@@ -109,7 +111,6 @@ export interface Form extends FormType {
 export interface FormAnswer extends FormType {
     fields: Array<FieldAnswer>;
     formId: ID;
-    createdAt: Date;
 }
 
 export type Path = string;

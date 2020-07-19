@@ -4,6 +4,7 @@ import {reducer as toastrReducer} from 'react-redux-toastr';
 import {languagesReducers, roleReducer, tokenReducer} from './utils/reducers';
 import {setStorage} from './utils/effects/storage';
 import fieldReducer from './component/fieldAgent/reducer';
+import centreReducer from './component/centreAgent/reducer';
 
 const rootReducer = combineReducers({
     toastr: toastrReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
     token: tokenReducer,
     role: roleReducer,
     field: fieldReducer,
+    centre: centreReducer,
 });
 
 const middlewares = [thunk];
