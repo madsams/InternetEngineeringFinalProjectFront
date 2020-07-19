@@ -101,7 +101,7 @@ const FieldFormDetail = ({form: {fields, id}}: WithFormProps<Form>) => {
 
     const submit = () => {
         if (checkRequires()) {
-            dispatch(submitForm({values}, id, undefined, submitResolve));
+            dispatch(submitForm(values, id, undefined, submitResolve));
         }
     };
 

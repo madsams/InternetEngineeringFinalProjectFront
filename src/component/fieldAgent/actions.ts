@@ -32,7 +32,7 @@ export const resetPolygonOfLocation = (): IDataAction<PolygonsOfLocation> => ({
     payload: [],
 });
 
-export const submitForm = createPostRequestWithIdActions<{values: FormValues}>(
+export const submitForm = createPostRequestWithIdActions<FormValues>(
     SUBMIT_FORM,
     api.formAnswers,
 );
