@@ -1,6 +1,6 @@
 import {Form} from '../../utils/types';
 import {getForms} from './actions';
-import FormsListItem from './FormsListItem';
+import FormsListItem from '../utils/FormsListItem';
 import createGenericFormsList from '../utils/createGenericFormsList';
 
 const strings = {

@@ -2,7 +2,7 @@ import React from 'react';
 import {ListItem, ListItemText, Typography} from '@material-ui/core';
 import {Form} from '../../utils/types';
 import {Link} from 'react-router-dom';
-import {FORMS_DETAIL} from './paths';
+import {FORMS_DETAIL} from '../fieldAgent/paths';
 
 interface FormsListItemProps {
     item: Form;
