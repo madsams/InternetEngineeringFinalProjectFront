@@ -4,7 +4,6 @@ import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store';
 import ITypography from './ITypography';
-import ILoader from './ILoader';
 import IList from './IList';
 import {DataRequestReducer} from '../../utils/generics';
 
@@ -26,6 +25,9 @@ const createGenericFormsList = <F extends FormType>(
     const isLoading = useSelector<RootState, boolean>(
         (state) => getReducer(state).isLoading,
     );
+    const isFailed = useSelector<RootState, boolean>(
+        (state) => getReducer(state).isFailed,
+    );
 
     useEffect(() => {
         dispatch(getData());
@@ -40,9 +42,12 @@ const createGenericFormsList = <F extends FormType>(
                 align="center"
             />
             <br />
-            <ILoader isLoading={isLoading}>
-                <IList data={list} itemComponent={listItemComponent} />
-            </ILoader>
+            <IList
+                data={list}
+                itemComponent={listItemComponent}
+                isLoading={isLoading}
+                isFailed={isFailed}
+            />
         </div>
     );
 };
