@@ -1,5 +1,5 @@
 import React from 'react';
-import {Divider, List} from '@material-ui/core';
+import {Divider, List, Paper} from '@material-ui/core';
 import ILoadingChecker from './ILoadingChecker';
 import IEmptyChecker from './IEmptyChecker';
 import {ISimpleAction, IThunkAction} from '../../utils/types';
@@ -22,29 +22,33 @@ const IList = ({
     reloadAction,
 }: IListProps) => {
     return (
-        <List component="nav" className="col-12 border">
-            <ILoadingChecker isLoading={isLoading}>
-                <IFailedChecker isFailed={isFailed} reloadAction={reloadAction}>
-                    <IEmptyChecker data={data}>
-                        <>
-                            {data.map((item, index) => (
-                                <>
-                                    {index > 0 && (
-                                        <Divider
-                                            key={'d' + (item.id || index)}
+        <Paper className="col-12 border p-3 m-3 h-100">
+            <List component="nav" className="col-12 border">
+                <ILoadingChecker isLoading={isLoading}>
+                    <IFailedChecker
+                        isFailed={isFailed}
+                        reloadAction={reloadAction}>
+                        <IEmptyChecker data={data}>
+                            <>
+                                {data.map((item, index) => (
+                                    <>
+                                        {index > 0 && (
+                                            <Divider
+                                                key={'d' + (item.id || index)}
+                                            />
+                                        )}
+                                        <ItemComponent
+                                            key={item.id || index}
+                                            item={item}
                                         />
-                                    )}
-                                    <ItemComponent
-                                        key={item.id || index}
-                                        item={item}
-                                    />
-                                </>
-                            ))}
-                        </>
-                    </IEmptyChecker>
-                </IFailedChecker>
-            </ILoadingChecker>
-        </List>
+                                    </>
+                                ))}
+                            </>
+                        </IEmptyChecker>
+                    </IFailedChecker>
+                </ILoadingChecker>
+            </List>
+        </Paper>
     );
 };
 

@@ -1,5 +1,5 @@
 enum api {
-    forms = '/api/forsms',
+    forms = '/api/forms',
     formAnswers = '/api/form-answers',
     polygon = '/api/areas/testpoint',
     login = '/api/login',

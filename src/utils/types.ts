@@ -95,8 +95,10 @@ export interface Field {
     options?: Array<Option>;
 }
 
+type Value = string | number | Location | Option | Date;
+
 export interface FieldAnswer extends Field {
-    value: string | number | Location | Option | Date;
+    value: Value;
 }
 
 export type ID = string;
@@ -118,3 +120,19 @@ export interface FormAnswer extends FormType {
 }
 
 export type Path = string;
+
+export interface FormAnswersRecord {
+    createdAt: Date;
+    userId: ID;
+    answerId: ID;
+    [nameOfField: string]: Value;
+}
+
+interface Sum {
+    [nameOfField: string]: number;
+}
+
+export interface FormTable extends Form {
+    records: Array<FormAnswersRecord>;
+    sum: Sum;
+}
