@@ -10,7 +10,6 @@ import ITooltip from '../ITooltip';
 import ITypography from '../ITypography';
 import {DrawerItem, StringsJson} from '../../../utils/types';
 import {makeStyles} from '@material-ui/core/styles';
-import {Link} from 'react-router-dom';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {useDispatch} from 'react-redux';
 import {logoutAction} from '../../../utils/actions/actions';
@@ -63,20 +62,16 @@ const DrawerButton = ({list}: DrawerButtonProps) => {
                 {list
                     .filter((i) => !i.hideInDrawer)
                     .map((item) => (
-                        <Link
-                            to={item.path}
+                        <ListItem
+                            button
                             key={item.path}
-                            className="text-decoration-none">
-                            <ListItem button component="div">
-                                <ListItemIcon>{item.icon}</ListItemIcon>
-                                <ListItemText>
-                                    <ITypography
-                                        text={item.title}
-                                        align="left"
-                                    />
-                                </ListItemText>
-                            </ListItem>
-                        </Link>
+                            component="a"
+                            href={item.path}>
+                            <ListItemIcon>{item.icon}</ListItemIcon>
+                            <ListItemText>
+                                <ITypography text={item.title} align="left" />
+                            </ListItemText>
+                        </ListItem>
                     ))}
                 <ListItem button onClick={logout}>
                     <ListItemIcon>
