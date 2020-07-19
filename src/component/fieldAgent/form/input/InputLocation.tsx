@@ -26,6 +26,7 @@ const InputLocation = ({
     required,
     onBlur,
     onChange,
+    disabled,
 }: InputLocationProps) => {
     const [open, setOpen] = React.useState<boolean>(false);
     const [text, setText] = React.useState<string | undefined>(undefined);
@@ -51,7 +52,7 @@ const InputLocation = ({
     );
 
     const handleClick = () => {
-        handleOpen();
+        if (!disabled) handleOpen();
         onBlur();
     };
 
@@ -62,11 +63,12 @@ const InputLocation = ({
     return (
         <>
             <TextField
+                disabled={disabled}
                 required={required}
                 InputLabelProps={{shrink: !!value}}
                 label={title}
                 inputProps={{
-                    dir: value && polygons.length === 0 ? 'ltr' : 'rtl',
+                    dir: value && polygons.length === 0 ? 'ltr' : '',
                 }}
                 id={name}
                 autoComplete="off"

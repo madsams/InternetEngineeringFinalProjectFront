@@ -45,6 +45,7 @@ const InputDate = ({
     value,
     onChange,
     onBlur,
+    disabled,
 }: InputDateProps) => {
     const momentFormat = useLanguage(momentFormatsLBJ);
     const util = useLanguage(utilsLBJ);
@@ -61,6 +62,7 @@ const InputDate = ({
             utils={util}
             locale={locale}>
             <DatePicker
+                disabled={disabled}
                 required={required}
                 clearable={true}
                 disableToolbar

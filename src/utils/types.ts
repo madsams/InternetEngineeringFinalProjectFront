@@ -83,18 +83,15 @@ export enum FieldTypes {
     Date = 'Date',
 }
 
-export interface FieldType {
+export interface Field {
     name: string;
     title: string;
     type: FieldTypes;
-}
-
-export interface Field extends FieldType {
     required?: boolean;
     options?: Array<Option>;
 }
 
-export interface FilledField extends FieldType {
+export interface FieldAnswer extends Field {
     value: string | number | Location | Option | Date;
 }
 
@@ -110,7 +107,8 @@ export interface Form extends FormType {
 }
 
 export interface FormAnswer extends FormType {
-    fields: Array<FilledField>;
+    fields: Array<FieldAnswer>;
+    formId: ID;
     createdAt: Date;
 }
 

@@ -1,14 +1,25 @@
-import {FormAnswer} from '../../../utils/types';
 import React from 'react';
-import withForm from './withForm';
+import {FormAnswer} from '../../../utils/types';
+import withForm, {WithFormProps} from './withForm';
 import {getSelectedFormAnswerDetail} from '../actions';
+import FormInput from './input';
 
-interface FieldFormProps {
-    form: FormAnswer;
-}
-
-const FieldFormAnswerDetail = ({form}: FieldFormProps) => (
-    <>filled: {form.title}</>
+const emptyFunc = () => {};
+const FieldFormAnswerDetail = ({form: {fields}}: WithFormProps<FormAnswer>) => (
+    <div className="flex-1 flex-column justify-content-center align-items-stretch">
+        {fields.map((item) => (
+            <FormInput
+                disabled
+                {...item}
+                error={null}
+                touched={false}
+                key={item.name}
+                onBlur={emptyFunc}
+                onChange={emptyFunc}
+                value={item.value}
+            />
+        ))}
+    </div>
 );
 export default withForm<FormAnswer>(
     (state) => state.field.formAnswerDetail,

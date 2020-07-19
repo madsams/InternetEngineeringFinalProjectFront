@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Field, Form, LangBaseJson, StringsJson} from '../../../utils/types';
-import withForm from './withForm';
+import withForm, {WithFormProps} from './withForm';
 import {InputValues} from './input/types';
 import FormInput from './input';
 import {FormValues} from '../types';
@@ -9,10 +9,7 @@ import {RootState} from '../../../store';
 import {getSelectedFormDetail, submitForm} from '../actions';
 import IButton from '../../utils/IButton';
 import {useHistory} from 'react-router-dom';
-
-interface FieldFormProps {
-    form: Form;
-}
+import {FORM_ANSWERS} from '../paths';
 
 type Errors = {
     [key: string]: LangBaseJson | null;
@@ -43,7 +40,7 @@ function getInitialFormState(fields: Array<Field>, initialValue: any) {
     );
 }
 
-const FieldFormDetail = ({form: {fields, id}}: FieldFormProps) => {
+const FieldFormDetail = ({form: {fields, id}}: WithFormProps<Form>) => {
     const [values, setValues] = useState<FormValues>(
         getInitialFormState(fields, null),
     );
@@ -99,7 +96,7 @@ const FieldFormDetail = ({form: {fields, id}}: FieldFormProps) => {
 
     const submitResolve = () => {
         clearState();
-        history.push('/form/answer');
+        history.push(FORM_ANSWERS);
     };
 
     const submit = () => {

@@ -9,10 +9,6 @@ import {Typography} from '@material-ui/core';
 import ILoader from '../../utils/ILoader';
 import NotMatch from '../../utils/NotMatch';
 
-interface ComponentProps<F> {
-    form: F;
-}
-
 const strings: StringsJson = {
     formNotFoundPrefix: {
         en: 'form',
@@ -20,10 +16,14 @@ const strings: StringsJson = {
     },
 };
 
+export interface WithFormProps<F> {
+    form: F;
+}
+
 const withForm = <F extends FormType>(
     getReducer: (state: RootState) => DataRequestReducer<F | undefined>,
     getAction: (id: ID) => IThunkAction,
-) => (Component: React.ComponentType<ComponentProps<F>>): React.FC => () => {
+) => (Component: React.ComponentType<WithFormProps<F>>): React.FC => () => {
     const {id} = useParams();
     const dispatch = useDispatch();
     const form = useSelector<RootState, F | undefined>(

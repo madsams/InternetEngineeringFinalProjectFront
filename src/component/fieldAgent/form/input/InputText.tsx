@@ -17,17 +17,19 @@ const InputText = ({
     value,
     onBlur,
     onChange,
+    disabled,
 }: InputTextProps) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
         onChange(e.target.value);
     return (
         <TextField
             id={name}
+            disabled={disabled}
             required={required}
             label={title}
             value={value ? value : ''}
             inputProps={{
-                dir: isNumber ? 'ltr' : 'rtl',
+                dir: isNumber ? 'ltr' : '',
             }}
             type={isNumber ? 'number' : undefined}
             onBlur={onBlur}
