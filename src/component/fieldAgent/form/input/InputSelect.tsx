@@ -31,6 +31,9 @@ const InputSelect = ({
                 labelId={name + 'label'}
                 id={name}
                 value={value ? value.label : undefined}
+                renderValue={
+                    disabled ? (v) => <div>{v as string}</div> : undefined
+                }
                 onBlur={onBlur}
                 onChange={handleChange}>
                 {options.map((option) => (

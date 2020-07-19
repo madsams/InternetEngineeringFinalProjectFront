@@ -32,6 +32,7 @@ const palette = {
     text: {
         primary: '#222',
         secondary: '#777',
+        disabled: 'rgb(0,0,0,0.55)',
     },
 };
 const rtlTheme = createMuiTheme({
