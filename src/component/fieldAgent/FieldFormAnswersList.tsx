@@ -1,7 +1,7 @@
 import {FormAnswer} from '../../utils/types';
 import {getFormAnswers} from './actions';
 import AnswersListItem from './AnswersListItem';
-import createGenericFormsList from './createGenericFormsList';
+import createGenericFormsList from '../utils/createGenericFormsList';
 
 const strings = {
     title: {

@@ -3,9 +3,9 @@ import * as React from 'react';
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store';
-import ITypography from '../utils/ITypography';
-import ILoader from '../utils/ILoader';
-import IList from '../utils/IList';
+import ITypography from './ITypography';
+import ILoader from './ILoader';
+import IList from './IList';
 import {DataRequestReducer} from '../../utils/generics';
 
 interface GenericFormsListString {
