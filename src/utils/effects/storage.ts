@@ -6,6 +6,14 @@ export const setStorage = (key: string, value: any) => {
     }
 };
 
+export const removeStorage = (key: string) => {
+    try {
+        localStorage.removeItem(key);
+    } catch (e) {
+        //ignore
+    }
+};
+
 export const getStorage = <T>(key: string, initialState: T): T => {
     try {
         const serializedState = localStorage.getItem(key);

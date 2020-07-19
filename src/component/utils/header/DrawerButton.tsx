@@ -8,8 +8,12 @@ import {IconButton} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ITooltip from '../ITooltip';
 import ITypography from '../ITypography';
-import {DrawerItem} from '../../../utils/types';
+import {DrawerItem, StringsJson} from '../../../utils/types';
 import {makeStyles} from '@material-ui/core/styles';
+import {Link} from 'react-router-dom';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import {useDispatch} from 'react-redux';
+import {logoutAction} from '../../../utils/actions/actions';
 
 const useStyles = makeStyles({
     drawer: {
@@ -21,8 +25,16 @@ interface DrawerButtonProps {
     list: Array<DrawerItem<string>>;
 }
 
+const strings: StringsJson = {
+    logout: {
+        en: 'Logout',
+        fa: 'خروج',
+    },
+};
+
 const DrawerButton = ({list}: DrawerButtonProps) => {
     const classes = useStyles();
+    const dispatch = useDispatch();
     const [open, setOpen] = useState<boolean>(false);
     const toggleDrawer = (value: boolean) => (
         event: React.KeyboardEvent | React.MouseEvent,
@@ -38,6 +50,8 @@ const DrawerButton = ({list}: DrawerButtonProps) => {
         setOpen(value);
     };
 
+    const logout = () => dispatch(logoutAction());
+
     //todo expandMore and expandLess
     const drawerList = () => (
         <div
@@ -49,17 +63,29 @@ const DrawerButton = ({list}: DrawerButtonProps) => {
                 {list
                     .filter((i) => !i.hideInDrawer)
                     .map((item) => (
-                        <ListItem
-                            button
+                        <Link
+                            to={item.path}
                             key={item.path}
-                            component="a"
-                            href={item.path}>
-                            <ListItemIcon>{item.icon}</ListItemIcon>
-                            <ListItemText>
-                                <ITypography text={item.title} align="left" />
-                            </ListItemText>
-                        </ListItem>
+                            className="text-decoration-none">
+                            <ListItem button component="div">
+                                <ListItemIcon>{item.icon}</ListItemIcon>
+                                <ListItemText>
+                                    <ITypography
+                                        text={item.title}
+                                        align="left"
+                                    />
+                                </ListItemText>
+                            </ListItem>
+                        </Link>
                     ))}
+                <ListItem button onClick={logout}>
+                    <ListItemIcon>
+                        <ExitToAppIcon />
+                    </ListItemIcon>
+                    <ListItemText>
+                        <ITypography text={strings.logout} align="left" />
+                    </ListItemText>
+                </ListItem>
             </List>
         </div>
     );

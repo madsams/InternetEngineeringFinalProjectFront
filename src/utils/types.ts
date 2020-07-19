@@ -7,6 +7,10 @@ export const _SUCCESS = '_SUCCESS';
 export const _ERROR = '_ERROR';
 export const _PENDING = '_PENDING';
 
+export const tokenStorageKey = 'token';
+export const roleStorageKey = 'role';
+export const languageStorageKey = 'language';
+
 export type ISimpleAction = Action<string>;
 
 export type IActionCreator<ReturnType = ISimpleAction> = (
