@@ -6,7 +6,6 @@ import {
     TableCell,
     TableContainer,
     TableFooter,
-    TablePagination,
     TableRow,
 } from '@material-ui/core';
 import ITableHeader from './ITableHeader';
@@ -15,14 +14,14 @@ import {
     FormTable,
     ID,
     Order,
-    StringCreatorsJson2,
     StringsJson,
 } from '../../../utils/types';
 import ITypography from '../../utils/ITypography';
 import {comparator, removeProperty} from '../../../utils/funstions';
-import {useFormat, useLanguage} from '../../../utils/hooks';
+import {useFormat} from '../../../utils/hooks';
 import {Link} from 'react-router-dom';
 import {FORM_RECORD_DETAIL} from '../paths';
+import ITablePagination from './ITablePagination';
 
 interface ITableProps {
     data: FormTable;
@@ -43,25 +42,10 @@ const strings: StringsJson = {
         en: 'YYYY-MM-DD (hh:mm)',
         fa: '(hh:mm) jYYYY/jMM/jDD',
     },
-    labelRowsPerPage: {
-        en: 'Rows per page:',
-        fa: 'سطر در صفحه:',
-    },
-};
-
-const stringCreators: StringCreatorsJson2 = {
-    labelDisplayedRows: {
-        en: ({from, to, count}) =>
-            `${from}-${to} of ${count !== -1 ? count : `more than ${to}`}`,
-        fa: ({from, to, count}) =>
-            `${from}-${to} از ${count !== -1 ? count : `بیشتر از ${to}`}`,
-    },
 };
 
 const ITable = ({data}: ITableProps) => {
     const formatMoment = useFormat(strings.momentFormat);
-    const labelDisplayedRows = useLanguage(stringCreators.labelDisplayedRows);
-    const labelRowsPerPage = useLanguage(strings.labelRowsPerPage);
     const [page, setPage] = React.useState<number>(0);
     const [rowsPerPage, setRowsPerPage] = React.useState<number>(5);
     const [order, setOrder] = React.useState<Order>('asc');
@@ -164,15 +148,12 @@ const ITable = ({data}: ITableProps) => {
                     </TableFooter>
                 </Table>
             </TableContainer>
-            <TablePagination
-                rowsPerPageOptions={[5, 10, 15, 25, 50]}
-                count={array.length}
-                onChangePage={handleChangePage}
-                onChangeRowsPerPage={handleChangeRowsPerPage}
+            <ITablePagination
                 page={page}
+                count={array.length}
                 rowsPerPage={rowsPerPage}
-                labelDisplayedRows={labelDisplayedRows}
-                labelRowsPerPage={labelRowsPerPage}
+                handleChangePage={handleChangePage}
+                handleChangeRowsPerPage={handleChangeRowsPerPage}
             />
         </Paper>
     );
