@@ -3,11 +3,13 @@ import {useSelector} from 'react-redux';
 import {RootState} from '../store';
 import {formatMoment} from './funstions';
 
-export const useLanguage = (str: LangBaseJson | undefined): string => {
+export const useLanguage = <D = string>(
+    str: LangBaseJson<D> | undefined,
+): D | undefined => {
     const language = useSelector<RootState, Language>(
         (state) => state.language,
     );
-    return str && str[language] ? str[language] : '';
+    return str && str[language] ? str[language] : undefined;
 };
 
 export const useLanguageSelector = () => {

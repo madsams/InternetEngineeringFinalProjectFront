@@ -53,6 +53,12 @@ export type StringCreatorsJson = {
     [key: string]: LangBaseJsonCreator;
 };
 
+export type LangBaseJsonCreator2 = (param: any) => string;
+
+export type StringCreatorsJson2 = {
+    [key: string]: LangBaseJson<LangBaseJsonCreator2>;
+};
+
 export enum Role {
     unknown = 'unknown',
     centreAgent = 'centre',

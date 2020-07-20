@@ -6,6 +6,7 @@ import {
     TableCell,
     TableContainer,
     TableFooter,
+    TablePagination,
     TableRow,
 } from '@material-ui/core';
 import ITableHeader from './ITableHeader';
@@ -13,11 +14,12 @@ import {
     FormAnswersRecordValues,
     FormTable,
     Order,
+    StringCreatorsJson2,
     StringsJson,
 } from '../../../utils/types';
 import ITypography from '../../utils/ITypography';
 import {comparator} from '../../../utils/funstions';
-import {useFormat} from '../../../utils/hooks';
+import {useFormat, useLanguage} from '../../../utils/hooks';
 
 interface ITableProps {
     data: FormTable;
@@ -37,10 +39,27 @@ const strings: StringsJson = {
         en: 'YYYY-MM-DD (hh:mm)',
         fa: '(hh:mm) jYYYY/jMM/jDD',
     },
+    labelRowsPerPage: {
+        en: 'Rows per page:',
+        fa: 'سطر در صفحه:',
+    },
+};
+
+const stringCreators: StringCreatorsJson2 = {
+    labelDisplayedRows: {
+        en: ({from, to, count}) =>
+            `${from}-${to} of ${count !== -1 ? count : `more than ${to}`}`,
+        fa: ({from, to, count}) =>
+            `${from}-${to} از ${count !== -1 ? count : `بیشتر از ${to}`}`,
+    },
 };
 
 const ITable = ({data}: ITableProps) => {
     const formatMoment = useFormat(strings.momentFormat);
+    const labelDisplayedRows = useLanguage(stringCreators.labelDisplayedRows);
+    const labelRowsPerPage = useLanguage(strings.labelRowsPerPage);
+    const [page, setPage] = React.useState<number>(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState<number>(5);
     const [order, setOrder] = React.useState<Order>('asc');
     const [orderBy, setOrderBy] = React.useState<string>();
     const [array, setArray] = React.useState<TableRow[]>(
@@ -75,6 +94,16 @@ const ITable = ({data}: ITableProps) => {
         });
     }, [order, orderBy]);
 
+    const handleChangePage = (event: unknown, newPage: number) =>
+        setPage(newPage);
+
+    const handleChangeRowsPerPage = (
+        event: React.ChangeEvent<HTMLInputElement>,
+    ) => {
+        setRowsPerPage(parseInt(event.target.value));
+        setPage(0);
+    };
+
     return (
         <Paper>
             <TableContainer>
@@ -86,15 +115,22 @@ const ITable = ({data}: ITableProps) => {
                         onRequestSort={handleRequestSort}
                     />
                     <TableBody>
-                        {array.map((row, index) => (
-                            <TableRow hover key={'r' + index}>
-                                {Object.values(row).map((cell, index) => (
-                                    <TableCell align="right" key={'c' + index}>
-                                        {cell}
-                                    </TableCell>
-                                ))}
-                            </TableRow>
-                        ))}
+                        {array
+                            .slice(
+                                page * rowsPerPage,
+                                page * rowsPerPage + rowsPerPage,
+                            )
+                            .map((row, index) => (
+                                <TableRow hover key={'r' + index}>
+                                    {Object.values(row).map((cell, index) => (
+                                        <TableCell
+                                            align="right"
+                                            key={'c' + index}>
+                                            {cell}
+                                        </TableCell>
+                                    ))}
+                                </TableRow>
+                            ))}
                     </TableBody>
                     <TableFooter>
                         <TableRow>
@@ -116,6 +152,16 @@ const ITable = ({data}: ITableProps) => {
                     </TableFooter>
                 </Table>
             </TableContainer>
+            <TablePagination
+                rowsPerPageOptions={[5, 10, 15, 25, 50]}
+                count={array.length}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+                page={page}
+                rowsPerPage={rowsPerPage}
+                labelDisplayedRows={labelDisplayedRows}
+                labelRowsPerPage={labelRowsPerPage}
+            />
         </Paper>
     );
 };
