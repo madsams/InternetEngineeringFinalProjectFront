@@ -17,6 +17,8 @@ export type IActionCreator<ReturnType = ISimpleAction> = (
     ...args: any
 ) => ReturnType;
 
+export type Order = 'asc' | 'desc';
+
 export interface IDataAction<D> extends ISimpleAction {
     payload: D;
 }
@@ -121,11 +123,15 @@ export interface FormAnswer extends FormType {
 
 export type Path = string;
 
+export interface FormAnswersRecordValues {
+    [nameOfField: string]: Value;
+}
+
 export interface FormAnswersRecord {
     createdAt: Date;
     userId: ID;
     answerId: ID;
-    [nameOfField: string]: Value;
+    values: FormAnswersRecordValues;
 }
 
 interface Sum {

@@ -1,8 +1,9 @@
 import {MainApplicationType, Role} from '../../utils/types';
-import {CentrePaths, FORMS} from './paths';
+import {CentrePaths, FORM_TABLE, FORMS} from './paths';
 import HomeIcon from '@material-ui/icons/Home';
 import React from 'react';
 import CentreHome from './CentreFormsList';
+import CentreFormTable from './CentreFormTable';
 
 const centre: MainApplicationType<CentrePaths> = {
     role: Role.centreAgent,
@@ -12,6 +13,11 @@ const centre: MainApplicationType<CentrePaths> = {
             title: {fa: 'صفحه اصلی', en: 'Home'},
             component: <CentreHome />,
             icon: <HomeIcon />,
+        },
+        {
+            path: FORM_TABLE(':id'),
+            component: <CentreFormTable />,
+            hideInDrawer: true,
         },
     ],
     headerTitle: {
