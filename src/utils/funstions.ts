@@ -74,3 +74,9 @@ function descendingComparator(a: any, b: any) {
 
 export const comparator = (a: any, b: any, order: Order): number =>
     order === 'desc' ? descendingComparator(a, b) : -descendingComparator(a, b);
+
+export const removeProperty = (object: object, property: string): object => {
+    // @ts-ignore
+    const {[property]: toRemove, ...restOfObject} = object;
+    return restOfObject;
+};

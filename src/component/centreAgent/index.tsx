@@ -1,5 +1,5 @@
 import {MainApplicationType, Role} from '../../utils/types';
-import {CentrePaths, FORM_TABLE, FORMS} from './paths';
+import {CentrePaths, FORM_RECORD_DETAIL, FORM_TABLE, FORMS} from './paths';
 import HomeIcon from '@material-ui/icons/Home';
 import React from 'react';
 import CentreHome from './CentreFormsList';
@@ -17,6 +17,11 @@ const centre: MainApplicationType<CentrePaths> = {
         {
             path: FORM_TABLE(':id'),
             component: <CentreFormTable />,
+            hideInDrawer: true,
+        },
+        {
+            path: FORM_RECORD_DETAIL(':id'),
+            component: <div>loft</div>,
             hideInDrawer: true,
         },
     ],

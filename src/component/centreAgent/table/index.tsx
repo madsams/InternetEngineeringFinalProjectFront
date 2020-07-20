@@ -13,21 +13,25 @@ import ITableHeader from './ITableHeader';
 import {
     FormAnswersRecordValues,
     FormTable,
+    ID,
     Order,
     StringCreatorsJson2,
     StringsJson,
 } from '../../../utils/types';
 import ITypography from '../../utils/ITypography';
-import {comparator} from '../../../utils/funstions';
+import {comparator, removeProperty} from '../../../utils/funstions';
 import {useFormat, useLanguage} from '../../../utils/hooks';
+import {Link} from 'react-router-dom';
+import {FORM_RECORD_DETAIL} from '../paths';
 
 interface ITableProps {
     data: FormTable;
 }
 
-interface TableRow extends FormAnswersRecordValues {
+interface TableRowType extends FormAnswersRecordValues {
     createdAt: string;
     '#': number;
+    id: ID;
 }
 
 const strings: StringsJson = {
@@ -62,8 +66,9 @@ const ITable = ({data}: ITableProps) => {
     const [rowsPerPage, setRowsPerPage] = React.useState<number>(5);
     const [order, setOrder] = React.useState<Order>('asc');
     const [orderBy, setOrderBy] = React.useState<string>();
-    const [array, setArray] = React.useState<TableRow[]>(
+    const [array, setArray] = React.useState<TableRowType[]>(
         data.records.map((v, index) => ({
+            id: v.answerId,
             '#': index,
             ...v.values,
             createdAt: formatMoment(v.createdAt),
@@ -81,7 +86,7 @@ const ITable = ({data}: ITableProps) => {
     useEffect(() => {
         setArray((prevState) => {
             const sortableArray = prevState.map(
-                (e, i) => [e, i] as [TableRow, number],
+                (e, i) => [e, i] as [TableRowType, number],
             );
             sortableArray.sort((a, b) => {
                 if (!orderBy) return 0;
@@ -109,7 +114,7 @@ const ITable = ({data}: ITableProps) => {
             <TableContainer>
                 <Table>
                     <ITableHeader
-                        heads={Object.keys(array[0])}
+                        heads={Object.keys(array[0]).filter((i) => i !== 'id')}
                         orderBy={orderBy}
                         order={order}
                         onRequestSort={handleRequestSort}
@@ -121,8 +126,14 @@ const ITable = ({data}: ITableProps) => {
                                 page * rowsPerPage + rowsPerPage,
                             )
                             .map((row, index) => (
-                                <TableRow hover key={'r' + index}>
-                                    {Object.values(row).map((cell, index) => (
+                                <TableRow
+                                    hover
+                                    key={'r' + index}
+                                    component={Link}
+                                    to={FORM_RECORD_DETAIL(row.id)}>
+                                    {Object.values(
+                                        removeProperty(row, 'id'),
+                                    ).map((cell, index) => (
                                         <TableCell
                                             align="right"
                                             key={'c' + index}>
@@ -143,6 +154,7 @@ const ITable = ({data}: ITableProps) => {
                             </TableCell>
                             {Object.keys(array[0])
                                 .filter((i) => i !== '#')
+                                .filter((i) => i !== 'id')
                                 .map((key, index) => (
                                     <TableCell align="right" key={'s' + index}>
                                         {data.sum[key] || '_'}
