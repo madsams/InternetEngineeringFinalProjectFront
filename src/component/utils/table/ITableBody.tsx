@@ -21,6 +21,7 @@ const ITableBody = <A extends IObject>({
                     hover
                     key={'r' + index}
                     component={Link}
+                    className="text-decoration-none"
                     to={getPath(row.id)}>
                     {getValues(row).map((cell, index) => (
                         <TableCell align="right" key={'c' + index}>
