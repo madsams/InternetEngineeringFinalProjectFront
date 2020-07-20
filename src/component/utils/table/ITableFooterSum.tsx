@@ -1,5 +1,5 @@
 import {TableCell, TableFooter, TableRow} from '@material-ui/core';
-import ITypography from '../../utils/ITypography';
+import ITypography from '../ITypography';
 import React from 'react';
 import {StringsJson} from '../../../utils/types';
 
