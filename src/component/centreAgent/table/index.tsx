@@ -5,7 +5,6 @@ import {
     TableBody,
     TableCell,
     TableContainer,
-    TableFooter,
     TableRow,
 } from '@material-ui/core';
 import ITableHeader from './ITableHeader';
@@ -16,12 +15,12 @@ import {
     Order,
     StringsJson,
 } from '../../../utils/types';
-import ITypography from '../../utils/ITypography';
 import {comparator, removeProperty} from '../../../utils/funstions';
 import {useFormat} from '../../../utils/hooks';
 import {Link} from 'react-router-dom';
 import {FORM_RECORD_DETAIL} from '../paths';
 import ITablePagination from './ITablePagination';
+import ITableFooterSum from './ITableFooterSum';
 
 interface ITableProps {
     data: FormTable;
@@ -34,10 +33,6 @@ interface TableRowType extends FormAnswersRecordValues {
 }
 
 const strings: StringsJson = {
-    sum: {
-        en: 'Sum',
-        fa: 'مجموع',
-    },
     momentFormat: {
         en: 'YYYY-MM-DD (hh:mm)',
         fa: '(hh:mm) jYYYY/jMM/jDD',
@@ -127,25 +122,10 @@ const ITable = ({data}: ITableProps) => {
                                 </TableRow>
                             ))}
                     </TableBody>
-                    <TableFooter>
-                        <TableRow>
-                            <TableCell align="right">
-                                <ITypography
-                                    align="right"
-                                    text={strings.sum}
-                                    variant="subtitle2"
-                                />
-                            </TableCell>
-                            {Object.keys(array[0])
-                                .filter((i) => i !== '#')
-                                .filter((i) => i !== 'id')
-                                .map((key, index) => (
-                                    <TableCell align="right" key={'s' + index}>
-                                        {data.sum[key] || '_'}
-                                    </TableCell>
-                                ))}
-                        </TableRow>
-                    </TableFooter>
+                    <ITableFooterSum
+                        keys={Object.keys(removeProperty(array[0], 'id', '#'))}
+                        sum={data.sum}
+                    />
                 </Table>
             </TableContainer>
             <ITablePagination
