@@ -1,12 +1,5 @@
 import React, {useEffect} from 'react';
-import {
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableRow,
-} from '@material-ui/core';
+import {Paper, Table, TableContainer} from '@material-ui/core';
 import ITableHeader from './ITableHeader';
 import {
     FormAnswersRecordValues,
@@ -17,10 +10,10 @@ import {
 } from '../../../utils/types';
 import {comparator, removeProperty} from '../../../utils/funstions';
 import {useFormat} from '../../../utils/hooks';
-import {Link} from 'react-router-dom';
 import {FORM_RECORD_DETAIL} from '../paths';
 import ITablePagination from './ITablePagination';
 import ITableFooterSum from './ITableFooterSum';
+import ITableBody from './ITableBody';
 
 interface ITableProps {
     data: FormTable;
@@ -88,40 +81,26 @@ const ITable = ({data}: ITableProps) => {
         setPage(0);
     };
 
+    const getTableBodyValues = (row: TableRowType) =>
+        Object.values(removeProperty(row, 'id'));
     return (
         <Paper>
             <TableContainer>
                 <Table>
                     <ITableHeader
-                        heads={Object.keys(array[0]).filter((i) => i !== 'id')}
+                        heads={Object.keys(removeProperty(array[0], 'id'))}
                         orderBy={orderBy}
                         order={order}
                         onRequestSort={handleRequestSort}
                     />
-                    <TableBody>
-                        {array
-                            .slice(
-                                page * rowsPerPage,
-                                page * rowsPerPage + rowsPerPage,
-                            )
-                            .map((row, index) => (
-                                <TableRow
-                                    hover
-                                    key={'r' + index}
-                                    component={Link}
-                                    to={FORM_RECORD_DETAIL(row.id)}>
-                                    {Object.values(
-                                        removeProperty(row, 'id'),
-                                    ).map((cell, index) => (
-                                        <TableCell
-                                            align="right"
-                                            key={'c' + index}>
-                                            {cell}
-                                        </TableCell>
-                                    ))}
-                                </TableRow>
-                            ))}
-                    </TableBody>
+                    <ITableBody
+                        array={array.slice(
+                            page * rowsPerPage,
+                            page * rowsPerPage + rowsPerPage,
+                        )}
+                        getValues={getTableBodyValues}
+                        getPath={FORM_RECORD_DETAIL}
+                    />
                     <ITableFooterSum
                         keys={Object.keys(removeProperty(array[0], 'id', '#'))}
                         sum={data.sum}
