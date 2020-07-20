@@ -39,8 +39,8 @@ export type LangBaseJson<D = string> = {
     [language in Language]: D;
 };
 
-export type LangBaseJsonCreator<D = string> = (
-    text: LangBaseJson,
+export type LangBaseJsonCreator<D = string, P = LangBaseJson<D>> = (
+    text: P,
 ) => {
     [language in Language]: D;
 };
@@ -49,8 +49,8 @@ export type StringsJson = {
     [key: string]: LangBaseJson;
 };
 
-export type StringCreatorsJson = {
-    [key: string]: LangBaseJsonCreator;
+export type StringCreatorsJson<D = string, P = LangBaseJson<D>> = {
+    [key: string]: LangBaseJsonCreator<D, P>;
 };
 
 export type LangBaseJsonCreator2 = (param: any) => string;
