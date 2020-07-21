@@ -12,14 +12,14 @@ import {
 
 export const getForms = createGetRequestSimpleActions<Form>(
     CENTRE_GET_ALL_FORMS,
-    api.forms,
+    api.formsList,
 );
 
 export const getFormTable = createGetRequestWithIdActions<FormTable>(
     CENTRE_GET_FORM_TABLE,
-    api.forms,
+    api.answerOfForm,
 );
 
 export const getSelectedFormAnswerDetail = createGetRequestWithIdActions<
     FormAnswer
->(CENTRE_GET_FORM_ANSWER_DETAIL, api.formAnswers);
+>(CENTRE_GET_FORM_ANSWER_DETAIL, api.answerDetail);

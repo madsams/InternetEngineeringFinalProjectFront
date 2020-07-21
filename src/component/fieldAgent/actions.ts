@@ -26,7 +26,7 @@ import {
 export const getPolygonOfLocation = createGetRequestWithParamsActions<
     PolygonsOfLocation[],
     Location
->(FIELD_GET_POLYGON_OF_LOCATION, api.polygon);
+>(FIELD_GET_POLYGON_OF_LOCATION, api.areaTestPoint);
 export const resetPolygonOfLocation = (): IDataAction<PolygonsOfLocation> => ({
     type: FIELD_GET_POLYGON_OF_LOCATION + _SUCCESS,
     payload: [],
@@ -34,24 +34,24 @@ export const resetPolygonOfLocation = (): IDataAction<PolygonsOfLocation> => ({
 
 export const submitForm = createPostRequestWithIdActions<FormValues>(
     SUBMIT_FORM,
-    api.formAnswers,
+    api.answerDetail,
 );
 
 export const getForms = createGetRequestSimpleActions<Form>(
     FIELD_GET_ALL_FORMS,
-    api.forms,
+    api.formsList,
 );
 
 export const getFormAnswers = createGetRequestSimpleActions<FormAnswer>(
     FIELD_GET_FORM_ANSWERS,
-    api.formAnswers,
+    api.answersList,
 );
 
 export const getSelectedFormDetail = createGetRequestWithIdActions<Form>(
     FIELD_GET_FORM_DETAIL,
-    api.forms,
+    api.formDetail,
 );
 
 export const getSelectedFormAnswerDetail = createGetRequestWithIdActions<
     FormAnswer
->(FIELD_GET_FORM_ANSWER_DETAIL, api.formAnswers);
+>(FIELD_GET_FORM_ANSWER_DETAIL, api.formDetail);

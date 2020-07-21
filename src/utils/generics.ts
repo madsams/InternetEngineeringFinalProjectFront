@@ -9,7 +9,7 @@ import {
 } from './types';
 import {Action, Reducer} from 'redux';
 import request, {RequestOptionType, RequestResponse} from './effects/request';
-import API from './api';
+import {IdApi, SimpleApi} from './api';
 
 // ----------------- Reducers ----------------
 
@@ -105,7 +105,7 @@ type GetRequestActionsType<P extends object | undefined> = (
 
 const createGetRequestActions = <SD, P extends object | undefined>(
     actionType: string,
-    url: API,
+    url: SimpleApi | IdApi,
     getData = (data: any) => data,
 ): GetRequestActionsType<P> => {
     const PENDING = actionType + _PENDING;
@@ -132,6 +132,7 @@ const createGetRequestActions = <SD, P extends object | undefined>(
     });
 
     return (id, params, callback): IThunkAction => (dispatch) => {
+        if (typeof url !== 'string') url = url(id as ID);
         const requestOption: RequestOptionType = {
             url,
             params,
@@ -151,7 +152,7 @@ const createGetRequestActions = <SD, P extends object | undefined>(
 
 export const createGetRequestSimpleActions = <SD>(
     actionType: string,
-    url: API,
+    url: SimpleApi,
     getData?: (data: any) => SD,
 ): GetRequestSimpleAction => (callback) =>
     createGetRequestActions<SD, undefined>(actionType, url, getData)(
@@ -161,7 +162,7 @@ export const createGetRequestSimpleActions = <SD>(
     );
 export const createGetRequestWithParamsActions = <SD, P extends object>(
     actionType: string,
-    url: API,
+    url: SimpleApi,
     getData?: (data: any) => SD,
 ): GetRequestWithParamsAction<P> => (params, callback) =>
     createGetRequestActions<SD, P>(actionType, url, getData)(
@@ -171,7 +172,7 @@ export const createGetRequestWithParamsActions = <SD, P extends object>(
     );
 export const createGetRequestWithIdActions = <SD>(
     actionType: string,
-    url: API,
+    url: IdApi,
     getData?: (data: any) => SD,
 ): GetRequestWithIdAction => (id, callback) =>
     createGetRequestActions<SD, undefined>(actionType, url, getData)(
@@ -182,7 +183,7 @@ export const createGetRequestWithIdActions = <SD>(
 
 export const GetRequestWithIdAndParamsAction = <SD, P extends object>(
     actionType: string,
-    url: API,
+    url: IdApi,
     getData?: (data: any) => SD,
 ): GetRequestWithIdAndParamsAction<P> => (id, params, callback) =>
     createGetRequestActions<SD, P>(actionType, url, getData)(
@@ -202,7 +203,7 @@ type PostRequestAction<D> = (
 
 export const createPostRequestWithIdActions = <D>(
     actionType: string,
-    url: API,
+    url: IdApi,
 ): PostRequestAction<D> => {
     const PENDING = actionType + _PENDING;
     const SUCCESS = actionType + _SUCCESS;
@@ -228,7 +229,7 @@ export const createPostRequestWithIdActions = <D>(
         dispatch(
             request({
                 data,
-                url: url + '/' + id,
+                url: url(id),
                 method: 'POST',
                 callback,
                 resolve,

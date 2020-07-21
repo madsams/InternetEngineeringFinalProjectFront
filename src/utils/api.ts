@@ -1,8 +1,24 @@
-enum api {
-    forms = '/api/forms',
-    formAnswers = '/api/form-answers',
-    polygon = '/api/areas/testpoint',
-    login = '/api/login',
-}
+import {ID} from './types';
+
+export type SimpleApi = string;
+export type IdApi = (id: ID) => string;
+
+const formsList: SimpleApi = '/api/forms';
+const formDetail: IdApi = (id: ID) => `/api/forms/${id}`;
+const answersList: SimpleApi = '/api/form-answers';
+const answerDetail: IdApi = (id: ID) => `/api/form-answers/${id}`;
+const answerOfForm: IdApi = (id: ID) => '/api/forms/' + id + '/form-answers';
+const areaTestPoint: SimpleApi = '/api/areas/testpoint';
+const login: SimpleApi = '/api/login';
+
+const api = {
+    formsList,
+    formDetail,
+    answersList,
+    answerDetail,
+    answerOfForm,
+    areaTestPoint,
+    login,
+};
 
 export default api;
