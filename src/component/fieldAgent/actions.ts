@@ -1,4 +1,11 @@
-import {_SUCCESS, Form, FormAnswer, IDataAction, Location, PolygonsOfLocation,} from '../../utils/types';
+import {
+    _SUCCESS,
+    Form,
+    FormAnswer,
+    IDataAction,
+    Location,
+    PolygonsOfLocation,
+} from '../../utils/types';
 import api from '../../utils/api';
 import {
     createGetRequestSimpleActions,
