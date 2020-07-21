@@ -92,6 +92,7 @@ const ITableContainer = <D extends Data>({
                 <ITableFooterSum
                     keys={Object.keys(removeProperty(array[0], 'id', '#'))}
                     sum={sum}
+                    isCollapsible={!!renderCollapsible}
                 />
             </Table>
             <ITablePagination
