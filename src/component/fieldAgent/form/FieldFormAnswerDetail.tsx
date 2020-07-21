@@ -1,6 +1,6 @@
 import React from 'react';
 import {FormAnswer} from '../../../utils/types';
-import withForm, {WithFormProps} from './withForm';
+import withForm, {WithFormProps} from '../../utils/withForm';
 import {getSelectedFormAnswerDetail} from '../actions';
 import FormInput from '../../utils/input';
 

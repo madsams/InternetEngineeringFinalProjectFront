@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Field, Form, LangBaseJson, StringsJson} from '../../../utils/types';
-import withForm, {WithFormProps} from './withForm';
+import withForm, {WithFormProps} from '../../utils/withForm';
 import {InputValues} from '../../utils/input/types';
 import FormInput from '../../utils/input';
 import {FormValues} from '../types';

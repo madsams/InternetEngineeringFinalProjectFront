@@ -1,12 +1,12 @@
-import {FormType, ID, IThunkAction, StringsJson} from '../../../utils/types';
+import {FormType, ID, IThunkAction, StringsJson} from '../../utils/types';
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '../../../store';
-import {DataRequestReducer} from '../../../utils/generics';
+import {RootState} from '../../store';
+import {DataRequestReducer} from '../../utils/generics';
 import {useParams} from 'react-router';
 import {Typography} from '@material-ui/core';
-import ILoadingChecker from '../../utils/ILoadingChecker';
-import NotMatch from '../../utils/NotMatch';
+import ILoadingChecker from './ILoadingChecker';
+import NotMatch from './NotMatch';
 
 const strings: StringsJson = {
     formNotFoundPrefix: {
