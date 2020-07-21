@@ -1,15 +1,7 @@
-import {
-    _ERROR,
-    _PENDING,
-    _SUCCESS,
-    ID,
-    IDataAction,
-    ISimpleAction,
-    IThunkAction,
-} from './types';
+import {_ERROR, _PENDING, _SUCCESS, ID, IDataAction, ISimpleAction, IThunkAction,} from './types';
 import {Action, Reducer} from 'redux';
 import request, {RequestOptionType, RequestResponse} from './effects/request';
-import API from './API';
+import API from './api';
 
 // ----------------- Reducers ----------------
 

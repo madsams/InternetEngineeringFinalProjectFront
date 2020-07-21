@@ -1,12 +1,5 @@
-import {
-    _SUCCESS,
-    Form,
-    FormAnswer,
-    IDataAction,
-    Location,
-    PolygonsOfLocation,
-} from '../../utils/types';
-import api from '../../utils/API';
+import {_SUCCESS, Form, FormAnswer, IDataAction, Location, PolygonsOfLocation,} from '../../utils/types';
+import api from '../../utils/api';
 import {
     createGetRequestSimpleActions,
     createGetRequestWithIdActions,
@@ -14,12 +7,12 @@ import {
     createPostRequestWithIdActions,
 } from '../../utils/generics';
 import {
-    FormValues,
     FIELD_GET_ALL_FORMS,
     FIELD_GET_FORM_ANSWER_DETAIL,
     FIELD_GET_FORM_ANSWERS,
     FIELD_GET_FORM_DETAIL,
     FIELD_GET_POLYGON_OF_LOCATION,
+    FormValues,
     SUBMIT_FORM,
 } from './types';
 
