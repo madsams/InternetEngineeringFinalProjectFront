@@ -1,34 +1,30 @@
-import {TableBody, TableCell, TableRow} from '@material-ui/core';
-import {Link} from 'react-router-dom';
+import {TableBody} from '@material-ui/core';
 import React from 'react';
+import ITableRow from './ITableRow';
+import {CollapsibleProps} from './types';
 
 interface ITableBodyProps<A> {
     array: A[];
     getValues: (row: A) => string[];
-    getPath: (id: string) => string;
+    renderCollapsible?: React.ComponentType<CollapsibleProps<A>>;
 }
 
 type IObject = {[k: string]: any};
+
 const ITableBody = <A extends IObject>({
     array,
     getValues,
-    getPath,
+    renderCollapsible,
 }: ITableBodyProps<A>) => {
     return (
         <TableBody>
             {array.map((row, index) => (
-                <TableRow
-                    hover
+                <ITableRow
+                    row={row}
                     key={'r' + index}
-                    component={Link}
-                    className="text-decoration-none"
-                    to={getPath(row.id)}>
-                    {getValues(row).map((cell, index) => (
-                        <TableCell align="right" key={'c' + index}>
-                            {cell}
-                        </TableCell>
-                    ))}
-                </TableRow>
+                    renderCollapsible={renderCollapsible}
+                    getValues={getValues}
+                />
             ))}
         </TableBody>
     );

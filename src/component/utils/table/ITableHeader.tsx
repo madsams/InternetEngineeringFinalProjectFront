@@ -12,6 +12,7 @@ interface ITableHeaderProps {
     orderBy: string | undefined;
     order: Order;
     onRequestSort: (event: React.MouseEvent<unknown>, property: string) => void;
+    isCollapsible?: boolean;
 }
 
 const ITableHeader = ({
@@ -19,6 +20,7 @@ const ITableHeader = ({
     orderBy,
     order,
     onRequestSort,
+    isCollapsible,
 }: ITableHeaderProps) => {
     const createSortHandler = (property: string) => (
         event: React.MouseEvent<unknown>,
@@ -28,6 +30,7 @@ const ITableHeader = ({
     return (
         <TableHead>
             <TableRow>
+                {isCollapsible && <TableCell />}
                 {heads.map((head) => (
                     <TableCell
                         key={'h' + head}

@@ -6,6 +6,7 @@ import ITableFooterSum from './ITableFooterSum';
 import ITablePagination from './ITablePagination';
 import React, {useEffect} from 'react';
 import {ID, Order} from '../../../utils/types';
+import {CollapsibleProps} from './types';
 
 interface Data {
     id: ID;
@@ -18,13 +19,13 @@ interface ITableContainerProps<D extends Data> {
     sum: {
         [key: string]: number | undefined;
     };
-    getPath: (id: string) => string;
+    renderCollapsible?: React.ComponentType<CollapsibleProps<D>>;
 }
 
 const ITableContainer = <D extends Data>({
     data,
     sum,
-    getPath,
+    renderCollapsible,
 }: ITableContainerProps<D>) => {
     const [page, setPage] = React.useState<number>(0);
     const [rowsPerPage, setRowsPerPage] = React.useState<number>(5);
@@ -78,6 +79,7 @@ const ITableContainer = <D extends Data>({
                     orderBy={orderBy}
                     order={order}
                     onRequestSort={handleRequestSort}
+                    isCollapsible={!!renderCollapsible}
                 />
                 <ITableBody
                     array={array.slice(
@@ -85,7 +87,7 @@ const ITableContainer = <D extends Data>({
                         page * rowsPerPage + rowsPerPage,
                     )}
                     getValues={getTableBodyValues}
-                    getPath={getPath}
+                    renderCollapsible={renderCollapsible}
                 />
                 <ITableFooterSum
                     keys={Object.keys(removeProperty(array[0], 'id', '#'))}

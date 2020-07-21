@@ -8,6 +8,7 @@ interface ITableFooterSumProps {
     sum: {
         [key: string]: number | undefined;
     };
+    isCollapsible?: boolean;
 }
 const strings: StringsJson = {
     sum: {
@@ -16,10 +17,11 @@ const strings: StringsJson = {
     },
 };
 
-const ITableFooterSum = ({keys, sum}: ITableFooterSumProps) => {
+const ITableFooterSum = ({keys, sum, isCollapsible}: ITableFooterSumProps) => {
     return (
         <TableFooter>
             <TableRow>
+                {isCollapsible && <TableCell />}
                 <TableCell align="right">
                     <ITypography
                         align="right"

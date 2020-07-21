@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import {Paper} from '@material-ui/core';
 import {FormTable, StringCreatorsJson, StringsJson} from '../../utils/types';
 import {useFormat} from '../../utils/hooks';
-import {FORM_RECORD_DETAIL} from './paths';
 import ITableContainer from '../utils/table';
 import IFailedChecker from '../utils/IFailedChecker';
 import {getFormTable} from './actions';
@@ -72,7 +71,9 @@ const CentreFormTable = () => {
                                 createdAt: formatMoment(v.createdAt),
                             }))}
                             sum={data.sum}
-                            getPath={FORM_RECORD_DETAIL}
+                            renderCollapsible={({row}) => (
+                                <div>{row.createdAt}</div>
+                            )}
                         />
                     </IFailedChecker>
                 </ILoadingChecker>
