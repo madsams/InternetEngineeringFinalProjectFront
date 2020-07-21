@@ -4,6 +4,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import React from 'react';
 import CentreHome from './CentreFormsList';
 import CentreFormTable from './CentreFormTable';
+import CentreFormAnswerDetail from './CentreFormAnswerDetail';
 
 const centre: MainApplicationType<CentrePaths> = {
     role: Role.centreAgent,
@@ -21,7 +22,7 @@ const centre: MainApplicationType<CentrePaths> = {
         },
         {
             path: FORM_RECORD_DETAIL(':id'),
-            component: <div>loft</div>,
+            component: <CentreFormAnswerDetail />,
             hideInDrawer: true,
         },
     ],

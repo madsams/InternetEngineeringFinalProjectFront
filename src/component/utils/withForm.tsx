@@ -51,7 +51,7 @@ const withForm = <F extends FormType>(
                     <Component form={form} />
                 </>
             ) : (
-                <NotMatch prefix={strings.prefix} />
+                <NotMatch prefix={strings.formNotFoundPrefix} />
             )}
         </ILoadingChecker>
     );

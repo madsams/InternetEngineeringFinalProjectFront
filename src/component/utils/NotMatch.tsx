@@ -14,11 +14,11 @@ const strings: StringsJson = {
 
 const stringCreators: StringCreatorsJson = {
     text: (text: LangBaseJson) => ({
-        en: text.en + 'This page is not exist',
-        fa: text.fa + ' مورد نظر شما یافت نشد',
+        en: `This ${text.en} is not exist`,
+        fa: `${text.fa} مورد نظر شما یافت نشد`,
     }),
 };
-const NotMatch = ({prefix = {en: 'صفحه', fa: 'page'}}: NotMatchProps) => (
+const NotMatch = ({prefix = {en: 'page', fa: 'صفحه'}}: NotMatchProps) => (
     <div className="d-flex flex-column flex-1 align-items-center justify-content-center h-100">
         <ITypography
             text={strings.code}

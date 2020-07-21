@@ -1,7 +1,11 @@
 import {combineReducers} from 'redux';
 import {createDataRequestReducer} from '../../utils/generics';
-import {FieldTypes, Form, FormTable} from '../../utils/types';
-import {CENTRE_GET_ALL_FORMS, CENTRE_GET_FORM_TABLE} from './types';
+import {FieldTypes, Form, FormAnswer, FormTable} from '../../utils/types';
+import {
+    CENTRE_GET_ALL_FORMS,
+    CENTRE_GET_FORM_ANSWER_DETAIL,
+    CENTRE_GET_FORM_TABLE,
+} from './types';
 
 const formsReducer = createDataRequestReducer<Form[]>(CENTRE_GET_ALL_FORMS, []);
 
@@ -332,8 +336,13 @@ const formTableReducer = createDataRequestReducer<FormTable>(
     mockTable,
 );
 
+const formAnswerDetailReducer = createDataRequestReducer<
+    FormAnswer | undefined
+>(CENTRE_GET_FORM_ANSWER_DETAIL, undefined, true);
+
 const centreReducer = combineReducers({
     forms: formsReducer,
     formTable: formTableReducer,
+    formAnswerDetail: formAnswerDetailReducer,
 });
 export default centreReducer;
