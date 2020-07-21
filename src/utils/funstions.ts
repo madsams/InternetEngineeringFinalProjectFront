@@ -18,7 +18,7 @@ const _setLanguageToTimeAgo = (locales: LangBaseJson<Locale>) =>
 
 const _formatTimeAgo = (language: string, time: number | Date): string => {
     _setLanguageToTimeAgo({fa, en});
-    return new TimeAgo(language).format(time);
+    return new TimeAgo(language).format(new Date(time));
 };
 export const formatTimeAgo = (time: Date): LangBaseJson => ({
     en: _formatTimeAgo('en-US', time),
