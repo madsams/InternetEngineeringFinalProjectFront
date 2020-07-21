@@ -17,6 +17,8 @@ export type IActionCreator<ReturnType = ISimpleAction> = (
     ...args: any
 ) => ReturnType;
 
+export type IObject = {[k: string]: any};
+
 export type Order = 'asc' | 'desc';
 
 export interface IDataAction<D> extends ISimpleAction {

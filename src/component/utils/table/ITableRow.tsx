@@ -4,6 +4,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import {CollapsibleProps} from './types';
+import {IObject} from '../../../utils/types';
 
 const useStyles = makeStyles({
     root: {
@@ -19,7 +20,7 @@ interface ITableRowProps<A> {
     renderCollapsible?: React.ComponentType<CollapsibleProps<A>>;
 }
 
-const ITableRow = <A extends object>({
+const ITableRow = <A extends IObject>({
     row,
     renderCollapsible: Collapsible,
     getValues,
