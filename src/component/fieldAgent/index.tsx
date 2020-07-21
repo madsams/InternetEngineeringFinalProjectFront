@@ -4,8 +4,8 @@ import HomeIcon from '@material-ui/icons/Home';
 import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 import FieldFormsList from './FieldFormsList';
 import FieldFormAnswersList from './FieldFormAnswersList';
-import FieldFormDetail from './form/FieldFormDetail';
-import FieldFormAnswerDetail from './form/FieldFormAnswerDetail';
+import FieldFormDetail from './FieldFormDetail';
+import FieldFormAnswerDetail from './FieldFormAnswerDetail';
 import {
     FieldAgentPaths,
     FORM_ANSWERS,

@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
-import {Field, Form, LangBaseJson, StringsJson} from '../../../utils/types';
-import withForm, {WithFormProps} from '../../utils/withForm';
-import {InputValues} from '../../utils/input/types';
-import FormInput from '../../utils/input';
-import {FormValues} from '../types';
+import {Field, Form, LangBaseJson, StringsJson} from '../../utils/types';
+import withForm, {WithFormProps} from '../utils/withForm';
+import {InputValues} from '../utils/input/types';
+import FormInput from '../utils/input';
+import {FormValues} from './types';
 import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '../../../store';
-import {getSelectedFormDetail, submitForm} from '../actions';
-import IButton from '../../utils/IButton';
+import {RootState} from '../../store';
+import {getSelectedFormDetail, submitForm} from './actions';
+import IButton from '../utils/IButton';
 import {useHistory} from 'react-router-dom';
-import {FORM_ANSWERS} from '../paths';
+import {FORM_ANSWERS} from './paths';
 
 type Errors = {
     [key: string]: LangBaseJson | null;

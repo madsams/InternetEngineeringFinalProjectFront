@@ -1,8 +1,8 @@
 import React from 'react';
-import {FormAnswer} from '../../../utils/types';
-import withForm, {WithFormProps} from '../../utils/withForm';
-import {getSelectedFormAnswerDetail} from '../actions';
-import FormInput from '../../utils/input';
+import {FormAnswer} from '../../utils/types';
+import withForm, {WithFormProps} from '../utils/withForm';
+import {getSelectedFormAnswerDetail} from './actions';
+import FormInput from '../utils/input';
 
 const emptyFunc = () => {};
 const FieldFormAnswerDetail = ({form: {fields}}: WithFormProps<FormAnswer>) => (
