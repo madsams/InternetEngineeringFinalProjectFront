@@ -1,10 +1,8 @@
-import {InputValues} from './form/input/types';
+import {InputValues} from '../utils/input/types';
 
 export type FormValues = {
     [key: string]: InputValues;
 };
-
-export type PolygonsOfLocation = string[];
 
 export const FIELD_GET_ALL_FORMS = 'FIELD_GET_ALL_FORMS';
 export const FIELD_GET_FORM_DETAIL = 'FIELD_GET_FORM';

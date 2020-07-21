@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {Field, Form, LangBaseJson, StringsJson} from '../../../utils/types';
 import withForm, {WithFormProps} from './withForm';
-import {InputValues} from './input/types';
-import FormInput from './input';
+import {InputValues} from '../../utils/input/types';
+import FormInput from '../../utils/input';
 import {FormValues} from '../types';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../store';

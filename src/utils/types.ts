@@ -65,6 +65,8 @@ export enum Role {
     fieldAgent = 'field',
 }
 
+export type PolygonsOfLocation = string[];
+
 export interface DrawerItem<P extends Path> {
     title?: LangBaseJson;
     icon?: React.ReactNode;

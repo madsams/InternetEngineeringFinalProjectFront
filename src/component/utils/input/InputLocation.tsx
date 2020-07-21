@@ -1,12 +1,11 @@
 import React, {useEffect} from 'react';
 import {IInputProps} from './types';
-import {Location, StringsJson} from '../../../../utils/types';
+import {Location, PolygonsOfLocation, StringsJson} from '../../../utils/types';
 import {TextField} from '@material-ui/core';
 import MapModal from './MapModal';
 import {useSelector} from 'react-redux';
-import {RootState} from '../../../../store';
-import {PolygonsOfLocation} from '../../types';
-import {useLanguageSelector} from '../../../../utils/hooks';
+import {RootState} from '../../../store';
+import {useLanguageSelector} from '../../../utils/hooks';
 
 interface InputLocationProps extends IInputProps {
     value: Location | null;

@@ -1,6 +1,6 @@
 import React from 'react';
 import {IInputProps} from './types';
-import {Option} from '../../../../utils/types';
+import {Option} from '../../../utils/types';
 import {FormControl, InputLabel, MenuItem, Select} from '@material-ui/core';
 
 interface InputSelectProps extends IInputProps {

@@ -1,4 +1,4 @@
-import {Field, Location, Option} from '../../../../utils/types';
+import {Field, Location, Option} from '../../../utils/types';
 
 export type InputValues = string | number | Location | Date | Option | null;
 

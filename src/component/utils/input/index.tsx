@@ -1,6 +1,6 @@
 import React from 'react';
 import IError from './IError';
-import {LangBaseJson} from '../../../../utils/types';
+import {LangBaseJson} from '../../../utils/types';
 import {IInputProps} from './types';
 import IInput from './IInput';
 

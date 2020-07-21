@@ -1,13 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import GoogleMapReact from 'google-map-react';
 import {createStyles, Modal, Theme} from '@material-ui/core';
-import {LangBaseJson, Location, StringsJson} from '../../../../utils/types';
-import IButton from '../../../utils/IButton';
+import {LangBaseJson, Location, StringsJson} from '../../../utils/types';
+import IButton from '../IButton';
 import IError from './IError';
 import {makeStyles} from '@material-ui/core/styles';
 import {useDispatch, useSelector} from 'react-redux';
-import {getPolygonOfLocation, resetPolygonOfLocation} from '../../actions';
-import {RootState} from '../../../../store';
+import {
+    getPolygonOfLocation,
+    resetPolygonOfLocation,
+} from '../../fieldAgent/actions';
+import {RootState} from '../../../store';
 
 interface MapModalProps {
     open: boolean;

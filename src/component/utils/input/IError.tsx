@@ -1,6 +1,6 @@
 import React from 'react';
-import {LangBaseJson} from '../../../../utils/types';
-import ITypography from '../../../utils/ITypography';
+import {LangBaseJson} from '../../../utils/types';
+import ITypography from '../ITypography';
 
 interface IErrorProps {
     error: LangBaseJson | null;

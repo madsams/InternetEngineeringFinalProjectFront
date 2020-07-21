@@ -1,6 +1,6 @@
 import React from 'react';
 import {IInputProps} from './types';
-import {FieldTypes, Location, Option} from '../../../../utils/types';
+import {FieldTypes, Location, Option} from '../../../utils/types';
 import InputSelect from './InputSelect';
 import InputDate from './InputDate';
 import InputLocation from './InputLocation';

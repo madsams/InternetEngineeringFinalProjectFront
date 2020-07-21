@@ -1,4 +1,4 @@
-import {Form, FormAnswer} from '../../utils/types';
+import {Form, FormAnswer, PolygonsOfLocation} from '../../utils/types';
 import {
     createDataRequestReducer,
     createRequestReducer,
@@ -10,7 +10,6 @@ import {
     FIELD_GET_FORM_ANSWERS,
     FIELD_GET_FORM_DETAIL,
     FIELD_GET_POLYGON_OF_LOCATION,
-    PolygonsOfLocation,
     SUBMIT_FORM,
 } from './types';
 

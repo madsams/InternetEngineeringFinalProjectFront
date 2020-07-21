@@ -4,6 +4,7 @@ import {
     FormAnswer,
     IDataAction,
     Location,
+    PolygonsOfLocation,
 } from '../../utils/types';
 import api from '../../utils/API';
 import {
@@ -19,7 +20,6 @@ import {
     FIELD_GET_FORM_ANSWERS,
     FIELD_GET_FORM_DETAIL,
     FIELD_GET_POLYGON_OF_LOCATION,
-    PolygonsOfLocation,
     SUBMIT_FORM,
 } from './types';
 

@@ -5,8 +5,8 @@ import JalaliUtils from '@date-io/jalaali';
 import MomentUtils from '@date-io/moment';
 import moment, {Moment} from 'moment';
 import jMoment from 'moment-jalaali';
-import {LangBaseJson} from '../../../../utils/types';
-import {useLanguage} from '../../../../utils/hooks';
+import {LangBaseJson} from '../../../utils/types';
+import {useLanguage} from '../../../utils/hooks';
 import TodayIcon from '@material-ui/icons/Today';
 
 interface InputDateProps extends IInputProps {
