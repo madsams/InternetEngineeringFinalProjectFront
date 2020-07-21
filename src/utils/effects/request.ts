@@ -147,8 +147,6 @@ const request = (requestOption: RequestOptionType): IThunkAction => async (
                     }
                 });
             }
-            console.log('errorCodeActioned', errorCodeActioned);
-            console.log('reject', reject);
             if (!errorCodeActioned) {
                 if (!reject) {
                     if (errorAction) dispatch(errorAction(failToastMessage));

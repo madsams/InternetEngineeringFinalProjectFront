@@ -144,7 +144,6 @@ const createGetRequestActions = <SD, P extends object | undefined>(
         };
 
         if (params) requestOption.params = params;
-        if (id) requestOption.url = url + '/' + id;
 
         dispatch(request(requestOption));
     };

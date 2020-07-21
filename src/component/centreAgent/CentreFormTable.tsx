@@ -44,7 +44,7 @@ const CentreFormTable = () => {
         (state) => state.centre.formTable.isFailed,
     );
     useEffect(() => {
-        // dispatch(getFormTable(id));
+        dispatch(getFormTable(id));
     }, [dispatch, id]);
     return (
         <>
@@ -60,7 +60,7 @@ const CentreFormTable = () => {
                 align="center"
             />
             <br />
-            <Paper>
+            <Paper className="p-2">
                 <ILoadingChecker isLoading={isLoading}>
                     <IFailedChecker
                         isFailed={isFailed}
