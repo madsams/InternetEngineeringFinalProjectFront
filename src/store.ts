@@ -5,6 +5,7 @@ import {languagesReducers, roleReducer, tokenReducer} from './utils/reducers';
 import {setStorage} from './utils/effects/storage';
 import fieldReducer from './component/fieldAgent/reducer';
 import centreReducer from './component/centreAgent/reducer';
+import {runInDevelopment} from './utils/funstions';
 
 const rootReducer = combineReducers({
     toastr: toastrReducer,
@@ -16,10 +17,11 @@ const rootReducer = combineReducers({
 });
 
 const middlewares = [thunk];
-if (process.env.NODE_ENV === `development`) {
+
+runInDevelopment(() => {
     const {logger} = require(`redux-logger`);
     middlewares.push(logger);
-}
+});
 
 const store = createStore(rootReducer, applyMiddleware(...middlewares));
 

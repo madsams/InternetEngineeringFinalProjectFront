@@ -87,3 +87,9 @@ export const removeProperty = (
     });
     return newObject;
 };
+
+export const runInDevelopment = (func: () => void) => {
+    if (process.env.NODE_ENV === `development`) {
+        func();
+    }
+};

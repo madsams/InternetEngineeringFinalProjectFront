@@ -1,6 +1,7 @@
 import Axios, {AxiosError, Method as AxiosMethods} from 'axios';
 import renderToast, {ToastTypes} from './renderToast';
 import {IActionCreator, IThunkAction, LangBaseJson} from '../types';
+import {runInDevelopment} from '../funstions';
 
 const instance = Axios.create({
     baseURL: process.env.REACT_APP_HOST,
@@ -13,19 +14,21 @@ const instance = Axios.create({
 });
 
 instance.interceptors.request.use(async (request) => {
-    console.log('>>>>>>>>>>>>', request);
+    runInDevelopment(() => console.log('>>>>>>>>>>>>', request));
     return Promise.resolve(request);
 });
 
 instance.interceptors.response.use(
     (response) => {
-        console.log('<<<<<<<<<<<', response);
+        runInDevelopment(() => console.log('<<<<<<<<<<<', response));
         return Promise.resolve(response);
     },
     async (error) => {
-        console.log(
-            '<<<<<<error<<<<<',
-            error.response ? {...error.response} : {...error},
+        runInDevelopment(() =>
+            console.log(
+                '<<<<<<error<<<<<',
+                error.response ? {...error.response} : {...error},
+            ),
         ); //cancel and network error have no response
         return Promise.reject(error);
     },
