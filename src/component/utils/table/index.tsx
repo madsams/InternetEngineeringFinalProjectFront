@@ -32,7 +32,7 @@ const ITableContainer = <D extends Data>({
     const [order, setOrder] = React.useState<Order>('asc');
     const [orderBy, setOrderBy] = React.useState<string>();
     const [array, setArray] = React.useState<D[]>(
-        data.map((value, index) => ({'#': index, ...value})),
+        data.map((value, index) => ({'#': index + 1, ...value})),
     );
 
     const handleRequestSort = (
