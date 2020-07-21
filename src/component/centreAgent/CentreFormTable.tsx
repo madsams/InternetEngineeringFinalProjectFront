@@ -10,11 +10,12 @@ import {useParams} from 'react-router';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store';
 import ITypography from '../utils/ITypography';
+import CentreTableCollapsible from './CentreTableCollapsible';
 
 const strings: StringsJson = {
     subtitle: {
         en: 'Click to see detail of the answer',
-        fa: 'برای دیدن جزییات پاسخ روی از سطر پاسخ‌ مورد نظر کلیک کنید',
+        fa: 'برای دیدن جزییات پاسخ روی سطر پاسخ‌ مورد نظر کلیک کنید',
     },
     momentFormat: {
         en: 'YYYY-MM-DD (hh:mm)',
@@ -71,9 +72,7 @@ const CentreFormTable = () => {
                                 createdAt: formatMoment(v.createdAt),
                             }))}
                             sum={data.sum}
-                            renderCollapsible={({row}) => (
-                                <div>{row.createdAt}</div>
-                            )}
+                            renderCollapsible={CentreTableCollapsible}
                         />
                     </IFailedChecker>
                 </ILoadingChecker>

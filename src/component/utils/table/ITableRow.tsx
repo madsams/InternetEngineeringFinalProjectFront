@@ -29,7 +29,10 @@ const ITableRow = <A extends IObject>({
     const [open, setOpen] = React.useState<boolean>(false);
     return (
         <React.Fragment>
-            <TableRow hover className={'text-decoration-none ' + classes.root}>
+            <TableRow
+                hover
+                onClick={() => setOpen(!open)}
+                className={'text-decoration-none ' + classes.root}>
                 {Collapsible && (
                     <TableCell>
                         <IconButton
