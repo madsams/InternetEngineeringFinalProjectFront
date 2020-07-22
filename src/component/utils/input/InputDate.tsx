@@ -1,6 +1,6 @@
 import React from 'react';
 import {IInputProps} from './types';
-import {DatePicker, MuiPickersUtilsProvider} from '@material-ui/pickers';
+import {DateTimePicker, MuiPickersUtilsProvider} from '@material-ui/pickers';
 import JalaliUtils from '@date-io/jalaali';
 import MomentUtils from '@date-io/moment';
 import moment, {Moment} from 'moment';
@@ -19,8 +19,8 @@ jMoment.loadPersian({dialect: 'persian-modern', usePersianDigits: true});
 moment.locale('en');
 
 const momentFormatsLBJ: LangBaseJson<string> = {
-    fa: 'jYYYY/jMM/jDD',
-    en: 'YYYY-MM-DD',
+    fa: 'jYYYY/jMM/jDD (hh:mm)',
+    en: 'YYYY-MM-DD (hh:mm)',
 };
 
 const utilsLBJ: LangBaseJson<any> = {
@@ -61,13 +61,14 @@ const InputDate = ({
             libInstance={libInstance}
             utils={util}
             locale={locale}>
-            <DatePicker
+            <DateTimePicker
                 disabled={disabled}
                 required={required}
                 clearable={true}
                 disableToolbar
                 variant="inline"
                 format={momentFormat}
+                ampm={false}
                 id={name}
                 label={title}
                 value={value ? moment(value) : null}
