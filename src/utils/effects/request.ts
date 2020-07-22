@@ -8,8 +8,7 @@ const instance = Axios.create({
     timeout: 7000,
     params: {},
     headers: {
-        Accept:
-            'application/json,text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,/;q=0.8,application/signed-exchange;v=b3;q=0.9',
+        Accept: 'application/json',
         'Content-Type': 'application/json',
     },
 });
@@ -66,6 +65,13 @@ export interface RequestOptionType {
     reject?(error?: AxiosError): void;
 }
 
+const unauthorizedError: ErrorCodesType = {
+    code: 403,
+    action: () => {
+        window.location.href = `${process.env.REACT_APP_HOST}/login`;
+    },
+};
+
 const request = (requestOption: RequestOptionType): IThunkAction => async (
     dispatch,
 ) => {
@@ -94,6 +100,7 @@ const request = (requestOption: RequestOptionType): IThunkAction => async (
     // Start loading
     if (pendingAction) dispatch(pendingAction());
 
+    const errorCodes2 = [unauthorizedError, ...errorCodes];
     try {
         // Calls "url" by "method" with "data" as body and "headers" and params
         const response = await instance.request<RequestResponse>({
@@ -136,7 +143,7 @@ const request = (requestOption: RequestOptionType): IThunkAction => async (
             if (!isCorsError) {
                 const code = error.response.status;
 
-                errorCodes.forEach((errorCode) => {
+                errorCodes2.forEach((errorCode) => {
                     if (code === errorCode.code && !errorCodeActioned) {
                         if (errorCode.toastMessage)
                             dispatch(

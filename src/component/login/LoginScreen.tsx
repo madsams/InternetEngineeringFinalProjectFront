@@ -1,9 +1,12 @@
 import React, {useEffect} from 'react';
 import IContainer from '../utils/IContainer';
 import ITypography from '../utils/ITypography';
-import {Role, StringsJson} from '../../utils/types';
-import {useDispatch} from 'react-redux';
-import {getRoles, login1} from './actions';
+import {StringsJson} from '../../utils/types';
+import {useDispatch, useSelector} from 'react-redux';
+import {getRoles} from './actions';
+import ILoadingChecker from '../utils/ILoadingChecker';
+import IFailedChecker from '../utils/IFailedChecker';
+import {RootState} from '../../store';
 
 const strings: StringsJson = {
     text: {
@@ -25,7 +28,7 @@ const strings: StringsJson = {
 };
 const LoginScreen = () => {
     const dispatch = useDispatch();
-    const handleCentreLogin = () => {
+    /*const handleCentreLogin = () => {
         dispatch(login1(Role.centreAgent));
     };
 
@@ -34,7 +37,14 @@ const LoginScreen = () => {
     };
     const handleLogin = () => {
         window.location.href = `${process.env.REACT_APP_HOST}/login`;
-    };
+    };*/
+
+    const isLoading = useSelector<RootState, boolean>(
+        (state) => state.login.rolesOfUser.isLoading,
+    );
+    const isFailed = useSelector<RootState, boolean>(
+        (state) => state.login.rolesOfUser.isFailed,
+    );
 
     useEffect(() => {
         dispatch(getRoles());
@@ -42,6 +52,11 @@ const LoginScreen = () => {
     return (
         <IContainer className="d-flex flex-column justify-content-center align-items-center">
             <ITypography text={strings.text} variant="h6" className="mb-4" />
+            <ILoadingChecker isLoading={isLoading}>
+                <IFailedChecker isFailed={isFailed} reloadAction={getRoles}>
+                    Logged iin
+                </IFailedChecker>
+            </ILoadingChecker>
             {/*
             <IButton
                 title={strings.buttonAsCentre}
