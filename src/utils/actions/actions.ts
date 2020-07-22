@@ -1,10 +1,8 @@
 import {
-    CHANGE_TOKEN,
     LanguageActionTypes,
     RoleActionTypes,
     SET_ROLE,
     SWITCH_LANGUAGE,
-    TokenActionTypes,
 } from './actionTypes';
 import {
     IThunkAction,
@@ -20,11 +18,6 @@ export const changeLanguage = (language: Language): LanguageActionTypes => ({
     payload: language,
 });
 
-const changeToken = (token: string): TokenActionTypes => ({
-    type: CHANGE_TOKEN,
-    payload: token,
-});
-
 const changeRole = (role: Role): RoleActionTypes => ({
     type: SET_ROLE,
     payload: role,
@@ -33,7 +26,6 @@ const changeRole = (role: Role): RoleActionTypes => ({
 export const loginAction = (token: string, role: Role): IThunkAction => (
     dispatch,
 ) => {
-    dispatch(changeToken(token));
     dispatch(changeRole(role));
 };
 
