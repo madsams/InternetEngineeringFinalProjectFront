@@ -1,22 +1,15 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {IInputProps} from './types';
-import {Location, PolygonsOfLocation, StringsJson} from '../../../utils/types';
+import {Location, PolygonsOfLocation} from '../../../utils/types';
 import {TextField} from '@material-ui/core';
 import MapModal from './MapModal';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../../store';
-import {useLanguageSelector} from '../../../utils/hooks';
+import {useJoin} from '../../../utils/hooks';
 
 interface InputLocationProps extends IInputProps {
-    value: Location | null;
+    value: Location | PolygonsOfLocation | null;
 }
-
-const strings: StringsJson = {
-    polygonJoinString: {
-        en: ', ', //comma
-        fa: '، ', //virgool
-    },
-};
 
 const InputLocation = ({
     name,
@@ -28,26 +21,10 @@ const InputLocation = ({
     disabled,
 }: InputLocationProps) => {
     const [open, setOpen] = React.useState<boolean>(false);
-    const [text, setText] = React.useState<string | undefined>(undefined);
+    const join = useJoin();
 
     const polygons = useSelector<RootState, PolygonsOfLocation>(
         (state) => state.field.polygonsOfLocation.data,
-    );
-
-    const languageSelector = useLanguageSelector();
-
-    useEffect(
-        () =>
-            setText(
-                value
-                    ? polygons.length > 0
-                        ? polygons.join(
-                              languageSelector(strings.polygonJoinString),
-                          )
-                        : `${value.lat}, ${value.lng}`
-                    : undefined,
-            ),
-        [languageSelector, value, polygons],
     );
 
     const handleClick = () => {
@@ -59,6 +36,19 @@ const InputLocation = ({
 
     const handleClose = () => setOpen(false);
 
+    const getValue = (): string | undefined => {
+        if (!value) {
+            return undefined;
+        } else if ((value as Location).lat) {
+            const val = value as Location;
+            return polygons.length > 0
+                ? join(polygons)
+                : `${val.lat}, ${val.lng}`;
+        } else {
+            const val = value as PolygonsOfLocation;
+            return join(val);
+        }
+    };
     return (
         <>
             <TextField
@@ -71,8 +61,9 @@ const InputLocation = ({
                 }}
                 id={name}
                 autoComplete="off"
-                value={text}
+                value={getValue()}
                 onClick={handleClick}
+                onFocus={handleClick}
             />
             <MapModal choose={onChange} onClose={handleClose} open={open} />
         </>
