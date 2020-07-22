@@ -1,11 +1,17 @@
 import React, {useState} from 'react';
 import {IconButton, Menu, MenuItem} from '@material-ui/core';
 import LanguageIcon from '@material-ui/icons/Language';
-import {Language} from '../../../utils/types';
+import {Language, StringsJson} from '../../../utils/types';
 import ITooltip from '../ITooltip';
 import {useDispatch} from 'react-redux';
 import {changeLanguage} from '../../../utils/actions/actions';
 
+const strings: StringsJson = {
+    changeLanguage: {
+        en: 'Change Language',
+        fa: 'تغییر زبان',
+    },
+};
 const LanguageSwitcherButton = () => {
     const dispatch = useDispatch();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -24,7 +30,7 @@ const LanguageSwitcherButton = () => {
 
     return (
         <>
-            <ITooltip en="Change Language" fa="تغییر زبان">
+            <ITooltip title={strings.changeLanguage}>
                 <IconButton
                     color="inherit"
                     aria-label="lang"

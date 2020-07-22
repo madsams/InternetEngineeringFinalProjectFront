@@ -29,6 +29,10 @@ const strings: StringsJson = {
         en: 'Logout',
         fa: 'خروج',
     },
+    menuTooltip: {
+        en: 'Menu',
+        fa: 'منو',
+    },
 };
 
 const DrawerButton = ({list}: DrawerButtonProps) => {
@@ -87,7 +91,7 @@ const DrawerButton = ({list}: DrawerButtonProps) => {
 
     return (
         <>
-            <ITooltip en={'Menu'} fa={'منو'}>
+            <ITooltip title={strings.menuTooltip}>
                 <IconButton
                     color="inherit"
                     aria-label="lang"
