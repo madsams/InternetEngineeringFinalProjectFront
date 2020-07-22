@@ -107,6 +107,7 @@ const ITableContainer = <D extends Data>({
                 rowsPerPage={rowsPerPage}
                 handleChangePage={handleChangePage}
                 handleChangeRowsPerPage={handleChangeRowsPerPage}
+                colSpan={names.length}
             />
         </TableContainer>
     );

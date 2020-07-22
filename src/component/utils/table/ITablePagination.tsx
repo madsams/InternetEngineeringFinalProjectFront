@@ -11,6 +11,7 @@ interface ITablePaginationProps {
     handleChangeRowsPerPage: (
         event: React.ChangeEvent<HTMLInputElement>,
     ) => void;
+    colSpan: number;
 }
 
 const strings: StringsJson = {
@@ -35,6 +36,7 @@ const ITablePagination = ({
     handleChangeRowsPerPage,
     handleChangePage,
     count,
+    colSpan,
 }: ITablePaginationProps) => {
     const labelDisplayedRows = useLanguage(stringCreators.labelDisplayedRows);
     const labelRowsPerPage = useLanguage(strings.labelRowsPerPage);
@@ -48,6 +50,7 @@ const ITablePagination = ({
             rowsPerPage={rowsPerPage}
             labelDisplayedRows={labelDisplayedRows}
             labelRowsPerPage={labelRowsPerPage}
+            colSpan={colSpan}
         />
     );
 };
