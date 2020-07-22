@@ -9,7 +9,6 @@ const answersList: SimpleApi = '/api/form-answers';
 const answerDetail: IdApi = (id: ID) => `/api/form-answers/${id}`;
 const answerOfForm: IdApi = (id: ID) => `/api/forms/${id}/form-answers`;
 const areaTestPoint: SimpleApi = '/api/areas/testpoint';
-const login: SimpleApi = '/api/login';
 
 const api = {
     formsList,
@@ -18,7 +17,6 @@ const api = {
     answerDetail,
     answerOfForm,
     areaTestPoint,
-    login,
 };
 
 export default api;

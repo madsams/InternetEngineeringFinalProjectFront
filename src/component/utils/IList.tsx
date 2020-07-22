@@ -31,17 +31,11 @@ const IList = ({
                         <IEmptyChecker data={data}>
                             <>
                                 {data.map((item, index) => (
-                                    <>
-                                        {index > 0 && (
-                                            <Divider
-                                                key={'d' + (item.id || index)}
-                                            />
-                                        )}
-                                        <ItemComponent
-                                            key={item.id || index}
-                                            item={item}
-                                        />
-                                    </>
+                                    <React.Fragment
+                                        key={'d' + (item.id || index)}>
+                                        {index > 0 && <Divider />}
+                                        <ItemComponent item={item} />
+                                    </React.Fragment>
                                 ))}
                             </>
                         </IEmptyChecker>
