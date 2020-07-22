@@ -27,12 +27,13 @@ const ITableRow = <A extends IObject>({
 }: ITableRowProps<A>) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState<boolean>(false);
+    const cells = getValues(row);
     return (
         <React.Fragment>
             <TableRow
                 hover
                 onClick={() => setOpen(!open)}
-                className={'text-decoration-none ' + classes.root}>
+                className={classes.root}>
                 {Collapsible && (
                     <TableCell>
                         <IconButton
@@ -48,7 +49,7 @@ const ITableRow = <A extends IObject>({
                     </TableCell>
                 )}
                 <TableCell align="right">{row['#']}</TableCell>
-                {getValues(row).map((cell, index) => (
+                {cells.map((cell, index) => (
                     <TableCell align="right" key={'c' + index}>
                         {cell}
                     </TableCell>
@@ -58,7 +59,7 @@ const ITableRow = <A extends IObject>({
                 <TableRow>
                     <TableCell
                         style={{paddingBottom: 0, paddingTop: 0}}
-                        colSpan={6}>
+                        colSpan={cells.length + 2}>
                         <Collapse in={open} timeout="auto" unmountOnExit>
                             <Collapsible row={row} />
                         </Collapse>
