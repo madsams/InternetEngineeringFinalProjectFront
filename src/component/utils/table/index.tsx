@@ -21,6 +21,8 @@ interface ITableContainerProps<D extends Data> {
         [key: string]: number | undefined;
     };
     renderCollapsible?: React.ComponentType<CollapsibleProps<D>>;
+
+    getRowValue(row: D): string[];
 }
 
 const ITableContainer = <D extends Data>({
@@ -28,6 +30,7 @@ const ITableContainer = <D extends Data>({
     sum,
     renderCollapsible,
     headerTitles,
+    getRowValue,
 }: ITableContainerProps<D>) => {
     const [page, setPage] = React.useState<number>(0);
     const [rowsPerPage, setRowsPerPage] = React.useState<number>(5);
@@ -71,8 +74,7 @@ const ITableContainer = <D extends Data>({
         setRowsPerPage(parseInt(event.target.value));
         setPage(0);
     };
-    const getTableBodyValues = (row: D) =>
-        Object.values(removeProperty(row, 'id'));
+
     return (
         <TableContainer>
             <Table>
@@ -88,7 +90,7 @@ const ITableContainer = <D extends Data>({
                         page * rowsPerPage,
                         page * rowsPerPage + rowsPerPage,
                     )}
-                    getValues={getTableBodyValues}
+                    getValues={getRowValue}
                     renderCollapsible={renderCollapsible}
                 />
                 <ITableFooterSum

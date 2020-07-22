@@ -1,7 +1,14 @@
 import React, {useEffect} from 'react';
 import {Paper} from '@material-ui/core';
-import {FormTable, StringCreatorsJson, StringsJson} from '../../utils/types';
-import {useFormat, useLanguage} from '../../utils/hooks';
+import {
+    FieldTypes,
+    FormTable,
+    Location,
+    PolygonsOfLocation,
+    StringCreatorsJson,
+    StringsJson,
+} from '../../utils/types';
+import {useFormat, useJoin, useLanguage} from '../../utils/hooks';
 import ITableContainer from '../utils/table';
 import IFailedChecker from '../utils/IFailedChecker';
 import {getFormTable} from './actions';
@@ -18,8 +25,8 @@ const strings: StringsJson = {
         fa: 'برای دیدن جزییات پاسخ روی سطر پاسخ‌ مورد نظر کلیک کنید',
     },
     momentFormat: {
-        en: 'YYYY-MM-DD (hh:mm)',
-        fa: '(hh:mm) jYYYY/jMM/jDD',
+        en: 'YYYY-MM-DD-(hh:mm)',
+        fa: 'jYYYY/jMM/jDD-(hh:mm)',
     },
     createdAt: {
         en: 'Answer at',
@@ -39,6 +46,7 @@ const CentreFormTable = () => {
     const createdAtInHeader = useLanguage(strings.createdAt);
     const {id} = useParams();
     const dispatch = useDispatch();
+    const join = useJoin();
     const data = useSelector<RootState, FormTable>(
         (state) => state.centre.formTable.data,
     );
@@ -52,42 +60,78 @@ const CentreFormTable = () => {
         dispatch(getFormTable(id));
     }, [dispatch, id]);
     return (
-        <>
-            <ITypography
-                text={stringCreators.title(data.title)}
-                variant="h5"
-                align="center"
-            />
-            <br />
-            <ITypography
-                text={strings.subtitle}
-                variant="subtitle1"
-                align="center"
-            />
-            <br />
-            <Paper className="p-2">
-                <ILoadingChecker isLoading={isLoading}>
-                    <IFailedChecker
-                        isFailed={isFailed}
-                        reloadAction={() => getFormTable(id)}>
-                        <ITableContainer
-                            data={data.records.map((v) => ({
-                                id: v.answerId,
-                                ...v.values,
-                                createdAt: formatMoment(v.createdAt),
-                            }))}
-                            headerTitles={[
-                                '#',
-                                ...data.fields.map((f) => f.title),
-                                createdAtInHeader as string,
-                            ]}
-                            sum={data.sum}
-                            renderCollapsible={CentreTableCollapsible}
-                        />
-                    </IFailedChecker>
-                </ILoadingChecker>
-            </Paper>
-        </>
+        <ILoadingChecker isLoading={isLoading}>
+            <IFailedChecker
+                isFailed={isFailed}
+                reloadAction={() => getFormTable(id)}>
+                <ITypography
+                    text={stringCreators.title(data.title)}
+                    variant="h5"
+                    align="center"
+                />
+                <br />
+                <ITypography
+                    text={strings.subtitle}
+                    variant="subtitle1"
+                    align="center"
+                />
+                <br />
+                <Paper className="p-2">
+                    <ITableContainer
+                        data={data.records.map((v) => ({
+                            id: v.answerId,
+                            value: v.values,
+                            createdAt: v.createdAt,
+                        }))}
+                        headerTitles={[
+                            '#',
+                            ...data.fields.map((f) => f.title),
+                            createdAtInHeader as string,
+                        ]}
+                        sum={data.sum}
+                        renderCollapsible={CentreTableCollapsible}
+                        getRowValue={(row) => {
+                            const cells = Object.keys(row.value).map((name) => {
+                                const value = row.value[name];
+                                if (value) {
+                                    const fieldInfo = data.fields.find(
+                                        (f) => f.name === name,
+                                    );
+                                    if (fieldInfo) {
+                                        const type = fieldInfo.type;
+                                        if (type === FieldTypes.Text) {
+                                            return value as string;
+                                        } else if (type === FieldTypes.Number) {
+                                            return '' + value;
+                                        } else if (type === FieldTypes.Date) {
+                                            return formatMoment(
+                                                new Date(value as string),
+                                            );
+                                        } else if (
+                                            type === FieldTypes.Location
+                                        ) {
+                                            if (
+                                                (value as PolygonsOfLocation)[0]
+                                            ) {
+                                                const val = value as PolygonsOfLocation;
+                                                return join(val);
+                                            } else {
+                                                const val = value as Location;
+                                                return `(${val.lat.toFixed(
+                                                    3,
+                                                )}, ${val.lng.toFixed(3)})`;
+                                            }
+                                        }
+                                    }
+                                }
+                                return '_';
+                            });
+                            return [...cells, formatMoment(row.createdAt)];
+                        }}
+                    />
+                </Paper>
+            </IFailedChecker>
+        </ILoadingChecker>
     );
 };
 export default CentreFormTable;

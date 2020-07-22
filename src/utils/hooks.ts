@@ -38,3 +38,13 @@ export const useFormat = (format?: LangBaseJson) => {
         return languageSelector(formatMoment(time, format));
     };
 };
+
+export const useJoin = (
+    joiner: LangBaseJson = {
+        en: ', ', //comma
+        fa: '، ', //virgool
+    },
+) => {
+    const languageSelector = useLanguageSelector();
+    return (array: string[]) => array.join(languageSelector(joiner));
+};

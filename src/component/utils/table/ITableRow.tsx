@@ -47,10 +47,10 @@ const ITableRow = <A extends IObject>({
                         </IconButton>
                     </TableCell>
                 )}
+                <TableCell align="right">{row['#']}</TableCell>
                 {getValues(row).map((cell, index) => (
                     <TableCell align="right" key={'c' + index}>
-                        {/*todo*/}
-                        {cell ? '' + cell : '_'}
+                        {cell}
                     </TableCell>
                 ))}
             </TableRow>
