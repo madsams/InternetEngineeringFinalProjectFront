@@ -19,6 +19,7 @@ import {useParams} from 'react-router';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store';
 import CentreTableCollapsible from './CentreTableCollapsible';
+import CentreTableToolbar from './CentreTableToolbar';
 
 const strings: StringsJson = {
     subtitle: {
@@ -36,7 +37,7 @@ const strings: StringsJson = {
 };
 
 const stringCreators: StringCreatorsJson<string, string> = {
-    title: (title: string) => ({
+    getTitle: (title: string) => ({
         en: `Answer of form "${title}"`,
         fa: `لیست پاسخهای "${title}"`,
     }),
@@ -113,6 +114,9 @@ const CentreFormTable = () => {
                 isFailed={isFailed}
                 reloadAction={() => getFormTable(id)}>
                 <Paper className="p-2">
+                    <CentreTableToolbar
+                        title={stringCreators.getTitle(data.title)}
+                    />
                     <ITableContainer<TableRowType>
                         data={tableData}
                         headerTitles={headerTitles}
