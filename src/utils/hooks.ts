@@ -5,11 +5,12 @@ import {formatMoment} from './funstions';
 
 export const useLanguage = <D = string>(
     str: LangBaseJson<D> | undefined,
+    defaultValue?: D,
 ): D | undefined => {
     const language = useSelector<RootState, Language>(
         (state) => state.language,
     );
-    return str && str[language] ? str[language] : undefined;
+    return str && str[language] ? str[language] : defaultValue;
 };
 
 export const useLanguageSelector = () => {

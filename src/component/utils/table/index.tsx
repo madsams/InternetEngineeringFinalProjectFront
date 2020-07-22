@@ -16,6 +16,7 @@ interface Data {
 
 interface ITableContainerProps<D extends Data> {
     data: D[];
+    headerTitles: string[];
     sum: {
         [key: string]: number | undefined;
     };
@@ -26,6 +27,7 @@ const ITableContainer = <D extends Data>({
     data,
     sum,
     renderCollapsible,
+    headerTitles,
 }: ITableContainerProps<D>) => {
     const [page, setPage] = React.useState<number>(0);
     const [rowsPerPage, setRowsPerPage] = React.useState<number>(5);
@@ -75,7 +77,7 @@ const ITableContainer = <D extends Data>({
         <TableContainer>
             <Table>
                 <ITableHeader
-                    heads={Object.keys(removeProperty(array[0], 'id'))}
+                    heads={headerTitles}
                     orderBy={orderBy}
                     order={order}
                     onRequestSort={handleRequestSort}

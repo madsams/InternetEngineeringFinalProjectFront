@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {Paper} from '@material-ui/core';
 import {FormTable, StringCreatorsJson, StringsJson} from '../../utils/types';
-import {useFormat} from '../../utils/hooks';
+import {useFormat, useLanguage} from '../../utils/hooks';
 import ITableContainer from '../utils/table';
 import IFailedChecker from '../utils/IFailedChecker';
 import {getFormTable} from './actions';
@@ -21,6 +21,10 @@ const strings: StringsJson = {
         en: 'YYYY-MM-DD (hh:mm)',
         fa: '(hh:mm) jYYYY/jMM/jDD',
     },
+    createdAt: {
+        en: 'Answer at',
+        fa: 'تاریخ',
+    },
 };
 
 const stringCreators: StringCreatorsJson<string, string> = {
@@ -32,6 +36,7 @@ const stringCreators: StringCreatorsJson<string, string> = {
 
 const CentreFormTable = () => {
     const formatMoment = useFormat(strings.momentFormat);
+    const createdAtInHeader = useLanguage(strings.createdAt);
     const {id} = useParams();
     const dispatch = useDispatch();
     const data = useSelector<RootState, FormTable>(
@@ -71,6 +76,11 @@ const CentreFormTable = () => {
                                 ...v.values,
                                 createdAt: formatMoment(v.createdAt),
                             }))}
+                            headerTitles={[
+                                '#',
+                                ...data.fields.map((f) => f.title),
+                                createdAtInHeader as string,
+                            ]}
                             sum={data.sum}
                             renderCollapsible={CentreTableCollapsible}
                         />
