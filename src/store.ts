@@ -14,6 +14,7 @@ const rootReducer = combineReducers({
     role: roleReducer,
     field: fieldReducer,
     centre: centreReducer,
+    login: loginReducer,
 });
 
 const middlewares = [thunk];

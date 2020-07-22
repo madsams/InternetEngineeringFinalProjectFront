@@ -1,0 +1,1 @@
+export const GET_ROLES_OF_USER = 'GET_ROLES_OF_USER';

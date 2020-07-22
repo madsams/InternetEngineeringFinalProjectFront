@@ -1,10 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import IContainer from '../utils/IContainer';
 import ITypography from '../utils/ITypography';
 import {Role, StringsJson} from '../../utils/types';
 import {useDispatch} from 'react-redux';
-import {login1} from './actions';
-import IButton from '../utils/IButton';
+import {getRoles, login1} from './actions';
 
 const strings: StringsJson = {
     text: {
@@ -36,15 +35,20 @@ const LoginScreen = () => {
     const handleLogin = () => {
         window.location.href = `${process.env.REACT_APP_HOST}/login`;
     };
+
+    useEffect(() => {
+        dispatch(getRoles());
+    }, [dispatch]);
     return (
         <IContainer className="d-flex flex-column justify-content-center align-items-center">
             <ITypography text={strings.text} variant="h6" className="mb-4" />
+            {/*
             <IButton
                 title={strings.buttonAsCentre}
                 onClick={handleCentreLogin}
             />
             <IButton title={strings.buttonAsField} onClick={handleFieldLogin} />
-            <IButton title={strings.button} onClick={handleLogin} />
+*/}
         </IContainer>
     );
 };
