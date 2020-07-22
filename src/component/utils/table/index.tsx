@@ -1,6 +1,6 @@
 import {Table, TableContainer} from '@material-ui/core';
 import ITableHeader from './ITableHeader';
-import {comparator, removeProperty} from '../../../utils/funstions';
+import {comparator} from '../../../utils/funstions';
 import ITableBody from './ITableBody';
 import ITableFooterSum from './ITableFooterSum';
 import ITablePagination from './ITablePagination';
@@ -17,6 +17,7 @@ interface Data {
 interface ITableContainerProps<D extends Data> {
     data: D[];
     headerTitles: string[];
+    names: string[];
     sum: {
         [key: string]: number | undefined;
     };
@@ -30,6 +31,7 @@ const ITableContainer = <D extends Data>({
     sum,
     renderCollapsible,
     headerTitles,
+    names,
     getRowValue,
 }: ITableContainerProps<D>) => {
     const [page, setPage] = React.useState<number>(0);
@@ -94,7 +96,7 @@ const ITableContainer = <D extends Data>({
                     renderCollapsible={renderCollapsible}
                 />
                 <ITableFooterSum
-                    keys={Object.keys(removeProperty(array[0], 'id', '#'))}
+                    keys={names}
                     sum={sum}
                     isCollapsible={!!renderCollapsible}
                 />

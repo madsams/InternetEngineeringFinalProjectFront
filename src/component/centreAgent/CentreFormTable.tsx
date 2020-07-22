@@ -128,6 +128,7 @@ const CentreFormTable = () => {
                             });
                             return [...cells, formatMoment(row.createdAt)];
                         }}
+                        names={[...data.fields.map((f) => f.name), 'createdAt']}
                     />
                 </Paper>
             </IFailedChecker>
