@@ -10,9 +10,9 @@ import {useLanguage} from '../../../utils/hooks';
 import TodayIcon from '@material-ui/icons/Today';
 
 interface InputDateProps extends IInputProps {
-    value: Date | null;
+    value: string | null;
 
-    onChange(value: Date | null): void;
+    onChange(value: string | null): void;
 }
 
 jMoment.loadPersian({dialect: 'persian-modern', usePersianDigits: true});
@@ -53,7 +53,7 @@ const InputDate = ({
     const libInstance = useLanguage(libInstanceLBJ);
 
     const handleDateChange = (date: Moment | null) => {
-        const iDate = date ? date.toDate() : null;
+        const iDate = date ? new Date(date.toDate()).toString() : null;
         onChange(iDate);
     };
     return (

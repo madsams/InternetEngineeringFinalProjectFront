@@ -1,6 +1,6 @@
 import React from 'react';
 import {IInputProps} from './types';
-import {FieldTypes, Location, Option} from '../../../utils/types';
+import {FieldTypes, Location} from '../../../utils/types';
 import InputSelect from './InputSelect';
 import InputDate from './InputDate';
 import InputLocation from './InputLocation';
@@ -8,17 +8,11 @@ import InputText from './InputText';
 
 const IInput = ({value, ...props}: IInputProps) => {
     if (props.options)
-        return (
-            <InputSelect
-                {...props}
-                options={props.options}
-                value={value as Option}
-            />
-        );
+        return <InputSelect {...props} options={props.options} value={value} />;
 
     switch (props.type) {
         case FieldTypes.Date:
-            return <InputDate {...props} value={value as Date | null} />;
+            return <InputDate {...props} value={value as string | null} />;
         case FieldTypes.Location:
             return (
                 <InputLocation {...props} value={value as Location | null} />

@@ -87,9 +87,11 @@ export interface MainApplicationType<P extends Path> {
 
 export type Location = {lat: number; lng: number};
 
+export type Value = string | number | Location;
+
 export interface Option {
     label: string;
-    value: any;
+    value: Value;
 }
 
 export enum FieldTypes {
@@ -106,8 +108,6 @@ export interface Field {
     required?: boolean;
     options?: Array<Option>;
 }
-
-type Value = string | number | Location | Option | Date;
 
 export interface FieldAnswer extends Field {
     value: Value;

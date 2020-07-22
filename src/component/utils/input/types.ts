@@ -1,6 +1,6 @@
-import {Field, Location, Option} from '../../../utils/types';
+import {Field, Value} from '../../../utils/types';
 
-export type InputValues = string | number | Location | Date | Option | null;
+export type InputValues = Value | null;
 
 export interface IInputProps extends Field {
     value: InputValues;
