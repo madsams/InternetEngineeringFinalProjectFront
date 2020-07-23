@@ -39,9 +39,7 @@ const LoginScreen = () => {
     );
 
     useEffect(() => {
-        auth0Client.handleAuthentication().then(() => {
-            dispatch(getRoles());
-        });
+        dispatch(getRoles());
     }, [dispatch]);
 
     return (
@@ -57,7 +55,9 @@ const LoginScreen = () => {
                 title={strings.buttonAsField}
                 onClick={() => {
                     // window.location.href = `${process.env.REACT_APP_HOST}/login?returnTo=${window.location.origin}`;
-                    auth0Client.signIn();
+                    // auth0Client.signIn();
+                    // auth0Client.handleAuthentication();
+                    auth0Client.silentAuth();
                 }}
             />
         </IContainer>
