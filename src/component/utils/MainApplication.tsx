@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import {DrawerItem} from '../../utils/types';
 import IContainer from './IContainer';
+import SecureRoute from './SecureRoute';
 
 interface MainApplicationProps {
     routes: Array<DrawerItem<string>>;
@@ -18,11 +19,17 @@ const MainApplication = ({routes, defaultPath}: MainApplicationProps) => {
         <IContainer>
             <Router>
                 <Switch>
-                    {routes.map((r) => (
-                        <Route path={r.path} key={r.path}>
-                            {r.component}
-                        </Route>
-                    ))}
+                    {routes.map((r) => {
+                        return r.isUnSecure ? (
+                            <Route path={r.path} key={r.path}>
+                                {r.component}
+                            </Route>
+                        ) : (
+                            <SecureRoute path={r.path} key={r.path}>
+                                {r.component}
+                            </SecureRoute>
+                        );
+                    })}
                     <Redirect to={defaultPath} />
                 </Switch>
             </Router>

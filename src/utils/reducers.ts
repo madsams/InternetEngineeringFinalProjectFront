@@ -1,18 +1,10 @@
 import {
-    CHANGE_TOKEN,
     LanguageActionTypes,
     RoleActionTypes,
     SET_ROLE,
     SWITCH_LANGUAGE,
-    TokenActionTypes,
 } from './actions/actionTypes';
-import {
-    Language,
-    languageStorageKey,
-    Role,
-    roleStorageKey,
-    tokenStorageKey,
-} from './types';
+import {Language, languageStorageKey, Role, roleStorageKey} from './types';
 import {getStorage} from './effects/storage';
 import {Reducer} from 'redux';
 
@@ -29,15 +21,6 @@ export const languagesReducers: Reducer<Language, LanguageActionTypes> = (
     } else {
         return state;
     }
-};
-
-const initialToken: string = getStorage<string>(tokenStorageKey, '');
-export const tokenReducer: Reducer<string, TokenActionTypes> = (
-    state = initialToken,
-    action,
-) => {
-    if (action.type === CHANGE_TOKEN) return action.payload;
-    else return state;
 };
 
 const initialRole: Role = getStorage<Role>(roleStorageKey, Role.unknown);

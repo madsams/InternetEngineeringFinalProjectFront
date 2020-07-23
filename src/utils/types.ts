@@ -8,6 +8,7 @@ export const _ERROR = '_ERROR';
 export const _PENDING = '_PENDING';
 
 export const tokenStorageKey = 'token';
+export const tokenExpiresStorageKey = 'tokenExpires';
 export const roleStorageKey = 'role';
 export const languageStorageKey = 'language';
 
@@ -75,6 +76,7 @@ export interface DrawerItem<P extends Path> {
     path: P;
     component: React.ReactNode;
     hideInDrawer?: boolean;
+    isUnSecure?: boolean;
 }
 
 export interface MainApplicationType<P extends Path> {

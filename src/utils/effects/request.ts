@@ -2,6 +2,7 @@ import Axios, {AxiosError, Method as AxiosMethods} from 'axios';
 import renderToast, {ToastTypes} from './renderToast';
 import {IActionCreator, IThunkAction, LangBaseJson} from '../types';
 import {runInDevelopment} from '../funstions';
+import auth0Client from '../auth0Client';
 
 const instance = Axios.create({
     baseURL: process.env.REACT_APP_HOST,
@@ -15,6 +16,7 @@ const instance = Axios.create({
 
 instance.interceptors.request.use(async (request) => {
     runInDevelopment(() => console.log('>>>>>>>>>>>>', request));
+    request.headers.Authorization = `Bearer ${auth0Client.getIdToken()}`;
     return Promise.resolve(request);
 });
 
@@ -65,6 +67,11 @@ export interface RequestOptionType {
     reject?(error?: AxiosError): void;
 }
 
+const unauthorizedError: ErrorCodesType = {
+    code: 401,
+    action: () => {},
+};
+
 const request = (requestOption: RequestOptionType): IThunkAction => async (
     dispatch,
 ) => {
@@ -93,6 +100,7 @@ const request = (requestOption: RequestOptionType): IThunkAction => async (
     // Start loading
     if (pendingAction) dispatch(pendingAction());
 
+    const errorCodes2 = [unauthorizedError, ...errorCodes];
     try {
         // Calls "url" by "method" with "data" as body and "headers" and params
         const response = await instance.request<RequestResponse>({
@@ -135,7 +143,7 @@ const request = (requestOption: RequestOptionType): IThunkAction => async (
             if (!isCorsError) {
                 const code = error.response.status;
 
-                errorCodes.forEach((errorCode) => {
+                errorCodes2.forEach((errorCode) => {
                     if (code === errorCode.code && !errorCodeActioned) {
                         if (errorCode.toastMessage)
                             dispatch(
@@ -146,6 +154,8 @@ const request = (requestOption: RequestOptionType): IThunkAction => async (
                                 ),
                             );
                         if (errorCode.action) errorCode.action(error);
+                        if (errorAction)
+                            dispatch(errorAction(failToastMessage));
                         errorCodeActioned = true;
                     }
                 });

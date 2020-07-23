@@ -1,42 +1,38 @@
 import React from 'react';
 import IContainer from '../utils/IContainer';
 import ITypography from '../utils/ITypography';
-import {Role, StringsJson} from '../../utils/types';
-import {useDispatch} from 'react-redux';
-import {login} from './actions';
+import {StringsJson} from '../../utils/types';
 import IButton from '../utils/IButton';
+import auth0Client from '../../utils/auth0Client';
+import {useHistory} from 'react-router';
+import {SET_ROLE} from './paths';
 
 const strings: StringsJson = {
     text: {
         en: 'You need to login first',
-        fa: 'شما ابتدا باید وارد شوید',
+        fa: 'لطفا لاگین کنید',
     },
-    buttonAsField: {
-        en: 'Login as Field Agent',
-        fa: 'ورود مامور میدانی',
-    },
-    buttonAsCentre: {
-        en: 'Login as Centre Agent',
-        fa: 'ورود مامور مرکزی',
+    button: {
+        en: 'Login',
+        fa: 'ورود',
     },
 };
 const LoginScreen = () => {
-    const dispatch = useDispatch();
-    const handleCentreLogin = () => {
-        dispatch(login(Role.centreAgent));
+    const history = useHistory();
+
+    const handleClick = () => {
+        if (!auth0Client.isAuthenticated()) {
+            auth0Client.silentAuth();
+        } else {
+            history.replace(SET_ROLE);
+        }
     };
 
-    const handleFieldLogin = async () => {
-        dispatch(login(Role.fieldAgent));
-    };
     return (
         <IContainer className="d-flex flex-column justify-content-center align-items-center">
-            <ITypography text={strings.text} variant="h6" className="mb-4" />
-            <IButton
-                title={strings.buttonAsCentre}
-                onClick={handleCentreLogin}
-            />
-            <IButton title={strings.buttonAsField} onClick={handleFieldLogin} />
+            <ITypography text={strings.text} variant="h4" className="mb-4" />
+
+            <IButton title={strings.button} onClick={handleClick} />
         </IContainer>
     );
 };

@@ -4,7 +4,6 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import IHeader from './utils/header/IHeader';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store';
-import {Auth0Provider} from '@auth0/auth0-react';
 import MainApplication from './utils/MainApplication';
 import login from './login';
 import centre from './centreAgent';
@@ -24,10 +23,7 @@ const App = () => {
     const isRTL = useDirection();
 
     return (
-        <Auth0Provider
-            domain="ieng-final-project.eu.auth0.com"
-            clientId="itCUjipghPHaeGzOC72mj04evZCBDcns"
-            redirectUri={window.location.origin}>
+        <Router>
             <ReduxToastr
                 timeOut={3000}
                 position={isRTL ? 'top-left' : 'top-right'}
@@ -35,22 +31,20 @@ const App = () => {
                 transitionOut="fadeOut"
                 closeOnToastrClick
             />
-            <Router>
-                <IHeader
-                    title={mainApp.headerTitle}
-                    drawerList={mainApp.routes}
-                    drawerVisible={mainApp.drawerVisible}
-                />
-                <Switch>
-                    <Route path="/">
-                        <MainApplication
-                            routes={mainApp.routes}
-                            defaultPath={mainApp.defaultPath}
-                        />
-                    </Route>
-                </Switch>
-            </Router>
-        </Auth0Provider>
+            <IHeader
+                title={mainApp.headerTitle}
+                drawerList={mainApp.routes}
+                drawerVisible={mainApp.drawerVisible}
+            />
+            <Switch>
+                <Route path="/">
+                    <MainApplication
+                        routes={mainApp.routes}
+                        defaultPath={mainApp.defaultPath}
+                    />
+                </Route>
+            </Switch>
+        </Router>
     );
 };
 export default App;
