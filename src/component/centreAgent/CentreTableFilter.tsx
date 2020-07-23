@@ -3,10 +3,11 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import ITooltip from '../utils/ITooltip';
 import React, {useState} from 'react';
 import {Field, FieldTypes, StringsJson} from '../../utils/types';
-import {createStyles, Modal, Theme} from '@material-ui/core';
+import {createStyles, Modal, Theme, Typography} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../store';
+import {Filter, FilterState} from './types';
 
 const strings: StringsJson = {
     iconTooltip: {
@@ -49,7 +50,7 @@ const CentreTableFilter = () => {
                         'flex-1 align-items-center flex-column ' + classes.paper
                     }>
                     {fields.map((f) => (
-                        <Filter
+                        <IFilter
                             type={f.type}
                             name={f.name}
                             key={'f' + f.name}
@@ -71,32 +72,45 @@ interface FilterProps {
     name: string;
 }
 
-const Filter = ({type, name}: FilterProps) => {
-    switch (type) {
-        case FieldTypes.Text:
-            return <TextFilter />;
-        case FieldTypes.Number:
-            return <NumberFilter />;
-        case FieldTypes.Location:
-            return <LocationFilter />;
-        case FieldTypes.Date:
-            return <DateFilter />;
-    }
+const IFilter = ({type, name}: FilterProps) => {
+    const filter = useSelector<RootState, FilterState>(
+        (state) => state.centre.filter,
+    );
+    const FilterModal =
+        type === FieldTypes.Text
+            ? TextFilter
+            : type === FieldTypes.Number
+            ? NumberFilter
+            : type === FieldTypes.Location
+            ? LocationFilter
+            : DateFilter;
+
+    return (
+        <div className="flex-1 flex-row">
+            <Typography>{name}</Typography>
+            <FilterModal filter={filter[name]} name={name} />
+        </div>
+    );
 };
 
-const TextFilter = () => {
+interface FilterModal {
+    filter: Filter;
+    name: string;
+}
+
+const TextFilter = ({filter, name}: FilterModal) => {
     return <div>text</div>;
 };
 
-const LocationFilter = () => {
+const LocationFilter = ({filter, name}: FilterModal) => {
     return <div>location</div>;
 };
 
-const NumberFilter = () => {
+const NumberFilter = ({filter, name}: FilterModal) => {
     return <div>number</div>;
 };
 
-const DateFilter = () => {
+const DateFilter = ({filter, name}: FilterModal) => {
     return <div>date</div>;
 };
 export default CentreTableFilter;
