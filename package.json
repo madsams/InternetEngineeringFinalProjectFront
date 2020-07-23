@@ -17,6 +17,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "auth0-js": "latest",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "express": "latest",
@@ -39,6 +40,7 @@
     "typescript": "~3.7.2"
   },
   "devDependencies": {
+    "@types/auth0-js": "^9.13.3",
     "@types/google-map-react": "^1.1.8",
     "@types/javascript-time-ago": "^2.0.1",
     "@types/moment-jalaali": "^0.7.4",

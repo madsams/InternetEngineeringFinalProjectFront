@@ -8,6 +8,7 @@ import ILoadingChecker from '../utils/ILoadingChecker';
 import IFailedChecker from '../utils/IFailedChecker';
 import {RootState} from '../../store';
 import IButton from '../utils/IButton';
+import auth0Client from '../../utils/auth0Client';
 
 const strings: StringsJson = {
     text: {
@@ -38,8 +39,11 @@ const LoginScreen = () => {
     );
 
     useEffect(() => {
-        dispatch(getRoles());
+        auth0Client.handleAuthentication().then(() => {
+            dispatch(getRoles());
+        });
     }, [dispatch]);
+
     return (
         <IContainer className="d-flex flex-column justify-content-center align-items-center">
             <ITypography text={strings.text} variant="h6" className="mb-4" />
@@ -52,7 +56,8 @@ const LoginScreen = () => {
             <IButton
                 title={strings.buttonAsField}
                 onClick={() => {
-                    window.location.href = `${process.env.REACT_APP_HOST}/login?returnTo=${window.location.origin}`;
+                    // window.location.href = `${process.env.REACT_APP_HOST}/login?returnTo=${window.location.origin}`;
+                    auth0Client.signIn();
                 }}
             />
         </IContainer>

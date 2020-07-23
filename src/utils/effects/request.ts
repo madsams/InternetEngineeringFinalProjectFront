@@ -2,6 +2,7 @@ import Axios, {AxiosError, Method as AxiosMethods} from 'axios';
 import renderToast, {ToastTypes} from './renderToast';
 import {IActionCreator, IThunkAction, LangBaseJson} from '../types';
 import {runInDevelopment} from '../funstions';
+import auth0Client from '../auth0Client';
 
 const instance = Axios.create({
     baseURL: process.env.REACT_APP_HOST,
@@ -15,6 +16,8 @@ const instance = Axios.create({
 
 instance.interceptors.request.use(async (request) => {
     runInDevelopment(() => console.log('>>>>>>>>>>>>', request));
+    console.log(auth0Client);
+    request.headers.Authorization = `Bearer ${auth0Client.getIdToken()}`;
     return Promise.resolve(request);
 });
 
