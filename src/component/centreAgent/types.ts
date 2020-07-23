@@ -1,17 +1,23 @@
-import {IDataAction} from '../../utils/types';
+import {Area, IDataAction} from '../../utils/types';
 
 export const CENTRE_GET_ALL_FORMS = 'CENTRE_GET_ALL_FORMS';
 export const CENTRE_GET_FORM_TABLE = 'CENTRE_GET_FORM_TABLE';
 export const CENTRE_GET_FORM_ANSWER_DETAIL = 'CENTRE_GET_FORM_ANSWER_DETAIL';
+export const CENTRE_GET_AREAS = 'CENTRE_GET_AREAS';
 
 export const CENTRE_SET_FILTER = 'CENTRE_SET_FILTER';
 
-export type LocationFilter = number[];
+export type LocationFilter = Area[];
 export type DateFilter = {from: Date; to: Date};
 export type NumberFilter = {from: number; to: number};
 export type TextFilter = string[];
 
-export type Filter = LocationFilter | DateFilter | NumberFilter | TextFilter;
+export type Filter =
+    | LocationFilter
+    | DateFilter
+    | NumberFilter
+    | TextFilter
+    | undefined;
 
 export interface SetFilterPayload {
     name: string;

@@ -154,3 +154,8 @@ export interface FormTable extends Form {
     records: Array<FormAnswersRecord>;
     sum: Sum;
 }
+
+export interface Area {
+    id: ID;
+    name: string;
+}

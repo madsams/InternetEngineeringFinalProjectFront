@@ -1,13 +1,14 @@
 import IconButton from '@material-ui/core/IconButton';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import ITooltip from '../utils/ITooltip';
+import ITooltip from '../../utils/ITooltip';
 import React, {useState} from 'react';
-import {Field, FieldTypes, StringsJson} from '../../utils/types';
+import {Field, FieldTypes, StringsJson} from '../../../utils/types';
 import {createStyles, Modal, Theme, Typography} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import {useSelector} from 'react-redux';
-import {RootState} from '../../store';
-import {Filter, FilterState} from './types';
+import {RootState} from '../../../store';
+import {Filter, LocationFilter} from '../types';
+import Locations from './Loactions';
 
 const strings: StringsJson = {
     iconTooltip: {
@@ -44,15 +45,17 @@ const CentreTableFilter = () => {
     );
     return (
         <>
-            <Modal open={open}>
+            <Modal open={open} onClose={handleClose}>
                 <div
                     className={
-                        'flex-1 align-items-center flex-column ' + classes.paper
+                        'flex-1 align-items-stretch flex-column ' +
+                        classes.paper
                     }>
                     {fields.map((f) => (
                         <IFilter
                             type={f.type}
                             name={f.name}
+                            title={f.title}
                             key={'f' + f.name}
                         />
                     ))}
@@ -70,47 +73,53 @@ const CentreTableFilter = () => {
 interface FilterProps {
     type: FieldTypes;
     name: string;
+    title: string;
 }
 
-const IFilter = ({type, name}: FilterProps) => {
-    const filter = useSelector<RootState, FilterState>(
-        (state) => state.centre.filter,
+const IFilter = ({type, title, name}: FilterProps) => {
+    const filter = useSelector<RootState, Filter>(
+        (state) => state.centre.filter[name],
     );
-    const FilterModal =
-        type === FieldTypes.Text
-            ? TextFilter
-            : type === FieldTypes.Number
-            ? NumberFilter
-            : type === FieldTypes.Location
-            ? LocationFilter
-            : DateFilter;
+
+    const filterInput =
+        type === FieldTypes.Text ? (
+            <FilterText name={name} filters={filter} />
+        ) : type === FieldTypes.Number ? (
+            <FilterNumber name={name} filters={filter} />
+        ) : type === FieldTypes.Location ? (
+            <Locations name={name} filters={filter as LocationFilter} />
+        ) : (
+            <FilterDate name={name} filters={filter} />
+        );
 
     return (
-        <div className="flex-1 flex-row">
-            <Typography>{name}</Typography>
-            <FilterModal filter={filter[name]} name={name} />
-        </div>
+        <>
+            <div className="flex-1 flex-row align-items-center justify-content-start">
+                <div className="flex-1">
+                    <Typography>{title}</Typography>
+                </div>
+                <div className="flex-2 flex-row align-items-center">
+                    {filterInput}
+                </div>
+            </div>
+        </>
     );
 };
 
-interface FilterModal {
-    filter: Filter;
+export interface FilterInputProps {
+    filters: Filter;
     name: string;
 }
 
-const TextFilter = ({filter, name}: FilterModal) => {
+const FilterText = ({filters, name}: FilterInputProps) => {
     return <div>text</div>;
 };
 
-const LocationFilter = ({filter, name}: FilterModal) => {
-    return <div>location</div>;
-};
-
-const NumberFilter = ({filter, name}: FilterModal) => {
+const FilterNumber = ({filters, name}: FilterInputProps) => {
     return <div>number</div>;
 };
 
-const DateFilter = ({filter, name}: FilterModal) => {
+const FilterDate = ({filters, name}: FilterInputProps) => {
     return <div>date</div>;
 };
 export default CentreTableFilter;

@@ -3,7 +3,7 @@ import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import {LangBaseJson} from '../../utils/types';
 import ITypography from '../utils/ITypography';
-import CentreTableFilter from './CentreTableFilter';
+import CentreTableFilter from './filter/CentreTableFilter';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({

@@ -1,8 +1,9 @@
 import {combineReducers, Reducer} from 'redux';
 import {createDataRequestReducer} from '../../utils/generics';
-import {Form, FormAnswer, FormTable} from '../../utils/types';
+import {Area, Form, FormAnswer, FormTable} from '../../utils/types';
 import {
     CENTRE_GET_ALL_FORMS,
+    CENTRE_GET_AREAS,
     CENTRE_GET_FORM_ANSWER_DETAIL,
     CENTRE_GET_FORM_TABLE,
     FilterAction,
@@ -39,10 +40,13 @@ const filterReducer: Reducer<FilterState, FilterAction> = (
     }
 };
 
+const areasReducer = createDataRequestReducer<Area[]>(CENTRE_GET_AREAS, []);
+
 const centreReducer = combineReducers({
     forms: formsReducer,
     formTable: formTableReducer,
     formAnswerDetail: formAnswerDetailReducer,
     filter: filterReducer,
+    areas: areasReducer,
 });
 export default centreReducer;

@@ -2,10 +2,11 @@ import {
     createGetRequestSimpleActions,
     createGetRequestWithIdActions,
 } from '../../utils/generics';
-import {Form, FormAnswer, FormTable} from '../../utils/types';
+import {Area, Form, FormAnswer, FormTable} from '../../utils/types';
 import api from '../../utils/api';
 import {
     CENTRE_GET_ALL_FORMS,
+    CENTRE_GET_AREAS,
     CENTRE_GET_FORM_ANSWER_DETAIL,
     CENTRE_GET_FORM_TABLE,
     CENTRE_SET_FILTER,
@@ -34,3 +35,8 @@ export const setFilter = (name: string, filter: Filter): SetFilter => ({
         filter,
     },
 });
+
+export const getAreas = createGetRequestSimpleActions<Area[]>(
+    CENTRE_GET_AREAS,
+    api.getAreas,
+);
