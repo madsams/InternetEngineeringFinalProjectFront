@@ -1,11 +1,9 @@
 import {createStyles, Theme, Toolbar} from '@material-ui/core';
-import IconButton from '@material-ui/core/IconButton';
 import React from 'react';
-import FilterListIcon from '@material-ui/icons/FilterList';
 import {makeStyles} from '@material-ui/core/styles';
-import ITooltip from '../utils/ITooltip';
-import {LangBaseJson, StringsJson} from '../../utils/types';
+import {LangBaseJson} from '../../utils/types';
 import ITypography from '../utils/ITypography';
+import CentreTableFilter from './CentreTableFilter';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -16,25 +14,19 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const strings: StringsJson = {
-    iconTooltip: {
-        en: 'Filter',
-        fa: 'فیلتر',
-    },
-};
 interface CentreTableToolbarProps {
     title: LangBaseJson;
 }
+
 const CentreTableToolbar = ({title}: CentreTableToolbarProps) => {
     const classes = useStyles();
     return (
-        <Toolbar className={classes.root}>
+        <Toolbar
+            className={
+                'flex-1 flex-row justify-content-between ' + classes.root
+            }>
             <ITypography text={title} />
-            <ITooltip title={strings.iconTooltip}>
-                <IconButton>
-                    <FilterListIcon />
-                </IconButton>
-            </ITooltip>
+            <CentreTableFilter />
         </Toolbar>
     );
 };
