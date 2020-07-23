@@ -1,9 +1,9 @@
 import auth0, {Auth0DecodedHash, WebAuth} from 'auth0-js';
 import {getStorage, removeStorage, setStorage} from './effects/storage';
+import {roleStorageKey, tokenExpiresStorageKey, tokenStorageKey} from './types';
 
 interface AuthType {
     auth0: WebAuth;
-    profile: any;
     idToken: any;
     expiresAt: any;
 }
@@ -12,7 +12,6 @@ class Auth implements AuthType {
     auth0: WebAuth;
     expiresAt: any;
     idToken: any;
-    profile: any;
 
     constructor() {
         this.auth0 = new auth0.WebAuth({
@@ -20,16 +19,13 @@ class Auth implements AuthType {
             domain: 'ieng-final-project.eu.auth0.com',
             audience: 'https://ieng-final-project.eu.auth0.com/userinfo',
             clientID: 'itCUjipghPHaeGzOC72mj04evZCBDcns',
-            redirectUri: `${window.location.origin}/login`,
+            redirectUri: `${window.location.origin}/callback`,
             responseType: 'id_token',
             scope: 'openid profile',
         });
-        this.idToken = getStorage('token', '');
+        this.idToken = getStorage(tokenStorageKey, '');
+        this.expiresAt = getStorage(tokenExpiresStorageKey, '');
     }
-
-    getProfile = () => {
-        return this.profile;
-    };
 
     getIdToken = () => {
         if (this.idToken) return this.idToken;
@@ -40,9 +36,7 @@ class Auth implements AuthType {
     };
 
     signIn = () => {
-        this.auth0.authorize({
-            connection: 'google-oauth2',
-        });
+        this.auth0.authorize();
     };
 
     handleAuthentication = () => {
@@ -51,7 +45,6 @@ class Auth implements AuthType {
 
             this.auth0.parseHash((err, authResult) => {
                 if (err) {
-                    console.log('error1');
                     return reject(err);
                 }
                 if (!authResult || !authResult.idToken) {
@@ -64,31 +57,31 @@ class Auth implements AuthType {
     };
 
     setSession = (authResult: Auth0DecodedHash) => {
-        console.log(authResult);
         this.idToken = authResult.idToken;
-        setStorage('token', authResult.idToken);
-        this.profile = authResult.idTokenPayload;
-        // set the time that the id token will expire at
         this.expiresAt = authResult.idTokenPayload.exp * 1000;
+        setStorage(tokenStorageKey, this.idToken);
+        setStorage(tokenExpiresStorageKey, this.expiresAt);
     };
 
     signOut = () => {
-        // clear id token, profile, and expiration
-        this.idToken = null;
-        this.profile = null;
-        this.expiresAt = null;
-        removeStorage('token');
+        this.auth0.logout({
+            returnTo: window.location.origin,
+            clientID: 'itCUjipghPHaeGzOC72mj04evZCBDcns',
+        });
+        removeStorage(tokenStorageKey);
+        removeStorage(tokenExpiresStorageKey);
+        removeStorage(roleStorageKey);
     };
 
-    silentAuth() {
-        return new Promise((resolve, reject) => {
+    silentAuth = () => {
+        return new Promise((resolve) => {
             this.auth0.checkSession({}, (err, authResult) => {
                 if (err) this.signIn();
                 this.setSession(authResult);
                 resolve();
             });
         });
-    }
+    };
 }
 
 const auth0Client = new Auth();

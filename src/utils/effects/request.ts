@@ -16,7 +16,6 @@ const instance = Axios.create({
 
 instance.interceptors.request.use(async (request) => {
     runInDevelopment(() => console.log('>>>>>>>>>>>>', request));
-    console.log(auth0Client);
     request.headers.Authorization = `Bearer ${auth0Client.getIdToken()}`;
     return Promise.resolve(request);
 });
@@ -69,7 +68,7 @@ export interface RequestOptionType {
 }
 
 const unauthorizedError: ErrorCodesType = {
-    code: 403,
+    code: 401,
     action: () => {},
 };
 

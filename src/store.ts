@@ -34,7 +34,6 @@ const saveStateToStorage = (key: string) => {
 
 store.subscribe(() => {
     saveStateToStorage('language');
-    saveStateToStorage('token');
     saveStateToStorage('role');
 });
 
