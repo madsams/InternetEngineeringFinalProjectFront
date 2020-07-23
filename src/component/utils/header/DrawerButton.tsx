@@ -11,8 +11,7 @@ import ITypography from '../ITypography';
 import {DrawerItem, StringsJson} from '../../../utils/types';
 import {makeStyles} from '@material-ui/core/styles';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import {useDispatch} from 'react-redux';
-import {logoutAction} from '../../../utils/actions/actions';
+import auth0Client from '../../../utils/auth0Client';
 
 const useStyles = makeStyles({
     drawer: {
@@ -29,11 +28,14 @@ const strings: StringsJson = {
         en: 'Logout',
         fa: 'خروج',
     },
+    menuTooltip: {
+        en: 'Menu',
+        fa: 'منو',
+    },
 };
 
 const DrawerButton = ({list}: DrawerButtonProps) => {
     const classes = useStyles();
-    const dispatch = useDispatch();
     const [open, setOpen] = useState<boolean>(false);
     const toggleDrawer = (value: boolean) => (
         event: React.KeyboardEvent | React.MouseEvent,
@@ -48,8 +50,6 @@ const DrawerButton = ({list}: DrawerButtonProps) => {
 
         setOpen(value);
     };
-
-    const logout = () => dispatch(logoutAction());
 
     //todo expandMore and expandLess
     const drawerList = () => (
@@ -73,7 +73,7 @@ const DrawerButton = ({list}: DrawerButtonProps) => {
                             </ListItemText>
                         </ListItem>
                     ))}
-                <ListItem button onClick={logout}>
+                <ListItem button onClick={auth0Client.signOut}>
                     <ListItemIcon>
                         <ExitToAppIcon />
                     </ListItemIcon>
@@ -87,7 +87,7 @@ const DrawerButton = ({list}: DrawerButtonProps) => {
 
     return (
         <>
-            <ITooltip en={'Menu'} fa={'منو'}>
+            <ITooltip title={strings.menuTooltip}>
                 <IconButton
                     color="inherit"
                     aria-label="lang"

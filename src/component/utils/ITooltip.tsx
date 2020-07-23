@@ -3,11 +3,12 @@ import {Tooltip} from '@material-ui/core';
 import React from 'react';
 import {LangBaseJson} from '../../utils/types';
 
-interface ITooltipProps extends LangBaseJson {
+interface ITooltipProps {
     children: React.ReactElement;
+    title: LangBaseJson;
 }
 
-const ITooltip = ({children, ...title}: ITooltipProps) => {
+const ITooltip = ({children, title}: ITooltipProps) => {
     const iTitle = useLanguage(title);
 
     return (

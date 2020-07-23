@@ -10,20 +10,32 @@ import centre from './centreAgent';
 import field from './fieldAgent';
 import ReduxToastr from 'react-redux-toastr';
 import {useDirection} from '../utils/hooks';
+import auth0Client from '../utils/auth0Client';
 
 const mainApplications = [field, centre, login];
 
-const useApplication = (): MainApplicationType<string> => {
-    const role = useSelector<RootState, Role>((state) => state.role);
-    return mainApplications.find((a) => a.role === role) || login;
-};
-
 const App = () => {
-    const mainApp = useApplication();
     const isRTL = useDirection();
+    const role = useSelector<RootState, Role>((state) => state.role);
+    const [mainApp, setMainApp] = useState<MainApplicationType<string>>(login);
+
+    useEffect(() => {
+        setMainApp(
+            auth0Client.isAuthenticated()
+                ? mainApplications.find((a) => a.role === role) || login
+                : login,
+        );
+    }, [role]);
 
     return (
         <Router>
+            <ReduxToastr
+                timeOut={3000}
+                position={isRTL ? 'top-left' : 'top-right'}
+                transitionIn="fadeIn"
+                transitionOut="fadeOut"
+                closeOnToastrClick
+            />
             <IHeader
                 title={mainApp.headerTitle}
                 drawerList={mainApp.routes}
@@ -37,13 +49,6 @@ const App = () => {
                     />
                 </Route>
             </Switch>
-            <ReduxToastr
-                timeOut={3000}
-                position={isRTL ? 'top-left' : 'top-right'}
-                transitionIn="fadeIn"
-                transitionOut="fadeOut"
-                closeOnToastrClick
-            />
         </Router>
     );
 };
