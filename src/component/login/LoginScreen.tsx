@@ -7,6 +7,7 @@ import {getRoles} from './actions';
 import ILoadingChecker from '../utils/ILoadingChecker';
 import IFailedChecker from '../utils/IFailedChecker';
 import {RootState} from '../../store';
+import IButton from '../utils/IButton';
 
 const strings: StringsJson = {
     text: {
@@ -28,16 +29,6 @@ const strings: StringsJson = {
 };
 const LoginScreen = () => {
     const dispatch = useDispatch();
-    /*const handleCentreLogin = () => {
-        dispatch(login1(Role.centreAgent));
-    };
-
-    const handleFieldLogin = () => {
-        dispatch(login1(Role.fieldAgent));
-    };
-    const handleLogin = () => {
-        window.location.href = `${process.env.REACT_APP_HOST}/login`;
-    };*/
 
     const isLoading = useSelector<RootState, boolean>(
         (state) => state.login.rolesOfUser.isLoading,
@@ -54,16 +45,16 @@ const LoginScreen = () => {
             <ITypography text={strings.text} variant="h6" className="mb-4" />
             <ILoadingChecker isLoading={isLoading}>
                 <IFailedChecker isFailed={isFailed} reloadAction={getRoles}>
-                    Logged iin
+                    Logged in
                 </IFailedChecker>
             </ILoadingChecker>
-            {/*
+
             <IButton
-                title={strings.buttonAsCentre}
-                onClick={handleCentreLogin}
+                title={strings.buttonAsField}
+                onClick={() => {
+                    window.location.href = `${process.env.REACT_APP_HOST}/login?returnTo=${window.location.origin}`;
+                }}
             />
-            <IButton title={strings.buttonAsField} onClick={handleFieldLogin} />
-*/}
         </IContainer>
     );
 };

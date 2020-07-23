@@ -67,9 +67,7 @@ export interface RequestOptionType {
 
 const unauthorizedError: ErrorCodesType = {
     code: 403,
-    action: () => {
-        window.location.href = `${process.env.REACT_APP_HOST}/login`;
-    },
+    action: () => {},
 };
 
 const request = (requestOption: RequestOptionType): IThunkAction => async (
@@ -154,6 +152,8 @@ const request = (requestOption: RequestOptionType): IThunkAction => async (
                                 ),
                             );
                         if (errorCode.action) errorCode.action(error);
+                        if (errorAction)
+                            dispatch(errorAction(failToastMessage));
                         errorCodeActioned = true;
                     }
                 });
