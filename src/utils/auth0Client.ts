@@ -50,6 +50,7 @@ class Auth implements AuthType {
                 if (!authResult || !authResult.idToken) {
                     return reject(err);
                 }
+                console.log(authResult);
                 this.setSession(authResult);
                 resolve();
             });
