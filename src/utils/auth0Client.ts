@@ -76,7 +76,7 @@ class Auth implements AuthType {
     silentAuth = () => {
         return new Promise((resolve) => {
             this.auth0.checkSession({}, (err, authResult) => {
-                if (err) this.signIn();
+                if (err) return this.signIn();
                 this.setSession(authResult);
                 resolve();
             });
