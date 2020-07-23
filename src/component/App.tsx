@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {MainApplicationType, Role} from '../utils/types';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import IHeader from './utils/header/IHeader';
@@ -14,16 +14,18 @@ import auth0Client from '../utils/auth0Client';
 
 const mainApplications = [field, centre, login];
 
-const useApplication = (): MainApplicationType<string> => {
-    const role = useSelector<RootState, Role>((state) => state.role);
-    return auth0Client.isAuthenticated()
-        ? mainApplications.find((a) => a.role === role) || login
-        : login;
-};
-
 const App = () => {
-    const mainApp = useApplication();
     const isRTL = useDirection();
+    const role = useSelector<RootState, Role>((state) => state.role);
+    const [mainApp, setMainApp] = useState<MainApplicationType<string>>(login);
+
+    useEffect(() => {
+        setMainApp(
+            auth0Client.isAuthenticated()
+                ? mainApplications.find((a) => a.role === role) || login
+                : login,
+        );
+    }, [role]);
 
     return (
         <Router>
