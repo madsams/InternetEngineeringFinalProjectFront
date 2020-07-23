@@ -7,12 +7,15 @@ import {createStyles, Modal, Theme, Typography} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../store';
-import {Filter, LocationFilter} from '../types';
-import Locations from './Locations';
+import {Filter, LocationFilter, NumberFilter} from '../types';
 import IButton from '../../utils/IButton';
-import {getFormTable} from '../actions';
+import {getFormTable, setAllFilter} from '../actions';
 import {useParams} from 'react-router-dom';
 import {useGenerateFormTableParam} from '../hook';
+import LocationInput from './LocationInput';
+import LocationShow from './LocationShow';
+import NumberShow from './NumberShow';
+import NumberInput from './NumberInput';
 
 const strings: StringsJson = {
     iconTooltip: {
@@ -35,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
             position: 'absolute',
             width: '80%',
             height: '80%',
-            backgroundColor: theme.palette.background.paper,
+            backgroundColor: theme.palette.background.default,
             border: '2px solid #000',
             boxShadow: theme.shadows[5],
             padding: theme.spacing(2, 4, 3),
@@ -72,6 +75,11 @@ const CentreTableFilter = () => {
         dispatch(getFormTable(id, param));
     };
 
+    const handleCancel = () => {
+        dispatch(setAllFilter({}));
+        handleClose();
+    };
+
     return (
         <>
             <Modal open={open}>
@@ -97,7 +105,7 @@ const CentreTableFilter = () => {
                         />
                         <IButton
                             title={strings.cancel}
-                            onClick={handleClose}
+                            onClick={handleCancel}
                             className={classes.button}
                         />
                     </div>
@@ -123,15 +131,26 @@ const IFilter = ({type, title, name}: FilterProps) => {
         (state) => state.centre.filter[name],
     );
 
-    const filterInput =
+    const show =
         type === FieldTypes.Text ? (
-            <FilterText name={name} filters={filter} />
+            <FilterText name={name} filter={filter} />
         ) : type === FieldTypes.Number ? (
-            <FilterNumber name={name} filters={filter} />
+            <NumberShow name={name} filter={filter as NumberFilter} />
         ) : type === FieldTypes.Location ? (
-            <Locations name={name} filters={filter as LocationFilter} />
+            <LocationShow name={name} filter={filter as LocationFilter} />
         ) : (
-            <FilterDate name={name} filters={filter} />
+            <FilterDate name={name} filter={filter} />
+        );
+
+    const input =
+        type === FieldTypes.Text ? (
+            <FilterText name={name} filter={filter} />
+        ) : type === FieldTypes.Number ? (
+            <NumberInput name={name} filter={filter as NumberFilter} />
+        ) : type === FieldTypes.Location ? (
+            <LocationInput name={name} filter={filter as LocationFilter} />
+        ) : (
+            <FilterDate name={name} filter={filter} />
         );
 
     return (
@@ -141,7 +160,10 @@ const IFilter = ({type, title, name}: FilterProps) => {
                     <Typography>{title}</Typography>
                 </div>
                 <div className="flex-2 flex-row align-items-center">
-                    {filterInput}
+                    <div className="flex-1">{input}</div>
+                    <div className="flex-2 flex-row align-items-center justify-content-center">
+                        {show}
+                    </div>
                 </div>
             </div>
         </>
@@ -149,19 +171,19 @@ const IFilter = ({type, title, name}: FilterProps) => {
 };
 
 export interface FilterInputProps {
-    filters: Filter;
+    filter: Filter;
     name: string;
 }
 
-const FilterText = ({filters, name}: FilterInputProps) => {
+const FilterText = ({filter, name}: FilterInputProps) => {
     return <div>text</div>;
 };
 
-const FilterNumber = ({filters, name}: FilterInputProps) => {
+const FilterNumber = ({filter, name}: FilterInputProps) => {
     return <div>number</div>;
 };
 
-const FilterDate = ({filters, name}: FilterInputProps) => {
+const FilterDate = ({filter, name}: FilterInputProps) => {
     return <div>date</div>;
 };
 export default CentreTableFilter;

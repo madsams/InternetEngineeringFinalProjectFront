@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {MenuItem, Select} from '@material-ui/core';
 import {useDispatch, useSelector} from 'react-redux';
-import {getAreas} from '../actions';
+import {getAreas, setFilter} from '../actions';
 import {RootState} from '../../../store';
 import {DataRequestReducer} from '../../../utils/generics';
 import {Area, StringsJson} from '../../../utils/types';
@@ -11,8 +11,8 @@ import {useLanguage} from '../../../utils/hooks';
 import {LocationFilter} from '../types';
 
 interface LocationInputProps {
-    addFilter: (area: Area) => void;
-    filters: LocationFilter | undefined;
+    filter: LocationFilter | undefined;
+    name: string;
 }
 
 const strings: StringsJson = {
@@ -22,7 +22,7 @@ const strings: StringsJson = {
     },
 };
 
-const LocationInput = ({addFilter, filters}: LocationInputProps) => {
+const LocationInput = ({filter, name}: LocationInputProps) => {
     const dispatch = useDispatch();
     const placeholder = useLanguage(strings.placeholder);
     useEffect(() => {
@@ -32,6 +32,8 @@ const LocationInput = ({addFilter, filters}: LocationInputProps) => {
         RootState,
         DataRequestReducer<Area[]>
     >((state) => state.centre.areas);
+    const addFilter = (area: Area) =>
+        dispatch(setFilter(name, filter ? [...filter, area.id] : [area.id]));
 
     const handleChoose = (event: React.ChangeEvent<{value: unknown}>) =>
         addFilter(JSON.parse(event.target.value as string) as Area);
@@ -44,9 +46,7 @@ const LocationInput = ({addFilter, filters}: LocationInputProps) => {
                     onChange={handleChoose}
                     className="w-100">
                     {areas
-                        .filter((a) =>
-                            filters ? !filters.includes(a.id) : true,
-                        )
+                        .filter((a) => (filter ? !filter.includes(a.id) : true))
                         .map((a) => (
                             <MenuItem
                                 key={a.id}

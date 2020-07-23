@@ -44,7 +44,10 @@ const SetRole = () => {
     };
     return (
         <ILoadingChecker isLoading={isLoading}>
-            <IFailedChecker isFailed={isFailed} reloadAction={getRoles}>
+            {/*todo*/}
+            <IFailedChecker
+                isFailed={false && isFailed}
+                reloadAction={getRoles}>
                 <IButton
                     title={strings.buttonAsCentre}
                     onClick={handleCentreLogin}

@@ -10,9 +10,12 @@ import {
     CENTRE_GET_AREAS,
     CENTRE_GET_FORM_ANSWER_DETAIL,
     CENTRE_GET_FORM_TABLE,
+    CENTRE_SET_ALL_FILTER,
     CENTRE_SET_FILTER,
     Filter,
+    FilterState,
     GetFormTableParam,
+    SetAllFilter,
     SetFilter,
 } from './types';
 
@@ -36,6 +39,11 @@ export const setFilter = (name: string, filter: Filter): SetFilter => ({
         name,
         filter,
     },
+});
+
+export const setAllFilter = (filter: FilterState): SetAllFilter => ({
+    type: CENTRE_SET_ALL_FILTER,
+    payload: filter,
 });
 
 export const getAreas = createGetRequestSimpleActions<Area[]>(

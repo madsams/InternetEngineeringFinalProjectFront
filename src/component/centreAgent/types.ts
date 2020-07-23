@@ -6,6 +6,7 @@ export const CENTRE_GET_FORM_ANSWER_DETAIL = 'CENTRE_GET_FORM_ANSWER_DETAIL';
 export const CENTRE_GET_AREAS = 'CENTRE_GET_AREAS';
 
 export const CENTRE_SET_FILTER = 'CENTRE_SET_FILTER';
+export const CENTRE_SET_ALL_FILTER = 'CENTRE_SET_ALL_FILTER';
 
 export type LocationFilter = ID[];
 export type DateFilter = {from: Date; to: Date};
@@ -28,7 +29,11 @@ export interface SetFilter extends IDataAction<SetFilterPayload> {
     type: typeof CENTRE_SET_FILTER;
 }
 
-export type FilterAction = SetFilter;
+export interface SetAllFilter extends IDataAction<FilterState> {
+    type: typeof CENTRE_SET_ALL_FILTER;
+}
+
+export type FilterAction = SetFilter | SetAllFilter;
 
 export interface FilterState {
     [name: string]: Filter;

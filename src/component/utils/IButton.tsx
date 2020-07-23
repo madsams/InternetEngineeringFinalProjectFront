@@ -28,7 +28,6 @@ const IButton = ({
     title,
 }: IButtonProps) => {
     const classes = useStyle();
-    //todo isLoading not working
     return (
         <Button
             color={color}
