@@ -67,11 +67,6 @@ export interface RequestOptionType {
     reject?(error?: AxiosError): void;
 }
 
-const unauthorizedError: ErrorCodesType = {
-    code: 401,
-    action: () => {},
-};
-
 const request = (requestOption: RequestOptionType): IThunkAction => async (
     dispatch,
 ) => {
@@ -96,6 +91,11 @@ const request = (requestOption: RequestOptionType): IThunkAction => async (
         successAction,
         callback,
     } = requestOption;
+
+    const unauthorizedError: ErrorCodesType = {
+        code: 401,
+        action: () => {},
+    };
 
     // Start loading
     if (pendingAction) dispatch(pendingAction());

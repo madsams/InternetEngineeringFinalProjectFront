@@ -10,12 +10,15 @@ import centre from './centreAgent';
 import field from './fieldAgent';
 import ReduxToastr from 'react-redux-toastr';
 import {useDirection} from '../utils/hooks';
+import auth0Client from '../utils/auth0Client';
 
 const mainApplications = [field, centre, login];
 
 const useApplication = (): MainApplicationType<string> => {
     const role = useSelector<RootState, Role>((state) => state.role);
-    return mainApplications.find((a) => a.role === role) || login;
+    return auth0Client.isAuthenticated()
+        ? mainApplications.find((a) => a.role === role) || login
+        : login;
 };
 
 const App = () => {
