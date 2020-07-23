@@ -1,6 +1,6 @@
 import {LocationFilter} from '../types';
 import React from 'react';
-import {FilterInputProps} from './CentreTableFilter';
+import {FilterInputProps} from './index';
 import {makeStyles} from '@material-ui/core/styles';
 import LocationInput from './LocationInput';
 import {useDispatch, useSelector} from 'react-redux';
