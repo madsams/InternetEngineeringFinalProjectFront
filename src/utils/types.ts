@@ -68,7 +68,7 @@ export enum Role {
     fieldAgent = 'field',
 }
 
-export type PolygonsOfLocation = string[];
+export type PolygonsOfLocation = Area[];
 
 export interface DrawerItem<P extends Path> {
     title?: LangBaseJson;

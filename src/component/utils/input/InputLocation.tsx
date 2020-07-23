@@ -42,11 +42,11 @@ const InputLocation = ({
         } else if ((value as Location).lat) {
             const val = value as Location;
             return polygons.length > 0
-                ? join(polygons)
+                ? join(polygons.map((v) => v.name))
                 : `${val.lat}, ${val.lng}`;
         } else {
             const val = value as PolygonsOfLocation;
-            return join(val);
+            return join(val.map((v) => v.name));
         }
     };
     return (

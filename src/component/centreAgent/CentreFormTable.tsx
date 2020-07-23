@@ -98,7 +98,7 @@ const CentreFormTable = () => {
                     } else if (type === FieldTypes.Location) {
                         if ((value as PolygonsOfLocation)[0]) {
                             const val = value as PolygonsOfLocation;
-                            return join(val);
+                            return join(val.map((v) => v.name));
                         } else {
                             const val = value as Location;
                             return `(${val.lat.toFixed(3)}, ${val.lng.toFixed(
