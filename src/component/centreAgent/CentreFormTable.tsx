@@ -20,6 +20,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store';
 import CentreTableCollapsible from './CentreTableCollapsible';
 import CentreTableToolbar from './CentreTableToolbar';
+import {useGenerateFormTableParam} from './hook';
 
 const strings: StringsJson = {
     subtitle: {
@@ -64,9 +65,13 @@ const CentreFormTable = () => {
     const isFailed = useSelector<RootState, boolean>(
         (state) => state.centre.formTable.isFailed,
     );
+    const param = useGenerateFormTableParam();
+
     useEffect(() => {
-        dispatch(getFormTable(id));
+        dispatch(getFormTable(id, param));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch, id]);
+
     const tableData = data.records.map((v) => ({
         id: v.answerId,
         value: v.values,
@@ -112,7 +117,7 @@ const CentreFormTable = () => {
         <ILoadingChecker isLoading={isLoading}>
             <IFailedChecker
                 isFailed={isFailed}
-                reloadAction={() => getFormTable(id)}>
+                reloadAction={() => getFormTable(id, param)}>
                 <Paper className="p-2">
                     <CentreTableToolbar
                         title={stringCreators.getTitle(data.title)}

@@ -1,6 +1,7 @@
 import {
     createGetRequestSimpleActions,
     createGetRequestWithIdActions,
+    createGetRequestWithIdAndParamsAction,
 } from '../../utils/generics';
 import {Area, Form, FormAnswer, FormTable} from '../../utils/types';
 import api from '../../utils/api';
@@ -11,6 +12,7 @@ import {
     CENTRE_GET_FORM_TABLE,
     CENTRE_SET_FILTER,
     Filter,
+    GetFormTableParam,
     SetFilter,
 } from './types';
 
@@ -19,10 +21,10 @@ export const getForms = createGetRequestSimpleActions<Form>(
     api.formsList,
 );
 
-export const getFormTable = createGetRequestWithIdActions<FormTable>(
-    CENTRE_GET_FORM_TABLE,
-    api.answerOfForm,
-);
+export const getFormTable = createGetRequestWithIdAndParamsAction<
+    FormTable,
+    GetFormTableParam
+>(CENTRE_GET_FORM_TABLE, api.answerOfForm);
 
 export const getSelectedFormAnswerDetail = createGetRequestWithIdActions<
     FormAnswer

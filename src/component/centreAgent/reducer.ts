@@ -6,6 +6,7 @@ import {
     CENTRE_GET_AREAS,
     CENTRE_GET_FORM_ANSWER_DETAIL,
     CENTRE_GET_FORM_TABLE,
+    CENTRE_SET_FILTER,
     FilterAction,
     FilterState,
 } from './types';
@@ -33,7 +34,7 @@ const filterReducer: Reducer<FilterState, FilterAction> = (
     state = {},
     action,
 ) => {
-    if (action.type === 'CENTRE_SET_FILTER') {
+    if (action.type === CENTRE_SET_FILTER) {
         return {...state, [action.payload.name]: action.payload.filter};
     } else {
         return state;

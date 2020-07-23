@@ -3,9 +3,10 @@ import React from 'react';
 import {FilterInputProps} from './CentreTableFilter';
 import {makeStyles} from '@material-ui/core/styles';
 import LocationInput from './LocationInput';
-import {useDispatch} from 'react-redux';
-import {Area} from '../../../utils/types';
+import {useDispatch, useSelector} from 'react-redux';
+import {Area, ID} from '../../../utils/types';
 import {setFilter} from '../actions';
+import {RootState} from '../../../store';
 
 interface FilterLocationProps extends FilterInputProps {
     filters: LocationFilter | undefined;
@@ -25,17 +26,19 @@ const useStyle = makeStyles({
 const Locations = ({filters, name}: FilterLocationProps) => {
     const classes = useStyle();
     const dispatch = useDispatch();
+    const areas = useSelector<RootState, Area[]>(
+        (state) => state.centre.areas.data,
+    );
     const addFilter = (area: Area) =>
-        dispatch(setFilter(name, filters ? [...filters, area] : [area]));
+        dispatch(setFilter(name, filters ? [...filters, area.id] : [area.id]));
 
-    const getRemoveFilter = (filter: Area) => () =>
+    const getRemoveFilter = (id: ID) => () =>
         dispatch(
-            setFilter(
-                name,
-                filters ? filters.filter((f) => f.id !== filter.id) : [],
-            ),
+            setFilter(name, filters ? filters.filter((f) => f !== id) : []),
         );
 
+    const findFilter = (f: ID): string =>
+        (areas.find((a) => a.id === f) as Area).name;
     return (
         <>
             <div className="flex-1">
@@ -51,7 +54,7 @@ const Locations = ({filters, name}: FilterLocationProps) => {
                             }
                             onClick={getRemoveFilter(f)}
                             key={i}>
-                            {f.name}
+                            {findFilter(f)}
                         </div>
                     ))}
             </div>

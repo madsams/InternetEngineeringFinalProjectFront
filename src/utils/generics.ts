@@ -180,7 +180,7 @@ export const createGetRequestWithIdActions = <SD>(
         callback,
     );
 
-export const GetRequestWithIdAndParamsAction = <SD, P extends object>(
+export const createGetRequestWithIdAndParamsAction = <SD, P extends object>(
     actionType: string,
     url: IdApi,
     getData?: (data: any) => SD,

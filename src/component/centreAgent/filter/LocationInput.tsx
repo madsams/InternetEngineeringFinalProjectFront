@@ -8,10 +8,11 @@ import {Area, StringsJson} from '../../../utils/types';
 import ILoadingChecker from '../../utils/ILoadingChecker';
 import IFailedChecker from '../../utils/IFailedChecker';
 import {useLanguage} from '../../../utils/hooks';
+import {LocationFilter} from '../types';
 
 interface LocationInputProps {
     addFilter: (area: Area) => void;
-    filters: Area[] | undefined;
+    filters: LocationFilter | undefined;
 }
 
 const strings: StringsJson = {
@@ -44,9 +45,7 @@ const LocationInput = ({addFilter, filters}: LocationInputProps) => {
                     className="w-100">
                     {areas
                         .filter((a) =>
-                            filters
-                                ? !filters.map((f) => f.id).includes(a.id)
-                                : true,
+                            filters ? !filters.includes(a.id) : true,
                         )
                         .map((a) => (
                             <MenuItem
