@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {MainApplicationType, Role} from '../utils/types';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import IHeader from './utils/header/IHeader';
