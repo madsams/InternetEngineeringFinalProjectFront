@@ -91,9 +91,6 @@ const NumberSubInput = ({value, label, onChange}: NumberSubInputProps) => {
             label={iLabel}
             value={value}
             InputLabelProps={{shrink: value !== undefined}}
-            inputProps={{
-                dir: 'ltr',
-            }}
             type={'number'}
             onChange={onChange}
         />
