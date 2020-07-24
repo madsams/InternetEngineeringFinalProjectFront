@@ -5,10 +5,9 @@ import {
     FormAnswersRecordValues,
     FormTable,
     ID,
-    Location,
-    PolygonsOfLocation,
     StringCreatorsJson,
     StringsJson,
+    TableLocation,
 } from '../../utils/types';
 import {useFormat, useJoin, useLanguage} from '../../utils/hooks';
 import ITableContainer from '../utils/table';
@@ -97,21 +96,49 @@ const CentreFormTable = () => {
                     } else if (type === FieldTypes.Date) {
                         return formatMoment(new Date(value as string));
                     } else if (type === FieldTypes.Location) {
-                        if ((value as PolygonsOfLocation)[0]) {
-                            const val = value as PolygonsOfLocation;
-                            return join(val.map((v) => v.name));
+                        const val = value as TableLocation;
+
+                        if (!val.value) return null;
+                        if (val.cover && val.cover.length > 0) {
+                            return join(val.cover.map((v) => v.name));
                         } else {
-                            const val = value as Location;
-                            return `(${val.lat.toFixed(3)}, ${val.lng.toFixed(
+                            return `${val.value.lat.toFixed(
                                 3,
-                            )})`;
+                            )}, ${val.value.lng.toFixed(3)}`;
                         }
                     }
                 }
             }
-            return '_';
+            return null;
         });
         return [...cells, formatMoment(row.createdAt)];
+    };
+    const getCSVValues = (row: FormAnswersRecordValues) => {
+        return Object.keys(row).map((name) => {
+            const value = row[name];
+            if (value) {
+                const fieldInfo = data.fields.find((f) => f.name === name);
+                if (fieldInfo) {
+                    const type = fieldInfo.type;
+                    if (type === FieldTypes.Text) {
+                        return value as string;
+                    } else if (type === FieldTypes.Number) {
+                        return '' + value;
+                    } else if (type === FieldTypes.Date) {
+                        return new Date(value as string);
+                    } else if (type === FieldTypes.Location) {
+                        const val = value as TableLocation;
+
+                        if (!val.value) return null;
+                        else
+                            return `${val.value.lat.toFixed(
+                                3,
+                            )}, ${val.value.lng.toFixed(3)}`;
+                    }
+                }
+            }
+            return null;
+        });
     };
     const names = [...data.fields.map((f) => f.name), 'createdAt'];
 
@@ -132,7 +159,12 @@ const CentreFormTable = () => {
                         getRowValue={getRowValues}
                         names={names}
                     />
-                    <GetCSVFile data={data} />
+                    <GetCSVFile
+                        data={data.records
+                            .map((r) => r.values)
+                            .map((r) => getCSVValues(r))}
+                        headers={data.fields.map((f) => f.title)}
+                    />
                 </Paper>
             </IFailedChecker>
         </ILoadingChecker>

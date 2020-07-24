@@ -23,7 +23,7 @@ interface ITableContainerProps<D extends Data> {
     };
     renderCollapsible?: React.ComponentType<CollapsibleProps<D>>;
 
-    getRowValue(row: D): string[];
+    getRowValue(row: D): (string | null)[];
 }
 
 const ITableContainer = <D extends Data>({

@@ -89,6 +89,8 @@ export interface MainApplicationType<P extends Path> {
 
 export type Location = {lat: number; lng: number};
 
+export type TableLocation = {value: Location; cover: PolygonsOfLocation};
+export type TableValue = string | number | TableLocation;
 export type Value = string | number | Location | PolygonsOfLocation;
 
 export interface Option {
@@ -136,7 +138,7 @@ export interface FormAnswer extends FormType {
 export type Path = string;
 
 export interface FormAnswersRecordValues {
-    [nameOfField: string]: Value | Array<string>;
+    [nameOfField: string]: TableValue | Array<string>;
 }
 
 export interface FormAnswersRecord {
