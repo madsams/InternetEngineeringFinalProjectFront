@@ -7,7 +7,7 @@ import {createStyles, Modal, Theme, Typography} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../store';
-import {Filter, LocationFilter, NumberFilter} from '../types';
+import {DateFilter, Filter, LocationFilter, NumberFilter} from '../types';
 import IButton from '../../utils/IButton';
 import {getFormTable, setAllFilter} from '../actions';
 import {useParams} from 'react-router-dom';
@@ -16,6 +16,8 @@ import LocationInput from './LocationInput';
 import LocationShow from './LocationShow';
 import NumberShow from './NumberShow';
 import NumberInput from './NumberInput';
+import DateShow from './DateShow';
+import DateInput from './DateInput';
 
 const strings: StringsJson = {
     iconTooltip: {
@@ -139,7 +141,7 @@ const IFilter = ({type, title, name}: FilterProps) => {
         ) : type === FieldTypes.Location ? (
             <LocationShow name={name} filter={filter as LocationFilter} />
         ) : (
-            <FilterDate name={name} filter={filter} />
+            <DateShow name={name} filter={filter as DateFilter} />
         );
 
     const input =
@@ -150,7 +152,7 @@ const IFilter = ({type, title, name}: FilterProps) => {
         ) : type === FieldTypes.Location ? (
             <LocationInput name={name} filter={filter as LocationFilter} />
         ) : (
-            <FilterDate name={name} filter={filter} />
+            <DateInput name={name} filter={filter as DateFilter} />
         );
 
     return (
@@ -179,11 +181,4 @@ const FilterText = ({filter, name}: FilterInputProps) => {
     return <div>text</div>;
 };
 
-const FilterNumber = ({filter, name}: FilterInputProps) => {
-    return <div>number</div>;
-};
-
-const FilterDate = ({filter, name}: FilterInputProps) => {
-    return <div>date</div>;
-};
 export default CentreTableFilter;
