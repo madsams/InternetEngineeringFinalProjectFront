@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {MainApplicationType, Role} from '../utils/types';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router} from 'react-router-dom';
 import IHeader from './utils/header/IHeader';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store';
@@ -41,14 +41,11 @@ const App = () => {
                 drawerList={mainApp.routes}
                 drawerVisible={mainApp.drawerVisible}
             />
-            <Switch>
-                <Route path="/">
-                    <MainApplication
-                        routes={mainApp.routes}
-                        defaultPath={mainApp.defaultPath}
-                    />
-                </Route>
-            </Switch>
+
+            <MainApplication
+                routes={mainApp.routes}
+                defaultPath={mainApp.defaultPath}
+            />
         </Router>
     );
 };

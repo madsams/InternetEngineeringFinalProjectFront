@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 
 interface ITableRowProps<A> {
     row: A;
-    getValues: (row: A) => string[];
+    getValues: (row: A) => (string | null)[];
     renderCollapsible?: React.ComponentType<CollapsibleProps<A>>;
 }
 
@@ -51,7 +51,7 @@ const ITableRow = <A extends IObject>({
                 <TableCell align="right">{row['#']}</TableCell>
                 {cells.map((cell, index) => (
                     <TableCell align="right" key={'c' + index}>
-                        {cell}
+                        {cell || '_'}
                     </TableCell>
                 ))}
             </TableRow>

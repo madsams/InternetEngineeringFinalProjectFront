@@ -24,6 +24,12 @@ const field: MainApplicationType<FieldAgentPaths> = {
             icon: <HomeIcon />,
         },
         {
+            path: FORM_ANSWERS,
+            title: {en: 'Filled Forms', fa: 'فرم‌های پر شده'},
+            component: <FieldFormAnswersList />,
+            icon: <AssignmentTurnedInIcon />,
+        },
+        {
             path: FORMS_DETAIL(':id'),
             component: <FieldFormDetail />,
             hideInDrawer: true,
@@ -32,12 +38,6 @@ const field: MainApplicationType<FieldAgentPaths> = {
             path: FORM_ANSWERS_DETAIL(':id'),
             component: <FieldFormAnswerDetail />,
             hideInDrawer: true,
-        },
-        {
-            path: FORM_ANSWERS,
-            title: {en: 'Filled Forms', fa: 'فرم‌های پر شده'},
-            component: <FieldFormAnswersList />,
-            icon: <AssignmentTurnedInIcon />,
         },
     ],
     defaultPath: FORMS,

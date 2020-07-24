@@ -1,9 +1,10 @@
 import React from 'react';
 import {CSVLink} from 'react-csv';
-import {FormTable, StringsJson} from '../../utils/types';
+import {StringsJson} from '../../utils/types';
 import ITypography from '../utils/ITypography';
 import {Button} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
+import {Data} from 'react-csv/components/CommonPropTypes';
 
 const strings: StringsJson = {
     getCsv: {
@@ -12,10 +13,6 @@ const strings: StringsJson = {
     },
 };
 
-interface GetCSVFileProps {
-    data: FormTable;
-}
-
 const useStyle = makeStyles({
     button: {
         maxWidth: 250,
@@ -23,12 +20,15 @@ const useStyle = makeStyles({
     },
 });
 
-const GetCSVFile = ({data}: GetCSVFileProps) => {
+interface GetCSVFileProps {
+    data: Data;
+    headers: string[];
+}
+
+const GetCSVFile = ({data, headers}: GetCSVFileProps) => {
     const classes = useStyle();
     return (
-        <CSVLink
-            data={data.records.map((r) => r.values)}
-            headers={data.fields.map((f) => ({label: f.title, key: f.name}))}>
+        <CSVLink data={data} headers={headers}>
             <Button
                 variant="contained"
                 color="primary"

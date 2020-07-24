@@ -12,6 +12,7 @@ import {DrawerItem, StringsJson} from '../../../utils/types';
 import {makeStyles} from '@material-ui/core/styles';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import auth0Client from '../../../utils/auth0Client';
+import {Link} from 'react-router-dom';
 
 const useStyles = makeStyles({
     drawer: {
@@ -65,8 +66,8 @@ const DrawerButton = ({list}: DrawerButtonProps) => {
                         <ListItem
                             button
                             key={item.path}
-                            component="a"
-                            href={item.path}>
+                            component={Link}
+                            to={item.path}>
                             <ListItemIcon>{item.icon}</ListItemIcon>
                             <ListItemText>
                                 <ITypography text={item.title} align="left" />

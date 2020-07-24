@@ -6,7 +6,7 @@ import {IObject} from '../../../utils/types';
 
 interface ITableBodyProps<A> {
     array: A[];
-    getValues: (row: A) => string[];
+    getValues: (row: A) => (string | null)[];
     renderCollapsible?: React.ComponentType<CollapsibleProps<A>>;
 }
 
