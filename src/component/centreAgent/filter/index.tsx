@@ -7,7 +7,13 @@ import {createStyles, Modal, Theme, Typography} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../store';
-import {DateFilter, Filter, LocationFilter, NumberFilter} from '../types';
+import {
+    DateFilter,
+    Filter,
+    LocationFilter,
+    NumberFilter,
+    TextFilter,
+} from '../types';
 import IButton from '../../utils/IButton';
 import {getFormTable, setAllFilter} from '../actions';
 import {useParams} from 'react-router-dom';
@@ -18,6 +24,8 @@ import NumberShow from './NumberShow';
 import NumberInput from './NumberInput';
 import DateShow from './DateShow';
 import DateInput from './DateInput';
+import TextInput from './TextInput';
+import TextShow from './TextShow';
 
 const strings: StringsJson = {
     iconTooltip: {
@@ -135,7 +143,7 @@ const IFilter = ({type, title, name}: FilterProps) => {
 
     const show =
         type === FieldTypes.Text ? (
-            <FilterText name={name} filter={filter} />
+            <TextShow name={name} filter={filter as TextFilter} />
         ) : type === FieldTypes.Number ? (
             <NumberShow name={name} filter={filter as NumberFilter} />
         ) : type === FieldTypes.Location ? (
@@ -146,7 +154,7 @@ const IFilter = ({type, title, name}: FilterProps) => {
 
     const input =
         type === FieldTypes.Text ? (
-            <FilterText name={name} filter={filter} />
+            <TextInput name={name} filter={filter as TextFilter} />
         ) : type === FieldTypes.Number ? (
             <NumberInput name={name} filter={filter as NumberFilter} />
         ) : type === FieldTypes.Location ? (
@@ -176,9 +184,5 @@ export interface FilterInputProps {
     filter: Filter;
     name: string;
 }
-
-const FilterText = ({filter, name}: FilterInputProps) => {
-    return <div>text</div>;
-};
 
 export default CentreTableFilter;

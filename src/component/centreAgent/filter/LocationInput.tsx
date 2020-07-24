@@ -44,7 +44,7 @@ const LocationInput = ({filter, name}: LocationInputProps) => {
                     renderValue={(value) => <div>{'' + value}</div>}
                     value={placeholder}
                     onChange={handleChoose}
-                    className="w-100">
+                    className="w-100 m-1 text-gray">
                     {areas
                         .filter((a) => (filter ? !filter.includes(a.id) : true))
                         .map((a) => (
