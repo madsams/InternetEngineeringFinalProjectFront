@@ -21,6 +21,7 @@ import {RootState} from '../../store';
 import CentreTableCollapsible from './CentreTableCollapsible';
 import CentreTableToolbar from './CentreTableToolbar';
 import {useGenerateFormTableParam} from './hook';
+import GetCSVFile from './GetCSVFile';
 
 const strings: StringsJson = {
     subtitle: {
@@ -113,6 +114,7 @@ const CentreFormTable = () => {
         return [...cells, formatMoment(row.createdAt)];
     };
     const names = [...data.fields.map((f) => f.name), 'createdAt'];
+
     return (
         <ILoadingChecker isLoading={isLoading}>
             <IFailedChecker
@@ -130,6 +132,7 @@ const CentreFormTable = () => {
                         getRowValue={getRowValues}
                         names={names}
                     />
+                    <GetCSVFile data={data} />
                 </Paper>
             </IFailedChecker>
         </ILoadingChecker>
