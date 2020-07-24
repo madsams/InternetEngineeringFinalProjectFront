@@ -1,52 +1,59 @@
 @import "./fonts/IRANSans/WebFonts/css/fontiran.css";
+
 body {
-  margin: 0;
-  font-family: -apple-system, IRANSans, 'Segoe UI', 'Roboto', 'Oxygen',
+    margin: 0;
+    font-family: -apple-system, IRANSans, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: inherit;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: inherit;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
 
 html, body, #root {
-  min-height: 100% !important;
-  height: 100% !important;
+    min-height: 100% !important;
+    height: 100% !important;
 }
 
 div, p, span {
-  font-family: IRANSans, sans-serif !important;
+    font-family: IRANSans, sans-serif !important;
 }
 
-#root{
-  display:flex;
-  flex-direction:column;
+#root {
+    display: flex;
+    flex-direction: column;
 }
 
 .flex-1 {
-  display: flex;
-  flex: 1 !important;
+    display: flex;
+    flex: 1 !important;
 }
 
 .flex-2 {
-  display: flex;
-  flex: 2  !important;
+    display: flex;
+    flex: 2 !important;
 }
 
 .flex-3 {
-  display: flex;
-  flex: 3 !important;
+    display: flex;
+    flex: 3 !important;
 }
 
 .flex-4 {
-  display: flex;
-  flex: 4 !important;
+    display: flex;
+    flex: 4 !important;
 }
 
-button:focus {outline:0;}
+button:focus {
+    outline: 0;
+}
+
+.text-gray {
+    color: #777777 !important;
+}

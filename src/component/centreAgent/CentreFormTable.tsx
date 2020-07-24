@@ -20,6 +20,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../store';
 import CentreTableCollapsible from './CentreTableCollapsible';
 import CentreTableToolbar from './CentreTableToolbar';
+import {useGenerateFormTableParam} from './hook';
+import GetCSVFile from './GetCSVFile';
 
 const strings: StringsJson = {
     subtitle: {
@@ -64,9 +66,13 @@ const CentreFormTable = () => {
     const isFailed = useSelector<RootState, boolean>(
         (state) => state.centre.formTable.isFailed,
     );
+    const param = useGenerateFormTableParam();
+
     useEffect(() => {
-        dispatch(getFormTable(id));
+        dispatch(getFormTable(id, param));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch, id]);
+
     const tableData = data.records.map((v) => ({
         id: v.answerId,
         value: v.values,
@@ -93,7 +99,7 @@ const CentreFormTable = () => {
                     } else if (type === FieldTypes.Location) {
                         if ((value as PolygonsOfLocation)[0]) {
                             const val = value as PolygonsOfLocation;
-                            return join(val);
+                            return join(val.map((v) => v.name));
                         } else {
                             const val = value as Location;
                             return `(${val.lat.toFixed(3)}, ${val.lng.toFixed(
@@ -108,11 +114,12 @@ const CentreFormTable = () => {
         return [...cells, formatMoment(row.createdAt)];
     };
     const names = [...data.fields.map((f) => f.name), 'createdAt'];
+
     return (
         <ILoadingChecker isLoading={isLoading}>
             <IFailedChecker
                 isFailed={isFailed}
-                reloadAction={() => getFormTable(id)}>
+                reloadAction={() => getFormTable(id, param)}>
                 <Paper className="p-2">
                     <CentreTableToolbar
                         title={stringCreators.getTitle(data.title)}
@@ -125,6 +132,7 @@ const CentreFormTable = () => {
                         getRowValue={getRowValues}
                         names={names}
                     />
+                    <GetCSVFile data={data} />
                 </Paper>
             </IFailedChecker>
         </ILoadingChecker>

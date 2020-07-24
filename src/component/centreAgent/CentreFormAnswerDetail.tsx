@@ -24,6 +24,6 @@ const CentreFormAnswerDetail = ({
     </div>
 );
 export default withForm<FormAnswer>(
-    (state) => state.field.formAnswerDetail,
+    (state) => state.centre.formAnswerDetail,
     getSelectedFormAnswerDetail,
 )(CentreFormAnswerDetail);

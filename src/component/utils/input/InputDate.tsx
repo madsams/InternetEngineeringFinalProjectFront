@@ -11,7 +11,9 @@ import TodayIcon from '@material-ui/icons/Today';
 
 interface InputDateProps extends IInputProps {
     value: string | null;
-
+    maxDate?: Date;
+    minDate?: Date;
+    className?: string;
     onChange(value: string | null): void;
 }
 
@@ -46,6 +48,9 @@ const InputDate = ({
     onChange,
     onBlur,
     disabled,
+    minDate,
+    maxDate,
+    className,
 }: InputDateProps) => {
     const momentFormat = useLanguage(momentFormatsLBJ);
     const util = useLanguage(utilsLBJ);
@@ -74,7 +79,9 @@ const InputDate = ({
                 value={value ? moment(value) : null}
                 onBlur={onBlur}
                 autoOk
-                minDate={new Date('0000-00-00')}
+                minDate={minDate}
+                maxDate={maxDate}
+                className={className}
                 onChange={handleDateChange}
                 InputProps={{
                     endAdornment: (

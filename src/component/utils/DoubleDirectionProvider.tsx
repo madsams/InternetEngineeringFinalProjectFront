@@ -26,8 +26,8 @@ const palette = {
         main: red.A400,
     },
     background: {
-        default: '#fff',
-        paper: '#fefefe',
+        default: '#e7e7e7',
+        paper: '#efefef',
     },
     text: {
         primary: '#222',

@@ -68,7 +68,7 @@ export enum Role {
     fieldAgent = 'field',
 }
 
-export type PolygonsOfLocation = string[];
+export type PolygonsOfLocation = Area[];
 
 export interface DrawerItem<P extends Path> {
     title?: LangBaseJson;
@@ -153,4 +153,9 @@ interface Sum {
 export interface FormTable extends Form {
     records: Array<FormAnswersRecord>;
     sum: Sum;
+}
+
+export interface Area {
+    id: ID;
+    name: string;
 }

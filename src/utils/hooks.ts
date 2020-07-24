@@ -32,7 +32,12 @@ export const useDirection = (): boolean => {
     return rtlLanguages.includes(language);
 };
 
-export const useFormat = (format?: LangBaseJson) => {
+export const useFormat = (
+    format: LangBaseJson = {
+        en: 'YYYY-MM-DD-(hh:mm)',
+        fa: 'jYYYY/jMM/jDD-(hh:mm)',
+    },
+) => {
     const languageSelector = useLanguageSelector();
     return (time: Date): string => {
         return languageSelector(formatMoment(time, format));
