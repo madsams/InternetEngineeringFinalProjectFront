@@ -14,22 +14,32 @@ import {
 
 const formsReducer = createDataRequestReducer<Form[]>(CENTRE_GET_ALL_FORMS, []);
 
+const initialFormTable = {
+    id: '',
+    title: '',
+    answersCount: 3,
+    createdAt: new Date(),
+    fields: [],
+    records: [],
+    sum: {},
+};
 const formTableReducer = createDataRequestReducer<FormTable>(
     CENTRE_GET_FORM_TABLE,
-    {
-        id: '',
-        title: '',
-        answersCount: 3,
-        createdAt: new Date(),
-        fields: [],
-        records: [],
-        sum: {},
-    },
+    initialFormTable,
 );
 
-const formAnswerDetailReducer = createDataRequestReducer<
-    FormAnswer | undefined
->(CENTRE_GET_FORM_ANSWER_DETAIL, undefined, true);
+const initialFormAnswerDetail = {
+    id: '',
+    fields: [],
+    title: '',
+    answersCount: 0,
+    createdAt: new Date(),
+    formId: '',
+};
+const formAnswerDetailReducer = createDataRequestReducer<FormAnswer>(
+    CENTRE_GET_FORM_ANSWER_DETAIL,
+    initialFormAnswerDetail,
+);
 
 const filterReducer: Reducer<FilterState, FilterAction> = (
     state = {},
