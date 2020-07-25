@@ -64,7 +64,7 @@ class Auth implements AuthType {
 
     signOut = () => {
         this.auth0.logout({
-            returnTo: window.location.origin,
+            returnTo: `${window.location.origin}`,
             clientID: `${process.env.REACT_APP_AUTH0_CLIENT_ID}`,
         });
         removeStorage(tokenStorageKey);
