@@ -5,7 +5,8 @@ declare global {
             REACT_APP_HOST: string;
             PUBLIC_URL: string;
             REACT_APP_GOOGLE_MAP_API_KEY: string;
-            REACT_APP_MAP_IR_API_KEY: string;
+            REACT_APP_AUTH0_DOMAIN: string;
+            REACT_APP_AUTH0_CLIENT_ID: string;
         }
     }
 }
