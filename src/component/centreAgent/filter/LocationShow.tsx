@@ -15,7 +15,7 @@ const useStyle = makeStyles({
     loc: {
         backgroundColor: '#777',
         color: '#fff',
-        width: 60,
+        minWidth: 60,
         height: 25,
         fontSize: 12,
         cursor: 'pointer',

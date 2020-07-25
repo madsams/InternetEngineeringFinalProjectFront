@@ -13,20 +13,12 @@ interface FormsListItemProps {
 const FilledFormsListItem = ({item}: FormsListItemProps) => (
     <Link to={FORM_ANSWERS_DETAIL(item.id)} className="text-decoration-none">
         <ListItem button component="div">
-            <ListItemText className="col-4">
-                <Typography
-                    variant="overline"
-                    align="left"
-                    color="textSecondary">
-                    {item.id}:
-                </Typography>
-            </ListItemText>
-            <ListItemText className="col-4">
+            <ListItemText className="col-6">
                 <Typography align="center" color="textPrimary">
                     {item.title}
                 </Typography>
             </ListItemText>
-            <ListItemText className="col-4">
+            <ListItemText className="col-6">
                 <ITypography
                     text={formatTimeAgo(item.createdAt)}
                     align="right"

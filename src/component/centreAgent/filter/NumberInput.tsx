@@ -59,7 +59,7 @@ const NumberInput = ({filter, name}: NumberInputProps) => {
         handleChange(newTo, newFrom);
     };
     return (
-        <>
+        <div className="flex-1 flex-row">
             <NumberSubInput
                 value={from}
                 label={strings.from}
@@ -70,7 +70,7 @@ const NumberInput = ({filter, name}: NumberInputProps) => {
                 label={strings.to}
                 onChange={handleToChange}
             />
-        </>
+        </div>
     );
 };
 export default NumberInput;

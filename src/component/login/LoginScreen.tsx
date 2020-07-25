@@ -30,7 +30,12 @@ const LoginScreen = () => {
 
     return (
         <IContainer className="d-flex flex-column justify-content-center align-items-center">
-            <ITypography text={strings.text} variant="h4" className="mb-4" />
+            <ITypography
+                text={strings.text}
+                variant="h4"
+                className="mb-4"
+                align="center"
+            />
 
             <IButton title={strings.button} onClick={handleClick} />
         </IContainer>
