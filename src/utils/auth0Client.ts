@@ -15,9 +15,9 @@ class Auth implements AuthType {
 
     constructor() {
         this.auth0 = new auth0.WebAuth({
-            domain: process.env.REACT_APP_AUTH0_DOMAIN,
+            domain: `${process.env.REACT_APP_AUTH0_DOMAIN}`,
             audience: `https://${process.env.REACT_APP_AUTH0_DOMAIN}/userinfo`,
-            clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
+            clientID: `${process.env.REACT_APP_AUTH0_CLIENT_ID}`,
             redirectUri: `${window.location.origin}/callback`,
             responseType: 'id_token',
             scope: 'openid profile',
@@ -64,8 +64,8 @@ class Auth implements AuthType {
 
     signOut = () => {
         this.auth0.logout({
-            returnTo: window.location.origin,
-            clientID: process.env.REACT_APP_AUTH0_CLIENT_ID,
+            returnTo: `${window.location.origin}`,
+            clientID: `${process.env.REACT_APP_AUTH0_CLIENT_ID}`,
         });
         removeStorage(tokenStorageKey);
         removeStorage(tokenExpiresStorageKey);
