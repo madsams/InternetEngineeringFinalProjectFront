@@ -52,7 +52,7 @@ const DateInput = ({filter, name}: DateInputProps) => {
         handleChange(newTo, newFrom);
     };
     return (
-        <>
+        <div className="flex-1 flex-row">
             <DateSubInput
                 value={from ? from.toString() : undefined}
                 label={strings.from}
@@ -67,7 +67,7 @@ const DateInput = ({filter, name}: DateInputProps) => {
                 name="to"
                 minDate={from}
             />
-        </>
+        </div>
     );
 };
 export default DateInput;

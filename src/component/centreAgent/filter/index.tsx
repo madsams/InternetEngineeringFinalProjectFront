@@ -3,7 +3,14 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import ITooltip from '../../utils/ITooltip';
 import React, {useState} from 'react';
 import {Field, FieldTypes, StringsJson} from '../../../utils/types';
-import {createStyles, Modal, Theme, Typography} from '@material-ui/core';
+import {
+    createStyles,
+    Divider,
+    Modal,
+    Theme,
+    Typography,
+    useMediaQuery,
+} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../../store';
@@ -55,6 +62,7 @@ const useStyles = makeStyles((theme: Theme) =>
             top: `50%`,
             left: `50%`,
             transform: `translate(-50%, -50%)`,
+            overflow: 'scroll',
         },
         button: {
             maxWidth: 80,
@@ -136,6 +144,75 @@ interface FilterProps {
     title: string;
 }
 
+const useLargeStyle = makeStyles((theme: Theme) =>
+    createStyles({
+        filterWrapper: {
+            display: 'flex',
+            flex: 1,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'start',
+        },
+        name: {
+            display: 'flex',
+            flex: 1,
+        },
+        divider: {
+            marginTop: 20,
+            marginBottom: 20,
+            marginLeft: -theme.spacing(1),
+            marginRight: -theme.spacing(1),
+        },
+        show: {
+            display: 'flex',
+            flex: 2,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'start',
+        },
+        input: {
+            display: 'flex',
+            flex: 1,
+        },
+        inputShowWrapper: {
+            display: 'flex',
+            flex: 3,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'start',
+        },
+    }),
+);
+
+const useSmallStyle = makeStyles((theme: Theme) =>
+    createStyles({
+        filterWrapper: {
+            display: 'flex',
+            flexWrap: 'wrap',
+        },
+        name: {
+            minWidth: 200,
+        },
+        divider: {
+            marginTop: 20,
+            marginBottom: 20,
+            marginLeft: -theme.spacing(1),
+            marginRight: -theme.spacing(1),
+        },
+        show: {
+            display: 'flex',
+            flexWrap: 'wrap',
+        },
+        input: {
+            alignSelf: 'stretch',
+        },
+        inputShowWrapper: {
+            display: 'flex',
+            flexDirection: 'column',
+        },
+    }),
+);
+
 const IFilter = ({type, title, name}: FilterProps) => {
     const filter = useSelector<RootState, Filter>(
         (state) => state.centre.filter[name],
@@ -163,19 +240,38 @@ const IFilter = ({type, title, name}: FilterProps) => {
             <DateInput name={name} filter={filter as DateFilter} />
         );
 
+    const largeClasses = useLargeStyle();
+    const smallClasses = useSmallStyle();
+    const isLarge = useMediaQuery('(min-width:850px)');
+
     return (
         <>
-            <div className="flex-1 flex-row align-items-center justify-content-start">
-                <div className="flex-1">
+            <div
+                className={
+                    (isLarge ? largeClasses : smallClasses).filterWrapper
+                }>
+                <div className={(isLarge ? largeClasses : smallClasses).name}>
                     <Typography>{title}</Typography>
                 </div>
-                <div className="flex-2 flex-row align-items-center">
-                    <div className="flex-1">{input}</div>
-                    <div className="flex-2 flex-row align-items-center justify-content-center">
+                <div
+                    className={
+                        (isLarge ? largeClasses : smallClasses).inputShowWrapper
+                    }>
+                    <div
+                        className={
+                            (isLarge ? largeClasses : smallClasses).input
+                        }>
+                        {input}
+                    </div>
+                    <div
+                        className={
+                            (isLarge ? largeClasses : smallClasses).show
+                        }>
                         {show}
                     </div>
                 </div>
             </div>
+            <Divider className={largeClasses.divider} />
         </>
     );
 };

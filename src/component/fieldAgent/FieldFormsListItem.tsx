@@ -11,11 +11,6 @@ interface FormsListItemProps {
 const FieldFormsListItem = ({item}: FormsListItemProps) => (
     <Link to={FORMS_DETAIL(item.id)} className="text-decoration-none">
         <ListItem button component="div">
-            <ListItemText className="position-absolute">
-                <Typography variant="overline" color="textSecondary">
-                    {item.id}:
-                </Typography>
-            </ListItemText>
             <ListItemText>
                 <Typography className="text-center" color="textPrimary">
                     {item.title}
