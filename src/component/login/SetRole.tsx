@@ -80,7 +80,7 @@ const SetRole = () => {
                                     variant="subtitle1"
                                 />
                             </>
-                        ) : roles.length === 2 ? (
+                        ) : roles.length >= 2 ? (
                             <>
                                 <ITypography text={strings.chooseYourRole} />
                                 <IButton
